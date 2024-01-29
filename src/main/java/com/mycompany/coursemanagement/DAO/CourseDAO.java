@@ -5,8 +5,13 @@
 package com.mycompany.coursemanagement.DAO;
 
 import com.mycompany.coursemanagement.Models.Course;
+import com.mycompany.coursemanagement.Models.Department;
+import com.mycompany.coursemanagement.Models.OnlineCourse;
+import com.mycompany.coursemanagement.Models.OnsiteCourse;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +23,14 @@ import java.util.List;
 public class CourseDAO {
 
     Connection conn;
+    private PreparedStatement ps;
     Statement stmt;
     ResultSet rs;
     DatabaseConnect db;
 
     public CourseDAO() {
         conn = null;
+        ps = null;
         stmt = null;
         rs = null;
         db = new DatabaseConnect();
@@ -50,6 +57,55 @@ public class CourseDAO {
             return new ArrayList<>(); // return về mảng rỗng nha, return null nó dễ bị văng lắm
         } finally {
             db.Close(conn); // đóng kết nối
+        }
+        return list;
+    }
+    
+    public ArrayList<Course> getCourseList(String courseTitle) throws SQLException {
+        ArrayList<Course> list = new ArrayList<>();
+        try {
+            conn = db.Open();
+            if (conn == null)
+                throw new SQLException("Lỗi kết nối CSDL");
+            String query = """
+                           SELECT C.CourseID, Title, Credits, C.DepartmentID, D.Name, url, Location
+                           FROM course C
+                           	JOIN department D ON D.DepartmentID = C.DepartmentID
+                           	LEFT JOIN onlinecourse OLC ON C.CourseID = OLC.CourseID
+                           	LEFT JOIN onsitecourse OSC ON C.CourseID = OSC.CourseID
+                           WHERE Title LIKE ?
+                           ORDER BY Title ASC
+                           """;
+            ps = conn.prepareStatement(query);
+            ps.setString(1, "%" + courseTitle + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int courseId = rs.getInt("CourseID");
+                String title = rs.getString("Title");
+                int credits = rs.getInt("Credits");
+                int departmentId = rs.getInt("DepartmentID");
+                String departmentName = rs.getString("Name");
+                String url = rs.getString("url");
+                String location = rs.getString("location");
+                
+                OnlineCourse onlineCourse = new OnlineCourse(courseId, url);
+                
+                OnsiteCourse onsiteCourse = new OnsiteCourse();
+                onsiteCourse.setCourseID(courseId);
+                onsiteCourse.setLocation(location);
+                
+                Department department = new Department();
+                department.setDepartmentID(departmentId);
+                department.setName(departmentName);
+                
+                list.add(new Course(courseId, title, credits, departmentId, onlineCourse, onsiteCourse, department));
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            ps.close();
+            rs.close();
+            db.Close(conn);
         }
         return list;
     }

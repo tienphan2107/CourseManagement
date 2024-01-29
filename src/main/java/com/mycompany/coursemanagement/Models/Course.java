@@ -9,6 +9,9 @@ public class Course {
     private String title;
     private int credits;
     private int departmentID;
+    private OnlineCourse onlineCourse;
+    private OnsiteCourse onsiteCourse;
+    private Department department;
 
     public Course() {
     }
@@ -18,6 +21,19 @@ public class Course {
         this.title = title;
         this.credits = credits;
         this.departmentID = departmentID;
+        this.onlineCourse = null;
+        this.onsiteCourse = null;
+        this.department = null;
+    }
+
+    public Course(int courseID, String title, int credits, int departmentID, OnlineCourse onlineCourse, OnsiteCourse onsiteCourse, Department department) {
+        this.courseID = courseID;
+        this.title = title;
+        this.credits = credits;
+        this.departmentID = departmentID;
+        this.onlineCourse = onlineCourse;
+        this.onsiteCourse = onsiteCourse;
+        this.department = department;
     }
 
     public int getCourseID() {
@@ -52,6 +68,30 @@ public class Course {
         this.departmentID = departmentID;
     }
 
+    public OnlineCourse getOnlineCourse() {
+        return onlineCourse;
+    }
+
+    public void setOnlineCourse(OnlineCourse onlineCourse) {
+        this.onlineCourse = onlineCourse;
+    }
+
+    public OnsiteCourse getOnsiteCourse() {
+        return onsiteCourse;
+    }
+
+    public void setOnsiteCourse(OnsiteCourse onsiteCourse) {
+        this.onsiteCourse = onsiteCourse;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+    
     @Override
     public String toString() {
         return "Course{" + "courseID=" + courseID + ", title=" + title + ", credits=" + credits + ", departmentID=" + departmentID + '}';
