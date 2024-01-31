@@ -108,4 +108,59 @@ public class OnsiteCourseDAO {
         }
         return result;
     }
+
+    public int editOnsiteCourse(Course course) throws SQLException {
+        int result = 0;
+        try {
+            conn = db.Open();
+            if (conn == null) {
+                throw new SQLException("Lỗi kết nối CSDL");
+            }
+            String query1 = "UPDATE course SET Title=?,Credits=?,DepartmentID=? WHERE CourseID = ?";
+            String query2 = "UPDATE onsitecourse SET Location=?,Days=?,Time=? WHERE CourseID = ?";
+            ps = conn.prepareStatement(query1);
+            ps.setString(1, course.getTitle());
+            ps.setInt(2, course.getCredits());
+            ps.setInt(3, course.getDepartmentID());
+            ps.setInt(4, course.getCourseID());
+            result = ps.executeUpdate();
+            ps = conn.prepareStatement(query2);
+            ps.setString(1, course.getOnsiteCourse().getLocation());
+            ps.setString(2, course.getOnsiteCourse().getDays());
+            Time time = Time.valueOf(course.getOnsiteCourse().getLocalTime());
+            ps.setTime(3, time);
+            ps.setInt(4, course.getCourseID());
+            result += ps.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            ps.close();
+            db.Close(conn);
+        }
+        return result;
+    }
+
+    public int deleteOnsiteCourse(int courseId) throws SQLException {
+        int result = 0;
+        try {
+            conn = db.Open();
+            if (conn == null) {
+                throw new SQLException("Lỗi kết nối CSDL");
+            }
+            String query1 = "DELETE FROM onsitecourse WHERE CourseID = ?";
+            String query2 = "DELETE FROM course WHERE CourseID = ?";
+            ps = conn.prepareStatement(query1);
+            ps.setInt(1, courseId);
+            result = ps.executeUpdate();
+            ps = conn.prepareStatement(query2);
+            ps.setInt(1, courseId);
+            result += ps.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            ps.close();
+            db.Close(conn);
+        }
+        return result;
+    }
 }

@@ -29,7 +29,7 @@ public class OnlineCourseBUS {
         return ocDAO.getOnlineCourseDetail(id);
     }
 
-    public int addCourse(String courseId, String title, String credits, Department department, String url) throws Exception {
+    public Course validateCourseInfo(String courseId, String title, String credits, Department department, String url, boolean checkExisted) throws Exception {
         if (courseId.isEmpty()) {
             throw new EmptyFieldException("courseId", "You must provide course ID");
         }
@@ -52,14 +52,16 @@ public class OnlineCourseBUS {
 
         int id = Integer.parseInt(courseId);
 
-        boolean existed = false;
-        try {
-            existed = courseDAO.checkCourseExisted(id);
-        } catch (SQLException e) {
-            throw e;
-        }
-        if (existed) {
-            throw new IllegalArgumentException("Course with ID " + id + " already existed");
+        if (checkExisted) {
+            boolean existed = false;
+            try {
+                existed = courseDAO.checkCourseExisted(id);
+            } catch (SQLException e) {
+                throw e;
+            }
+            if (existed) {
+                throw new IllegalArgumentException("Course with ID " + id + " already existed");
+            }
         }
 
         if (!Pattern.matches("^\\d{1,2}$", credits)) {
@@ -70,8 +72,11 @@ public class OnlineCourseBUS {
         }
 
         OnlineCourse onlineCourse = new OnlineCourse(id, url);
-        Course c = new Course(id, title, Integer.parseInt(credits), department.getDepartmentID(), onlineCourse, null, department);
+        return new Course(id, title, Integer.parseInt(credits), department.getDepartmentID(), onlineCourse, null, department);
+    }
 
+    public int addCourse(String courseId, String title, String credits, Department department, String url) throws Exception {
+        Course c = validateCourseInfo(courseId, title, credits, department, url, true);
         int result;
         try {
             result = ocDAO.addOnlineCourse(c);
@@ -79,5 +84,28 @@ public class OnlineCourseBUS {
             throw e;
         }
         return result;
+    }
+
+    public int editCourse(Course oldCourseInfo, String courseId, String title, String credits, Department department, String url) throws Exception {
+        String oldCredits = String.valueOf(oldCourseInfo.getCredits());
+
+        if (oldCourseInfo.getTitle().equals(title)
+                && oldCredits.equals(credits)
+                && oldCourseInfo.getDepartment().getDepartmentID() == department.getDepartmentID()
+                && oldCourseInfo.getOnlineCourse().getUrl().equals(url)) {
+            throw new Exception("Form unchanged");
+        }
+        Course c = validateCourseInfo(courseId, title, credits, department, url, false);
+        int result;
+        try {
+            result = ocDAO.editOnlineCourse(c);
+        } catch (SQLException e) {
+            throw e;
+        }
+        return result;
+    }
+
+    public int deleteOnlineCourse(int courseId) throws SQLException {
+        return ocDAO.deleteOnlineCourse(courseId);
     }
 }

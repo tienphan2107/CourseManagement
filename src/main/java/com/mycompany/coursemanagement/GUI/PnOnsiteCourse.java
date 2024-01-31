@@ -9,10 +9,10 @@ import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
-import javax.swing.JFormattedTextField;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
+import javax.swing.SpinnerModel;
 
 public class PnOnsiteCourse extends javax.swing.JPanel implements DepartmentDialogListener {
 
@@ -75,10 +75,6 @@ public class PnOnsiteCourse extends javax.swing.JPanel implements DepartmentDial
         return txtTitle;
     }
 
-    public SpinnerDateModel getSpinnerDateModel() {
-        return spinnerDateModel;
-    }
-
     public Department getDepartment() {
         return department;
     }
@@ -87,16 +83,12 @@ public class PnOnsiteCourse extends javax.swing.JPanel implements DepartmentDial
         this.department = department;
     }
 
-    public JFormattedTextField getTxtTime() {
-        return txtTime;
-    }
-
     public void setTime(int hour, int minute) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minute);
 
-        spinnerDateModel.setValue(calendar.getTime());
+        spinnerModel.setValue(calendar.getTime());
         spinnerTime.repaint();
     }
 
@@ -168,8 +160,8 @@ public class PnOnsiteCourse extends javax.swing.JPanel implements DepartmentDial
         cbSaturday = new javax.swing.JCheckBox();
         lblTime = new javax.swing.JLabel();
         Date date = new Date();
-        spinnerDateModel = new SpinnerDateModel(date, null, null, Calendar.MINUTE);
-        spinnerTime = new javax.swing.JSpinner(spinnerDateModel);
+        spinnerModel = new SpinnerDateModel();
+        spinnerTime = new javax.swing.JSpinner(spinnerModel);
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -340,10 +332,8 @@ public class PnOnsiteCourse extends javax.swing.JPanel implements DepartmentDial
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
-        JSpinner.DateEditor de = new JSpinner.DateEditor(spinnerTime, "HH:mm");
-        spinnerTime.setEditor(de);
-        txtTime = de.getTextField();
-        txtTime.setFormatterFactory(null); // Remove the default formatter
+        JSpinner.DateEditor editor = new JSpinner.DateEditor(spinnerTime, "HH:mm");
+        spinnerTime.setEditor(editor);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnChooseDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseDepartmentActionPerformed
@@ -370,9 +360,8 @@ public class PnOnsiteCourse extends javax.swing.JPanel implements DepartmentDial
     private javax.swing.JLabel lblOnsiteCourse;
     private javax.swing.JLabel lblTime;
     private javax.swing.JLabel lblTitle;
-    private SpinnerDateModel spinnerDateModel;
+    private SpinnerModel spinnerModel;
     private javax.swing.JSpinner spinnerTime;
-    private JFormattedTextField txtTime;
     private javax.swing.JTextField txtCourseId;
     private javax.swing.JTextField txtCredits;
     private javax.swing.JTextField txtDepartment;

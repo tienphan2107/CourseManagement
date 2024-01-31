@@ -1,6 +1,8 @@
 package com.mycompany.coursemanagement.GUI;
 
 import com.mycompany.coursemanagement.BUS.CourseBUS;
+import com.mycompany.coursemanagement.BUS.OnlineCourseBUS;
+import com.mycompany.coursemanagement.BUS.OnsiteCourseBUS;
 import com.mycompany.coursemanagement.Models.Course;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
@@ -12,6 +14,8 @@ import javax.swing.table.DefaultTableModel;
 public class PnCourse extends javax.swing.JPanel {
 
     private final CourseBUS courseBUS = new CourseBUS();
+    private final OnlineCourseBUS onlineCourseBUS = new OnlineCourseBUS();
+    private final OnsiteCourseBUS onsiteCourseBUS = new OnsiteCourseBUS();
     private ArrayList<Course> data;
     private DefaultTableModel tableModel;
     private String query;
@@ -54,12 +58,54 @@ public class PnCourse extends javax.swing.JPanel {
     private void handleViewCourseDetail(int row) {
         Course course = data.get(row);
         if (course.getOnsiteCourse().getDays() == null) {
-            DialogOnlineCourseDetail detailDialog = new DialogOnlineCourseDetail((JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true, course, false);
-            detailDialog.setVisible(true);
+            DialogCourse dialog = new DialogCourse(this, (JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true, "view", course, "online");
+            dialog.setVisible(true);
         } else {
-            DialogOnsiteCourseDetail detailDialog = new DialogOnsiteCourseDetail((JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true, course, false);
-            detailDialog.setVisible(true);
+            DialogCourse dialog = new DialogCourse(this, (JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true, "view", course, "onsite");
+            dialog.setVisible(true);
         }
+    }
+
+    private void handleEditCourse(int row) {
+        Course course = data.get(row);
+        if (course.getOnsiteCourse().getDays() == null) {
+            DialogCourse dialog = new DialogCourse(this, (JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true, "edit", course, "online");
+            dialog.setVisible(true);
+        } else {
+            DialogCourse dialog = new DialogCourse(this, (JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true, "edit", course, "onsite");
+            dialog.setVisible(true);
+        }
+    }
+
+    private void handleDeleteCourse(int row) {
+        Course course = data.get(row);
+        int courseId = course.getCourseID();
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "Delete " + course.getTitle() + " (" + course.getCourseID() + ")?",
+                "Course",
+                JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.NO_OPTION) {
+            return;
+        }
+        int result = 0;
+        try {
+            if (course.getOnsiteCourse().getDays() == null) {
+                result = onlineCourseBUS.deleteOnlineCourse(courseId);
+            } else {
+                result = onsiteCourseBUS.deleteOnsiteCourse(courseId);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            return;
+        }
+
+        if (result <= 0) {
+            JOptionPane.showMessageDialog(this, "An error occured while deleting this course.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        getCourseList(query);
     }
 
     protected void getCourseList(String query) {
@@ -173,10 +219,20 @@ public class PnCourse extends javax.swing.JPanel {
 
         btnEdit.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         btnEdit.setText("Sửa");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
         add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(729, 6, -1, -1));
 
         btnDelete.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         btnDelete.setText("Xoá");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
         add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(807, 6, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -220,9 +276,29 @@ public class PnCourse extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        DialogAddCourse dialog = new DialogAddCourse(this, (JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true);
+        DialogCourse dialog = new DialogCourse(this, (JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true, "add", null, null);
         dialog.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        int row = tbCourse.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn khoá học");
+            return;
+        }
+        handleEditCourse(row);
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int row = tbCourse.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn khoá học");
+            return;
+        }
+        handleDeleteCourse(row);
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

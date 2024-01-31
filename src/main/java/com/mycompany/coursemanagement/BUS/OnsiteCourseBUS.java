@@ -9,11 +9,9 @@ import com.mycompany.coursemanagement.DAO.OnsiteCourseDAO;
 import com.mycompany.coursemanagement.Models.Course;
 import com.mycompany.coursemanagement.Models.Department;
 import com.mycompany.coursemanagement.Models.OnsiteCourse;
-import helper.DateTimeHelper;
 import helper.EmptyFieldException;
 import java.sql.SQLException;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 /**
@@ -32,7 +30,7 @@ public class OnsiteCourseBUS {
         return ocDAO.getOnsiteCourseDetail(id);
     }
 
-    public int addCourse(String courseId, String title, String credits, Department department, String location, boolean[] days, String time) throws Exception {
+    public Course validateCourseInfo(String courseId, String title, String credits, Department department, String location, boolean[] days, int hour, int minute, boolean checkExisted) throws Exception {
         if (courseId.isEmpty()) {
             throw new EmptyFieldException("courseId", "You must provide course ID");
         }
@@ -60,40 +58,36 @@ public class OnsiteCourseBUS {
             throw new EmptyFieldException("days", "You must select days");
         }
 
-        if (time.isEmpty()) {
-            throw new EmptyFieldException("time", "You must provide time");
-        }
-
         if (!Pattern.matches("^\\d{4}$", courseId)) {
             throw new IllegalArgumentException("Course ID must be an integer, 4 digits");
         }
 
         int id = Integer.parseInt(courseId);
 
-        boolean existed = false;
-        try {
-            existed = courseDAO.checkCourseExisted(id);
-        } catch (SQLException e) {
-            throw e;
-        }
-        if (existed) {
-            throw new IllegalArgumentException("Course with ID " + id + " already existed");
+        if (checkExisted) {
+            boolean existed = false;
+            try {
+                existed = courseDAO.checkCourseExisted(id);
+            } catch (SQLException e) {
+                throw e;
+            }
+            if (existed) {
+                throw new IllegalArgumentException("Course with ID " + id + " already existed");
+            }
         }
 
         if (!Pattern.matches("^\\d{1,2}$", credits)) {
             throw new IllegalArgumentException("Credits must be an integer");
         }
 
-        LocalTime localTime;
-        try {
-            localTime = DateTimeHelper.parseTime(time);
-        } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Invalid time (HH:mm)");
-        }
+        LocalTime localTime = LocalTime.of(hour, minute);
 
         OnsiteCourse onsiteCourse = new OnsiteCourse(id, location, sb.toString(), localTime);
-        Course c = new Course(id, title, Integer.parseInt(credits), department.getDepartmentID(), null, onsiteCourse, department);
+        return new Course(id, title, Integer.parseInt(credits), department.getDepartmentID(), null, onsiteCourse, department);
+    }
 
+    public int addCourse(String courseId, String title, String credits, Department department, String location, boolean[] days, int hour, int minute) throws Exception {
+        Course c = validateCourseInfo(courseId, title, credits, department, location, days, hour, minute, true);
         int result;
         try {
             result = ocDAO.addOnsiteCourse(c);
@@ -103,4 +97,36 @@ public class OnsiteCourseBUS {
         return result;
     }
 
+    public int editCourse(Course oldCourseInfo, String courseId, String title, String credits, Department department, String location, boolean[] days, int hour, int minute) throws Exception {
+        String oldCredits = String.valueOf(oldCourseInfo.getCredits());
+        StringBuilder sbDays = new StringBuilder();
+        sbDays.append(days[0] ? "M" : "");
+        sbDays.append(days[1] ? "T" : "");
+        sbDays.append(days[2] ? "W" : "");
+        sbDays.append(days[3] ? "H" : "");
+        sbDays.append(days[4] ? "F" : "");
+        sbDays.append(days[5] ? "S" : "");
+
+        if (oldCourseInfo.getTitle().equals(title)
+                && oldCredits.equals(credits)
+                && oldCourseInfo.getDepartment().getDepartmentID() == department.getDepartmentID()
+                && oldCourseInfo.getOnsiteCourse().getLocation().equalsIgnoreCase(location)
+                && oldCourseInfo.getOnsiteCourse().getDays().equalsIgnoreCase(sbDays.toString())
+                && oldCourseInfo.getOnsiteCourse().getLocalTime().getHour() == hour
+                && oldCourseInfo.getOnsiteCourse().getLocalTime().getMinute() == minute) {
+            throw new Exception("Form unchanged");
+        }
+        Course c = validateCourseInfo(courseId, title, credits, department, location, days, hour, minute, false);
+        int result;
+        try {
+            result = ocDAO.editOnsiteCourse(c);
+        } catch (SQLException e) {
+            throw e;
+        }
+        return result;
+    }
+
+    public int deleteOnsiteCourse(int courseId) throws SQLException {
+        return ocDAO.deleteOnsiteCourse(courseId);
+    }
 }

@@ -318,11 +318,10 @@
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="JSpinner.DateEditor de = new JSpinner.DateEditor(spinnerTime, &quot;HH:mm&quot;);&#xa;spinnerTime.setEditor(de);&#xa;txtTime = de.getTextField();&#xa;txtTime.setFormatterFactory(null); // Remove the default formatter"/>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(spinnerDateModel)"/>
-        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="Date date = new Date();&#xa;spinnerDateModel = new SpinnerDateModel(date, null, null, Calendar.MINUTE);"/>
-        <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private JFormattedTextField txtTime;"/>
-        <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="private SpinnerDateModel spinnerDateModel;"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="JSpinner.DateEditor editor = new JSpinner.DateEditor(spinnerTime, &quot;HH:mm&quot;);&#xa;spinnerTime.setEditor(editor);"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(spinnerModel)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="Date date = new Date();&#xa;spinnerModel = new SpinnerDateModel();"/>
+        <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="private SpinnerModel spinnerModel;"/>
       </AuxValues>
     </Component>
   </SubComponents>
