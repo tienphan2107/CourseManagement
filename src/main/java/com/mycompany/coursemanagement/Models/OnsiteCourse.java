@@ -5,16 +5,19 @@
 package com.mycompany.coursemanagement.Models;
 
 import java.sql.Time;
+import java.time.LocalTime;
 
 /**
  *
  * @author PC
  */
 public class OnsiteCourse {
+
     private int courseID;
     private String location;
     private String days;
     private Time time;
+    private LocalTime localTime;
 
     public OnsiteCourse() {
     }
@@ -24,6 +27,14 @@ public class OnsiteCourse {
         this.location = location;
         this.days = days;
         this.time = time;
+        this.localTime = time.toLocalTime();
+    }
+
+    public OnsiteCourse(int courseID, String location, String days, LocalTime localTime) {
+        this.courseID = courseID;
+        this.location = location;
+        this.days = days;
+        this.localTime = localTime;
     }
 
     public int getCourseID() {
@@ -58,9 +69,17 @@ public class OnsiteCourse {
         this.time = time;
     }
 
+    public LocalTime getLocalTime() {
+        return localTime;
+    }
+
+    public void setLocalTime(LocalTime localTime) {
+        this.localTime = localTime;
+    }
+
     @Override
     public String toString() {
         return "OnsiteCourse{" + "courseID=" + courseID + ", location=" + location + ", days=" + days + ", time=" + time + '}';
     }
-    
+
 }

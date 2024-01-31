@@ -14,13 +14,18 @@ import java.util.ArrayList;
  * @author PC
  */
 public class CourseBUS {
+
     private final CourseDAO courseDAO = new CourseDAO();
-    
+
     public CourseBUS() {
-        
+
     }
-    
+
     public ArrayList<Course> getCourseList(String courseTitle) throws SQLException {
         return courseDAO.getCourseList(courseTitle);
+    }
+
+    public boolean checkCourseExisted(int courseId) throws SQLException {
+        return courseDAO.checkCourseExisted(courseId);
     }
 }

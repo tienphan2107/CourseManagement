@@ -43,7 +43,7 @@ public class CourseDAO {
             if (conn != null) {
                 stmt = conn.createStatement();
                 rs = stmt.executeQuery("SELECT * FROM course"); // lệnh truy vấn
-                
+
                 while (rs.next()) {
                     int courseID = rs.getInt("CourseID");
                     String title = rs.getString("Title");
@@ -60,18 +60,18 @@ public class CourseDAO {
         }
         return list;
     }
-    
+
     public ArrayList<Course> getCourseList(String courseTitle) throws SQLException {
         ArrayList<Course> list = new ArrayList<>();
         try {
             conn = db.Open();
-            if (conn == null)
+            if (conn == null) {
                 throw new SQLException("Lỗi kết nối CSDL");
+            }
             String query = """
-                           SELECT C.CourseID, Title, Credits, C.DepartmentID, D.Name, url, Location
+                           SELECT C.CourseID, Title, Credits, C.DepartmentID, D.Name, Days
                            FROM course C
                            	JOIN department D ON D.DepartmentID = C.DepartmentID
-                           	LEFT JOIN onlinecourse OLC ON C.CourseID = OLC.CourseID
                            	LEFT JOIN onsitecourse OSC ON C.CourseID = OSC.CourseID
                            WHERE Title LIKE ?
                            ORDER BY Title ASC
@@ -85,19 +85,16 @@ public class CourseDAO {
                 int credits = rs.getInt("Credits");
                 int departmentId = rs.getInt("DepartmentID");
                 String departmentName = rs.getString("Name");
-                String url = rs.getString("url");
-                String location = rs.getString("location");
-                
-                OnlineCourse onlineCourse = new OnlineCourse(courseId, url);
-                
-                OnsiteCourse onsiteCourse = new OnsiteCourse();
-                onsiteCourse.setCourseID(courseId);
-                onsiteCourse.setLocation(location);
-                
+                String days = rs.getString("Days"); // Use to check if course type is online/onsite
+
                 Department department = new Department();
                 department.setDepartmentID(departmentId);
                 department.setName(departmentName);
-                
+
+                OnlineCourse onlineCourse = new OnlineCourse();
+                OnsiteCourse onsiteCourse = new OnsiteCourse();
+                onsiteCourse.setDays(days);
+
                 list.add(new Course(courseId, title, credits, departmentId, onlineCourse, onsiteCourse, department));
             }
         } catch (SQLException e) {
@@ -108,5 +105,29 @@ public class CourseDAO {
             db.Close(conn);
         }
         return list;
+    }
+
+    public boolean checkCourseExisted(int courseId) throws SQLException {
+        boolean result = false;
+        try {
+            conn = db.Open();
+            if (conn == null) {
+                throw new SQLException("Lỗi kết nối CSDL");
+            }
+            String query = "SELECT Title FROM course WHERE CourseID = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, courseId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                result = true;
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            ps.close();
+            rs.close();
+            db.Close(conn);
+        }
+        return result;
     }
 }

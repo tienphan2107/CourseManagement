@@ -5,6 +5,7 @@ import com.mycompany.coursemanagement.Models.Course;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -40,7 +41,7 @@ public class PnCourse extends javax.swing.JPanel {
                 }
         ) {
             boolean[] canEdit = new boolean[]{
-                false, false, false, true, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -50,7 +51,18 @@ public class PnCourse extends javax.swing.JPanel {
         tbCourse.setModel(tableModel);
     }
 
-    private void getCourseList(String query) {
+    private void handleViewCourseDetail(int row) {
+        Course course = data.get(row);
+        if (course.getOnsiteCourse().getDays() == null) {
+            DialogOnlineCourseDetail detailDialog = new DialogOnlineCourseDetail((JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true, course, false);
+            detailDialog.setVisible(true);
+        } else {
+            DialogOnsiteCourseDetail detailDialog = new DialogOnsiteCourseDetail((JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true, course, false);
+            detailDialog.setVisible(true);
+        }
+    }
+
+    protected void getCourseList(String query) {
         ArrayList<Course> result = new ArrayList<>();
         try {
             result = courseBUS.getCourseList(query);
@@ -70,7 +82,7 @@ public class PnCourse extends javax.swing.JPanel {
             int courseId = course.getCourseID();
             String courseTitle = course.getTitle();
             int credits = course.getCredits();
-            String type = course.getOnlineCourse().getUrl() != null ? "Online" : "Onsite";
+            String type = course.getOnsiteCourse().getDays() == null ? "Online" : "Onsite";
             String departmentName = course.getDepartment().getName();
             Object[] row = {courseId, courseTitle, credits, type, departmentName};
             tableModel.addRow(row);
@@ -125,11 +137,16 @@ public class PnCourse extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbCourse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbCourseMouseClicked(evt);
             }
         });
         scrollPane.setViewportView(tbCourse);
@@ -138,10 +155,20 @@ public class PnCourse extends javax.swing.JPanel {
 
         btnDetail.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         btnDetail.setText("Chi tiết");
+        btnDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailActionPerformed(evt);
+            }
+        });
         add(btnDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 6, -1, -1));
 
         btnAdd.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         btnAdd.setText("Thêm");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
         add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(651, 6, -1, -1));
 
         btnEdit.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
@@ -156,8 +183,9 @@ public class PnCourse extends javax.swing.JPanel {
     private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (txtSearch.getText().trim().toLowerCase().equals(query.toLowerCase()))
+            if (txtSearch.getText().trim().toLowerCase().equals(query.toLowerCase())) {
                 return;
+            }
             setQuery(txtSearch.getText().trim());
             getCourseList(query);
         }
@@ -165,11 +193,36 @@ public class PnCourse extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        if (txtSearch.getText().trim().toLowerCase().equals(query.toLowerCase()))
+        if (txtSearch.getText().trim().toLowerCase().equals(query.toLowerCase())) {
             return;
+        }
         setQuery(txtSearch.getText().trim());
         getCourseList(query);
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailActionPerformed
+        // TODO add your handling code here:
+        int row = tbCourse.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn khoá học");
+            return;
+        }
+        handleViewCourseDetail(row);
+    }//GEN-LAST:event_btnDetailActionPerformed
+
+    private void tbCourseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCourseMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2 && tbCourse.getSelectedRow() >= 0) {
+            int row = tbCourse.getSelectedRow();
+            handleViewCourseDetail(row);
+        }
+    }//GEN-LAST:event_tbCourseMouseClicked
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        DialogAddCourse dialog = new DialogAddCourse(this, (JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_btnAddActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
