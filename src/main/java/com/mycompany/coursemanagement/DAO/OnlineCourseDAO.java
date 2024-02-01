@@ -38,7 +38,7 @@ public class OnlineCourseDAO {
         try {
             conn = db.Open();
             if (conn == null) {
-                throw new SQLException("Lỗi kết nối CSDL");
+                throw new SQLException("Connection error");
             }
             String query = """
                            SELECT C.CourseID, C.Title, Credits, C.DepartmentID, D.Name, url
@@ -78,7 +78,7 @@ public class OnlineCourseDAO {
         try {
             conn = db.Open();
             if (conn == null) {
-                throw new SQLException("Lỗi kết nối CSDL");
+                throw new SQLException("Connection error");
             }
             String query1 = "INSERT INTO course(CourseID, Title, Credits, DepartmentID) VALUES (?,?,?,?)";
             String query2 = "INSERT INTO onlinecourse(CourseID, url) VALUES (?,?)";
@@ -91,7 +91,6 @@ public class OnlineCourseDAO {
             ps = conn.prepareStatement(query2);
             ps.setInt(1, course.getCourseID());
             ps.setString(2, course.getOnlineCourse().getUrl());
-
             result += ps.executeUpdate();
         } catch (SQLException e) {
             throw e;
@@ -107,7 +106,7 @@ public class OnlineCourseDAO {
         try {
             conn = db.Open();
             if (conn == null) {
-                throw new SQLException("Lỗi kết nối CSDL");
+                throw new SQLException("Connection error");
             }
             String query1 = "UPDATE course SET Title=?,Credits=?,DepartmentID=? WHERE CourseID = ?";
             String query2 = "UPDATE onlinecourse SET url=? WHERE CourseID = ?";
@@ -135,7 +134,7 @@ public class OnlineCourseDAO {
         try {
             conn = db.Open();
             if (conn == null) {
-                throw new SQLException("Lỗi kết nối CSDL");
+                throw new SQLException("Connection error");
             }
             String query1 = "DELETE FROM onlinecourse WHERE CourseID = ?";
             String query2 = "DELETE FROM course WHERE CourseID = ?";

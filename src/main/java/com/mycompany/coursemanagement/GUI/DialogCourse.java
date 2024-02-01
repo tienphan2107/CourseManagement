@@ -87,8 +87,10 @@ public class DialogCourse extends javax.swing.JDialog {
             btnConfirmActionOnsiteCourse.setText("Close");
             if (courseType.equalsIgnoreCase("online")) {
                 layout.show(pMain, "pOnlineCourseInfo");
+                btnConfirmActionOnlineCourse.requestFocus();
             } else if (courseType.equalsIgnoreCase("onsite")) {
                 layout.show(pMain, "pOnsiteCourseInfo");
+                btnConfirmActionOnsiteCourse.requestFocus();
             }
         } else if (dialogMode.equalsIgnoreCase("add")) {
             lblDialogTitle.setText("Add course");
@@ -99,8 +101,10 @@ public class DialogCourse extends javax.swing.JDialog {
             btnBack2.setVisible(false);
             if (courseType.equalsIgnoreCase("online")) {
                 layout.show(pMain, "pOnlineCourseInfo");
+                pOnlineCourse.getTxtTitle().requestFocus();
             } else if (courseType.equalsIgnoreCase("onsite")) {
                 layout.show(pMain, "pOnsiteCourseInfo");
+                pOnsiteCourse.getTxtTitle().requestFocus();
             }
         }
     }
@@ -144,11 +148,11 @@ public class DialogCourse extends javax.swing.JDialog {
                 c = onsiteCourseBUS.getOnsiteCourseDetail(id);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Connection error", "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             return c;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi không xác định", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "An error occurred, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             return c;
         }
@@ -181,6 +185,10 @@ public class DialogCourse extends javax.swing.JDialog {
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
             return;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Connection error", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            return;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
@@ -193,7 +201,7 @@ public class DialogCourse extends javax.swing.JDialog {
                 PnCourse p = (PnCourse) parent;
                 p.getCourseList(p.getQuery());
             }
-            JOptionPane.showMessageDialog(this, "Course " + title + " (" + courseId + ") successfully added");
+            JOptionPane.showMessageDialog(this, "Course '" + title + "' (" + courseId + ") successfully added");
         } else {
             JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -234,6 +242,10 @@ public class DialogCourse extends javax.swing.JDialog {
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
             return;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Connection error", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            return;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
@@ -246,7 +258,7 @@ public class DialogCourse extends javax.swing.JDialog {
                 PnCourse p = (PnCourse) parent;
                 p.getCourseList(p.getQuery());
             }
-            JOptionPane.showMessageDialog(this, "Course " + title + " (" + courseId + ") successfully added");
+            JOptionPane.showMessageDialog(this, "Course '" + title + "' (" + courseId + ") successfully added");
         } else {
             JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -278,6 +290,10 @@ public class DialogCourse extends javax.swing.JDialog {
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
             return;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Connection error", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            return;
         } catch (Exception e) {
             if (e.getMessage().equalsIgnoreCase("Form unchanged")) {
                 return;
@@ -293,7 +309,7 @@ public class DialogCourse extends javax.swing.JDialog {
                 PnCourse p = (PnCourse) parent;
                 p.getCourseList(p.getQuery());
             }
-            JOptionPane.showMessageDialog(this, "Course " + title + " (" + courseId + ") successfully modified");
+            JOptionPane.showMessageDialog(this, "Course '" + title + "' (" + courseId + ") successfully modified");
         } else {
             JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -334,6 +350,10 @@ public class DialogCourse extends javax.swing.JDialog {
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
             return;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Connection error", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            return;
         } catch (Exception e) {
             if (e.getMessage().equalsIgnoreCase("Form unchanged")) {
                 return;
@@ -349,7 +369,7 @@ public class DialogCourse extends javax.swing.JDialog {
                 PnCourse p = (PnCourse) parent;
                 p.getCourseList(p.getQuery());
             }
-            JOptionPane.showMessageDialog(this, "Course " + title + " (" + courseId + ") successfully modified");
+            JOptionPane.showMessageDialog(this, "Course '" + title + "' (" + courseId + ") successfully modified");
         } else {
             JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -390,7 +410,7 @@ public class DialogCourse extends javax.swing.JDialog {
 
         lblDialogTitle.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         lblDialogTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblDialogTitle.setText("Add course");
+        lblDialogTitle.setText("[title]");
         lblDialogTitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         pHeader.add(lblDialogTitle, java.awt.BorderLayout.CENTER);
 
@@ -506,9 +526,11 @@ public class DialogCourse extends javax.swing.JDialog {
         switch (String.valueOf(cbCourseType.getSelectedItem())) {
             case CB_VALUE_ONLINE_COURSE:
                 layout.show(pMain, "pOnlineCourseInfo");
+                pOnlineCourse.getTxtCourseId().requestFocus();
                 break;
             case CB_VALUE_ONSITE_COURSE:
                 layout.show(pMain, "pOnsiteCourseInfo");
+                pOnsiteCourse.getTxtCourseId().requestFocus();
                 break;
             default:
         }

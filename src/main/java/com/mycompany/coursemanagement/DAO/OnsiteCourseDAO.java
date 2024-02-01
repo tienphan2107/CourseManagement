@@ -40,7 +40,7 @@ public class OnsiteCourseDAO {
         try {
             conn = db.Open();
             if (conn == null) {
-                throw new SQLException("Lỗi kết nối CSDL");
+                throw new SQLException("Connection error");
             }
             String query = """
                            SELECT C.CourseID, C.Title, Credits, C.DepartmentID, D.Name, Location, Days, OSC.Time
@@ -83,7 +83,7 @@ public class OnsiteCourseDAO {
         try {
             conn = db.Open();
             if (conn == null) {
-                throw new SQLException("Lỗi kết nối CSDL");
+                throw new SQLException("Connection error");
             }
             String query1 = "INSERT INTO course(CourseID, Title, Credits, DepartmentID) VALUES (?,?,?,?)";
             String query2 = "INSERT INTO onsitecourse(CourseID, Location, Days, Time) VALUES (?,?,?,?)";
@@ -114,7 +114,7 @@ public class OnsiteCourseDAO {
         try {
             conn = db.Open();
             if (conn == null) {
-                throw new SQLException("Lỗi kết nối CSDL");
+                throw new SQLException("Connection error");
             }
             String query1 = "UPDATE course SET Title=?,Credits=?,DepartmentID=? WHERE CourseID = ?";
             String query2 = "UPDATE onsitecourse SET Location=?,Days=?,Time=? WHERE CourseID = ?";
@@ -145,7 +145,7 @@ public class OnsiteCourseDAO {
         try {
             conn = db.Open();
             if (conn == null) {
-                throw new SQLException("Lỗi kết nối CSDL");
+                throw new SQLException("Connection error");
             }
             String query1 = "DELETE FROM onsitecourse WHERE CourseID = ?";
             String query2 = "DELETE FROM course WHERE CourseID = ?";

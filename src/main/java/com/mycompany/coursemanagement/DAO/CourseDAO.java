@@ -66,7 +66,7 @@ public class CourseDAO {
         try {
             conn = db.Open();
             if (conn == null) {
-                throw new SQLException("Lỗi kết nối CSDL");
+                throw new SQLException("Connection error");
             }
             String query = """
                            SELECT C.CourseID, Title, Credits, C.DepartmentID, D.Name, Days
@@ -112,7 +112,7 @@ public class CourseDAO {
         try {
             conn = db.Open();
             if (conn == null) {
-                throw new SQLException("Lỗi kết nối CSDL");
+                throw new SQLException("Connection error");
             }
             String query = "SELECT Title FROM course WHERE CourseID = ?";
             ps = conn.prepareStatement(query);

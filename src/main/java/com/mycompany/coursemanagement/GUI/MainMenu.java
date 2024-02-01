@@ -69,7 +69,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jButton4.setText("Chức Năng 4");
 
-        jButton5.setText("Khóa học");
+        jButton5.setText("Course");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);

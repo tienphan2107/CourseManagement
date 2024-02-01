@@ -39,7 +39,7 @@ public class DepartmentDAO {
         try {
             conn = db.Open();
             if (conn == null) {
-                throw new SQLException("Lỗi kết nối CSDL");
+                throw new SQLException("Connection error");
             }
             String query = "SELECT * FROM department WHERE Name LIKE ?";
             ps = conn.prepareStatement(query);

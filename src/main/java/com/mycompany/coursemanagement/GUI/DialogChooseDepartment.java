@@ -84,11 +84,11 @@ public class DialogChooseDepartment extends javax.swing.JDialog {
         try {
             result = departmentBUS.getDepartmentList(query);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Lỗi kết nối cơ sở dữ liệu", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Connection error", "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             return;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi không xác định", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "An error occurred, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             return;
         }
