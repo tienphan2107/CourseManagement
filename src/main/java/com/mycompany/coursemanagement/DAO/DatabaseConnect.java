@@ -1,15 +1,16 @@
 package com.mycompany.coursemanagement.DAO;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnect {
 
-    private Connection conn = null;
+    private Connection c = null;
 
     public DatabaseConnect() {
-        conn = null;
+        c = null;
     }
 
     public static Connection getConnection() {
@@ -35,13 +36,25 @@ public class DatabaseConnect {
 		return c;
 	}
 
-    public void closeConnection(Connection conn) {
+    public void closeConnection(Connection c) {
         try {
-            if (conn != null && !conn.isClosed()) {
-                conn.close();
+            if (c != null && !c.isClosed()) {
+                c.close();
             }
         } catch (SQLException ex) {
             System.out.println("Lỗi đóng kết nối: " + ex.getMessage());
         }
     }
+    
+    public static void printInfo(Connection c) {
+		try {
+			if(c!=null) {
+				DatabaseMetaData mtdt = c.getMetaData();
+				System.out.println(mtdt.getDatabaseProductName());
+				System.out.println(mtdt.getDatabaseProductVersion());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

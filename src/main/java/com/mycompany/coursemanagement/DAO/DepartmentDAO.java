@@ -37,7 +37,7 @@ public class DepartmentDAO {
     public ArrayList<Department> getDepartmentList(String name) throws SQLException {
         ArrayList<Department> list = new ArrayList<>();
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -59,7 +59,7 @@ public class DepartmentDAO {
         } finally {
             ps.close();
             rs.close();
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return list;
     }

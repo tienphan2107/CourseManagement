@@ -36,7 +36,7 @@ public class OnlineCourseDAO {
     public Course getOnlineCourseDetail(int id) throws SQLException {
         Course c = new Course();
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -68,7 +68,7 @@ public class OnlineCourseDAO {
         } finally {
             ps.close();
             rs.close();
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return c;
     }
@@ -76,7 +76,7 @@ public class OnlineCourseDAO {
     public int addOnlineCourse(Course course) throws SQLException {
         int result = 0;
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -96,7 +96,7 @@ public class OnlineCourseDAO {
             throw e;
         } finally {
             ps.close();
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return result;
     }
@@ -104,7 +104,7 @@ public class OnlineCourseDAO {
     public int editOnlineCourse(Course course) throws SQLException {
         int result = 0;
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -124,7 +124,7 @@ public class OnlineCourseDAO {
             throw e;
         } finally {
             ps.close();
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return result;
     }
@@ -132,7 +132,7 @@ public class OnlineCourseDAO {
     public int deleteOnlineCourse(int courseId) throws SQLException {
         int result = 0;
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -148,7 +148,7 @@ public class OnlineCourseDAO {
             throw e;
         } finally {
             ps.close();
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return result;
     }

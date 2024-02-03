@@ -38,7 +38,7 @@ public class OnsiteCourseDAO {
     public Course getOnsiteCourseDetail(int id) throws SQLException {
         Course c = new Course();
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -73,7 +73,7 @@ public class OnsiteCourseDAO {
         } finally {
             ps.close();
             rs.close();
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return c;
     }
@@ -81,7 +81,7 @@ public class OnsiteCourseDAO {
     public int addOnsiteCourse(Course course) throws SQLException {
         int result = 0;
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -104,7 +104,7 @@ public class OnsiteCourseDAO {
             throw e;
         } finally {
             ps.close();
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return result;
     }
@@ -112,7 +112,7 @@ public class OnsiteCourseDAO {
     public int editOnsiteCourse(Course course) throws SQLException {
         int result = 0;
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -135,7 +135,7 @@ public class OnsiteCourseDAO {
             throw e;
         } finally {
             ps.close();
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return result;
     }
@@ -143,7 +143,7 @@ public class OnsiteCourseDAO {
     public int deleteOnsiteCourse(int courseId) throws SQLException {
         int result = 0;
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -159,7 +159,7 @@ public class OnsiteCourseDAO {
             throw e;
         } finally {
             ps.close();
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return result;
     }
