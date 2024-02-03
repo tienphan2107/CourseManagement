@@ -12,20 +12,30 @@ public class DatabaseConnect {
         conn = null;
     }
 
-    public Connection Open() {
-        try {
-            String dbURL = "jdbc:mysql://localhost:3306/School";
-            String username = "root";
-            String password = "";
-            conn = DriverManager.getConnection(dbURL, username, password);
-        } catch (SQLException ex) {
-            System.out.println("Lỗi kết nối: " + ex.getMessage());
-            return null;
-        }
-        return conn;
-    }
+    public static Connection getConnection() {
+		Connection c = null;
+		
+		try {
+			// Đăng ký MySQL Driver với DriverManager
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			
+			// Các thông số
+			String url = "jdbc:mysql://localhost:3306/shool";
+			String username = "root";
+			String password = "";
+			
+			// Tạo kết nối
+			c = DriverManager.getConnection(url, username, password);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return c;
+	}
 
-    public void Close(Connection conn) {
+    public void closeConnection(Connection conn) {
         try {
             if (conn != null && !conn.isClosed()) {
                 conn.close();

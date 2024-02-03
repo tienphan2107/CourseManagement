@@ -39,7 +39,7 @@ public class CourseDAO {
     public List<Course> Get() {
         List<Course> list = new ArrayList<>();
         try {
-            conn = db.Open(); // mở kết nối csdl
+            conn = db.getConnection(); // mở kết nối csdl
             if (conn != null) {
                 stmt = conn.createStatement();
                 rs = stmt.executeQuery("SELECT * FROM course"); // lệnh truy vấn
@@ -56,7 +56,7 @@ public class CourseDAO {
         } catch (Exception ex) {
             return new ArrayList<>(); // return về mảng rỗng nha, return null nó dễ bị văng lắm
         } finally {
-            db.Close(conn); // đóng kết nối
+            db.closeConnection(conn); // đóng kết nối
         }
         return list;
     }
@@ -64,7 +64,7 @@ public class CourseDAO {
     public ArrayList<Course> getCourseList(String courseTitle) throws SQLException {
         ArrayList<Course> list = new ArrayList<>();
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -102,7 +102,7 @@ public class CourseDAO {
         } finally {
             ps.close();
             rs.close();
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return list;
     }
@@ -110,7 +110,7 @@ public class CourseDAO {
     public boolean checkCourseExisted(int courseId) throws SQLException {
         boolean result = false;
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -126,7 +126,7 @@ public class CourseDAO {
         } finally {
             ps.close();
             rs.close();
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return result;
     }
