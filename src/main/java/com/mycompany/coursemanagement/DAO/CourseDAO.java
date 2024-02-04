@@ -130,4 +130,52 @@ public class CourseDAO {
         }
         return result;
     }
+    
+    //-------------------------------------------------Ham nay Tien viet nha-------------------------------------------------------
+    public Course GetCourseByID(String courseTitle, int courseID) throws SQLException {
+        Course result = new Course();
+        try {
+            conn = db.Open();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = """
+                           SELECT C.CourseID, Title, Credits, C.DepartmentID, D.Name, Days
+                           FROM course C
+                           	JOIN department D ON D.DepartmentID = C.DepartmentID
+                           	LEFT JOIN onsitecourse OSC ON C.CourseID = OSC.CourseID
+                           WHERE Title LIKE ? AND C.CourseID = ?
+                           ORDER BY Title ASC
+                           """;
+            ps = conn.prepareStatement(query);
+            ps.setString(1, "%" + courseTitle + "%");
+            ps.setString(2, courseID+"");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int courseId = rs.getInt("CourseID");
+                String title = rs.getString("Title");
+                int credits = rs.getInt("Credits");
+                int departmentId = rs.getInt("DepartmentID");
+                String departmentName = rs.getString("Name");
+                String days = rs.getString("Days"); // Use to check if course type is online/onsite
+
+                Department department = new Department();
+                department.setDepartmentID(departmentId);
+                department.setName(departmentName);
+
+                OnlineCourse onlineCourse = new OnlineCourse();
+                OnsiteCourse onsiteCourse = new OnsiteCourse();
+                onsiteCourse.setDays(days);
+
+                result = new Course(courseId, title, credits, departmentId, onlineCourse, onsiteCourse, department);
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            ps.close();
+            rs.close();
+            db.Close(conn);
+        }
+        return result;
+    }
 }
