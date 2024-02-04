@@ -4,10 +4,14 @@
  */
 package com.mycompany.coursemanagement.BUS;
 
+import com.mycompany.coursemanagement.DAO.StudentGradeDAO;
+
 /**
  *
  * @author PC
  */
 public class StudentGradeBUS {
+    private final StudentGradeDAO studenGradeDAO = new StudentGradeDAO();
+    
     
 }
