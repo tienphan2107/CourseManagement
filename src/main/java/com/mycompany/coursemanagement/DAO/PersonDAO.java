@@ -35,7 +35,7 @@ public class PersonDAO {
     public Person GetTeacherByID(int personID) throws Exception {
         Person result = new Person();
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -55,7 +55,7 @@ public class PersonDAO {
         } catch (Exception ex) {
             throw ex;
         } finally {
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return result;
     }

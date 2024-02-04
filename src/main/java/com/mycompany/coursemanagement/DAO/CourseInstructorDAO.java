@@ -36,7 +36,7 @@ public class CourseInstructorDAO {
     public List<CourseInstructor> Get() throws Exception {
         List<CourseInstructor> list = new ArrayList<>();
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -53,7 +53,7 @@ public class CourseInstructorDAO {
         } catch (Exception ex) {
             throw ex;
         } finally {
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return list;
     }
@@ -61,7 +61,7 @@ public class CourseInstructorDAO {
     public int Add(CourseInstructor courseInstructor) throws Exception {
         int result = 0;
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -74,7 +74,7 @@ public class CourseInstructorDAO {
         } catch (Exception ex) {
             throw ex;
         } finally {
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return result;
     }
@@ -82,7 +82,7 @@ public class CourseInstructorDAO {
     public int Edit(CourseInstructor courseInstructor) throws Exception {
         int result = 0;
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -96,7 +96,7 @@ public class CourseInstructorDAO {
         } catch (Exception ex) {
             throw ex;
         } finally {
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return result;
     }
@@ -104,7 +104,7 @@ public class CourseInstructorDAO {
     public int Delete(int courseID) throws Exception {
         int result = 0;
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -117,7 +117,7 @@ public class CourseInstructorDAO {
         } catch (Exception ex) {
             throw ex;
         } finally {
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return result;
     }

@@ -135,7 +135,7 @@ public class CourseDAO {
     public Course GetCourseByID(String courseTitle, int courseID) throws SQLException {
         Course result = new Course();
         try {
-            conn = db.Open();
+            conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
@@ -174,7 +174,7 @@ public class CourseDAO {
         } finally {
             ps.close();
             rs.close();
-            db.Close(conn);
+            db.closeConnection(conn);
         }
         return result;
     }

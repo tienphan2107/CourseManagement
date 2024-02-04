@@ -13,7 +13,7 @@ public class DatabaseConnect {
         c = null;
     }
 
-    public static Connection getConnection() {
+    public Connection getConnection() {
 		Connection c = null;
 		
 		try {
@@ -21,7 +21,7 @@ public class DatabaseConnect {
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 			
 			// Các thông số
-			String url = "jdbc:mysql://localhost:3306/shool";
+			String url = "jdbc:mysql://localhost:3306/school";
 			String username = "root";
 			String password = "";
 			
