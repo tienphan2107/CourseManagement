@@ -53,7 +53,7 @@ public class StudentGradeDAO {
                 studentGrades.add(studentGrade);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            return new ArrayList<>();
         } finally {
             // Đảm bảo đóng tất cả các tài nguyên
             try { rs.close(); } catch (Exception e) { /* Ignored */ }
@@ -62,6 +62,77 @@ public class StudentGradeDAO {
         }
 
         return studentGrades;
+    }
+    
+    
+    public int addStudentGrade(StudentGrade studentGrade) throws SQLException {
+        int result = 0;
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "INSERT INTO course(CourseID, Title, Credits, DepartmentID) VALUES (?,?,?,?)";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, studentGrade.getEnrollmentID());
+            ps.setInt(2, studentGrade.getCourseID());
+            ps.setInt(3, studentGrade.getStudentID());
+            ps.setDouble(4, studentGrade.getGrade());
+            result = ps.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            ps.close();
+            db.closeConnection(conn);
+        }
+        return result;
+    }
+    
+    
+    public int editStudentGrade(StudentGrade studentGrade) throws SQLException {
+        int result = 0;
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "UPDATE studentgrade SET Grade = ? WHERE StudentID = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, studentGrade.getEnrollmentID());
+            ps.setInt(2, studentGrade.getCourseID());
+            ps.setInt(3, studentGrade.getStudentID());
+            ps.setDouble(4, studentGrade.getGrade());
+            result = ps.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            ps.close();
+            db.closeConnection(conn);
+        }
+        return result;
+    }
+    
+    public int deleteStudentGrade(StudentGrade studentGrade) throws SQLException {
+        int result = 0;
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "DELETE FROM studentgrade WHERE StudentID = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, studentGrade.getEnrollmentID());
+            ps.setInt(2, studentGrade.getCourseID());
+            ps.setInt(3, studentGrade.getStudentID());
+            ps.setDouble(4, studentGrade.getGrade());
+            result = ps.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            ps.close();
+            db.closeConnection(conn);
+        }
+        return result;
     }
     
     
