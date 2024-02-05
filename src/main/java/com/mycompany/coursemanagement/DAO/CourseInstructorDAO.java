@@ -58,6 +58,32 @@ public class CourseInstructorDAO {
         return list;
     }
 
+    public List<Integer> GetCourseIDHaveNoInstructor() throws Exception { // hàm này lấy ra danh sách các courseID chưa có giáo viên dạy
+        List<Integer> list = new ArrayList<>();
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "SELECT c.CourseID\n"
+                    + " FROM courseinstructor ci RIGHT JOIN course c ON ci.CourseID=c.CourseID\n"
+                    + " WHERE ci.CourseID IS NULL";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int courseID = rs.getInt("CourseID");
+                list.add(courseID);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            db.closeConnection(conn);
+        }
+        return list;
+    }
+
     public int Add(CourseInstructor courseInstructor) throws Exception {
         int result = 0;
         try {
@@ -69,7 +95,6 @@ public class CourseInstructorDAO {
                     + "VALUES (" + courseInstructor.getCourseID() + ", " + courseInstructor.getPersonID() + ");";
             ps = conn.prepareStatement(query);
             result += ps.executeUpdate();
-            rs.close();
             ps.close();
         } catch (Exception ex) {
             throw ex;
@@ -91,7 +116,6 @@ public class CourseInstructorDAO {
                     + "WHERE CourseID = " + courseInstructor.getCourseID() + ";";
             ps = conn.prepareStatement(query);
             result += ps.executeUpdate();
-            rs.close();
             ps.close();
         } catch (Exception ex) {
             throw ex;
@@ -101,7 +125,7 @@ public class CourseInstructorDAO {
         return result;
     }
 
-    public int Delete(int courseID) throws Exception {
+    public int Delete(int courseID, int personID) throws Exception {
         int result = 0;
         try {
             conn = db.getConnection();
@@ -109,10 +133,9 @@ public class CourseInstructorDAO {
                 throw new SQLException("Connection error");
             }
             String query = "DELETE FROM CourseInstructor\n"
-                    + "WHERE CourseID = "+courseID+";";
+                    + "WHERE CourseID = " + courseID + " AND PersonID = " + personID + " ;";
             ps = conn.prepareStatement(query);
             result += ps.executeUpdate();
-            rs.close();
             ps.close();
         } catch (Exception ex) {
             throw ex;
