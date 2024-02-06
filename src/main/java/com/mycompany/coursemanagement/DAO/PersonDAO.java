@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -30,6 +32,34 @@ public class PersonDAO {
         stmt = null;
         rs = null;
         db = new DatabaseConnect();
+    }
+
+    public List<Person> GetAllTeacher() throws Exception {
+        List<Person> list = new ArrayList<>();
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "SELECT * FROM Person WHERE EnrollmentDate IS NULL";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int personID = rs.getInt("PersonID");
+                String lastName = rs.getString("Lastname");
+                String firstName = rs.getString("Firstname");
+                Date hireDate = rs.getDate("Hiredate");
+                Date enrollmentDate = null;
+                list.add(new Person(personID, lastName, firstName, hireDate, enrollmentDate));
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            db.closeConnection(conn);
+        }
+        return list;
     }
 
     public Person GetTeacherByID(int personID) throws Exception {
