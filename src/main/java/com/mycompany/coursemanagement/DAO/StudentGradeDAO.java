@@ -121,10 +121,7 @@ public class StudentGradeDAO {
             }
             String query = "DELETE FROM studentgrade WHERE StudentID = ?";
             ps = conn.prepareStatement(query);
-            ps.setInt(1, studentGrade.getEnrollmentID());
-            ps.setInt(2, studentGrade.getCourseID());
-            ps.setInt(3, studentGrade.getStudentID());
-            ps.setDouble(4, studentGrade.getGrade());
+            ps.setInt(1, enrollmentID);
             result = ps.executeUpdate();
         } catch (SQLException e) {
             throw e;
