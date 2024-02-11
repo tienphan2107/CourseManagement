@@ -130,7 +130,7 @@ public class CourseDAO {
         }
         return result;
     }
-    
+
     //-------------------------------------------------Ham nay Tien viet nha-------------------------------------------------------
     public Course GetCourseByID(String courseTitle, int courseID) throws SQLException {
         Course result = new Course();
@@ -149,7 +149,7 @@ public class CourseDAO {
                            """;
             ps = conn.prepareStatement(query);
             ps.setString(1, "%" + courseTitle + "%");
-            ps.setString(2, courseID+"");
+            ps.setString(2, courseID + "");
             rs = ps.executeQuery();
             while (rs.next()) {
                 int courseId = rs.getInt("CourseID");

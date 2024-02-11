@@ -8,6 +8,7 @@ import com.mycompany.coursemanagement.DAO.CourseDAO;
 import com.mycompany.coursemanagement.Models.Course;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,6 +20,10 @@ public class CourseBUS {
 
     public CourseBUS() {
 
+    }
+    
+    public List<Course> get() throws SQLException {
+        return courseDAO.Get();
     }
 
     public ArrayList<Course> getCourseList(String courseTitle) throws SQLException {

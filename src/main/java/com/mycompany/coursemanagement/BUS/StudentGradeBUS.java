@@ -26,6 +26,10 @@ public class StudentGradeBUS {
         return studentGradeDAO.Get();
     }
     
+    public int Add(StudentGrade studentGrade) throws Exception {
+        return studentGradeDAO.addStudentGrade(studentGrade);
+    }
+    
     public int Delete(int courseID, int studentID) throws Exception{
         return studentGradeDAO.deleteStudentGrade(courseID, studentID);
     }
@@ -41,5 +45,4 @@ public class StudentGradeBUS {
     public int getLastEnrollmentIDFromDatabase() throws Exception {
         return studentGradeDAO.getLastEnrollmentIDFromDatabase();
     }
-    
 }
