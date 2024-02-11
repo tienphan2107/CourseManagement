@@ -26,6 +26,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     
     EditManageStudentGrade EditFrame;
     DetailManageStudentGrade DetailFrame;
+    AddManageStudentGrade AddFrame;
 
     /**
      * Creates new form ManageStudentGrade
@@ -233,8 +234,8 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-//        AddFrame = new AddCourseInstructor();
-//        AddFrame.setVisible(true);
+        AddFrame = new AddManageStudentGrade();
+        AddFrame.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed

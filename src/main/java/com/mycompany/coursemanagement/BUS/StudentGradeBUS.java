@@ -38,6 +38,8 @@ public class StudentGradeBUS {
         return studentGradeDAO.editStudentGrade(studentGrade);
     }
     
-    
+    public int getLastEnrollmentIDFromDatabase() throws Exception {
+        return studentGradeDAO.getLastEnrollmentIDFromDatabase();
+    }
     
 }

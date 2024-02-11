@@ -159,4 +159,29 @@ public class StudentGradeDAO {
         return result;
     }
 
+    public int getLastEnrollmentIDFromDatabase() throws SQLException {
+        int lastEnrollmentID = 0;
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+
+            String query = "SELECT MAX(EnrollmentID) AS LastEnrollmentID FROM studentgrade";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                lastEnrollmentID = rs.getInt("LastEnrollmentID");
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            rs.close();
+            ps.close();
+            db.closeConnection(conn);
+        }
+        return lastEnrollmentID;
+    }
+
 }
