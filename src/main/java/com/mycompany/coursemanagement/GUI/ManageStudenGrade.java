@@ -4,6 +4,7 @@
  */
 package com.mycompany.coursemanagement.GUI;
 
+import com.mycompany.coursemanagement.BUS.StudentGradeBUS;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,6 +12,8 @@ import javax.swing.JOptionPane;
  * @author DELL
  */
 public class ManageStudenGrade extends javax.swing.JPanel {
+    
+    private StudentGradeBUS courseInstructorBUS = new StudentGradeBUS();
 
     /**
      * Creates new form ManageStudent
