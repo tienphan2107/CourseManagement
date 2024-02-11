@@ -4,7 +4,11 @@
  */
 package com.mycompany.coursemanagement.GUI.ManageStudentGrade;
 
+import com.mycompany.coursemanagement.BUS.CourseBUS;
 import com.mycompany.coursemanagement.BUS.StudentGradeBUS;
+import com.mycompany.coursemanagement.Models.Course;
+import com.mycompany.coursemanagement.Models.StudentGrade;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,8 +16,9 @@ import javax.swing.JOptionPane;
  * @author DELL
  */
 public class AddManageStudentGrade extends javax.swing.JFrame {
-    
+
     private StudentGradeBUS studentGradeBUS = new StudentGradeBUS();
+    private CourseBUS courseBUS = new CourseBUS();
 
     /**
      * Creates new form AddManageStudentGrade
@@ -23,12 +28,18 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         LoadValueComponent();
     }
-    
+
     public void LoadValueComponent() {
         try {
+            // Tự động đặt và tăng giá trị EnrollmentID
             int lastEnrollmentID = studentGradeBUS.getLastEnrollmentIDFromDatabase();
             int nextEnrollmentID = lastEnrollmentID + 1;
             txtEnrollmentID.setText(String.valueOf(nextEnrollmentID));
+
+            for (Course i : courseBUS.get()) {
+                int courseID = i.getCourseID();
+                cbbCourseID.addItem(courseID + "");
+            }
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured , please try again.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -57,7 +68,7 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
         btnSave = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         txtStudentID = new javax.swing.JTextField();
-        txtGrade1 = new javax.swing.JTextField();
+        txtGrade = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -104,9 +115,9 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
             }
         });
 
-        txtGrade1.addActionListener(new java.awt.event.ActionListener() {
+        txtGrade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGrade1ActionPerformed(evt);
+                txtGradeActionPerformed(evt);
             }
         });
 
@@ -136,7 +147,7 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtGrade1))
+                                .addComponent(txtGrade))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -166,7 +177,7 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtGrade1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(126, 126, 126)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,17 +229,22 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
 
         //Thêm
 //        int courseID = Integer.parseInt(cbbCourseID.getSelectedItem().toString());
-        int teacherID = Integer.parseInt(cbbCourseID.getSelectedItem().toString());
-//        try {
-//            if (courseInstructorBUS.Add(new CourseInstructor(courseID, teacherID)) > 0) {
-//                JOptionPane.showMessageDialog(this, "Add Instructor Success !");
-//            }
-//            this.dispose();
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(this, "An error occured when Add Data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-//            ex.printStackTrace();
-//            return;
-//        }
+//        int teacherID = Integer.parseInt(cbbCourseID.getSelectedItem().toString());
+        // Lấy dữ liệu từ các trường nhập liệu
+        int enrollmentID = Integer.parseInt(txtEnrollmentID.getText());
+        int studentID = Integer.parseInt(txtStudentID.getText());
+        int courseID = Integer.parseInt(cbbCourseID.getSelectedItem().toString());
+        double grade = Double.parseDouble(txtGrade.getText());
+        try {
+            if (studentGradeBUS.Add(new StudentGrade(enrollmentID, courseID, studentID, grade)) > 0) {
+                JOptionPane.showMessageDialog(this, "Add Instructor Success !");
+            }
+            this.dispose();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "An error occured when Add Data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+            return;
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -239,9 +255,9 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStudentIDActionPerformed
 
-    private void txtGrade1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGrade1ActionPerformed
+    private void txtGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGradeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtGrade1ActionPerformed
+    }//GEN-LAST:event_txtGradeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,7 +305,7 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtEnrollmentID;
-    private javax.swing.JTextField txtGrade1;
+    private javax.swing.JTextField txtGrade;
     private javax.swing.JTextField txtStudentID;
     // End of variables declaration//GEN-END:variables
 }
