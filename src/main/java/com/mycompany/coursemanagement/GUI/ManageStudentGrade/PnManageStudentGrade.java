@@ -25,6 +25,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     private DefaultTableModel tableModel;
     
     EditManageStudentGrade EditFrame;
+    DetailManageStudentGrade DetailFrame;
 
     /**
      * Creates new form ManageStudentGrade
@@ -238,14 +239,13 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         if (tblGrade.getSelectedRowCount() != 1) {
-            JOptionPane.showMessageDialog(this, "Please choose ONE Course Instructor", "Message", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please choose ONE Student Grade", "Message", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        int courseID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 2).toString());
-        int teacherID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 0).toString());
-//        DetailFrame = new CourseInstructorDetail(courseID, teacherID);
-//        DetailFrame.setVisible(true);
+        int enrollmentID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 0).toString());
+        
+        DetailFrame = new DetailManageStudentGrade(enrollmentID);
+        DetailFrame.setVisible(true);
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
