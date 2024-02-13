@@ -184,4 +184,33 @@ public class StudentGradeDAO {
         return lastEnrollmentID;
     }
 
+    public List<StudentGrade> FindByStudentID(int studentID) throws SQLException {
+        List<StudentGrade> resultList = new ArrayList<>();
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "SELECT * FROM studentgrade WHERE StudentID = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, studentID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int enrollmentID = rs.getInt("EnrollmentID");
+                int courseID = rs.getInt("CourseID");
+                double grade = rs.getDouble("Grade");
+
+                StudentGrade studentGrade = new StudentGrade(enrollmentID, courseID, studentID, grade);
+                resultList.add(studentGrade);
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            ps.close();
+            rs.close();
+            db.closeConnection(conn);
+        }
+        return resultList;
+    }
+
 }
