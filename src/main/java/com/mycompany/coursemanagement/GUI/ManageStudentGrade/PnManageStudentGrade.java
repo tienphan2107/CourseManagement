@@ -4,7 +4,6 @@
  */
 package com.mycompany.coursemanagement.GUI.ManageStudentGrade;
 
-
 import com.mycompany.coursemanagement.BUS.StudentGradeBUS;
 import com.mycompany.coursemanagement.Models.StudentGrade;
 import java.util.List;
@@ -18,12 +17,12 @@ import javax.swing.table.DefaultTableModel;
  * @author DELL
  */
 public class PnManageStudentGrade extends javax.swing.JPanel {
-    
+
     private StudentGradeBUS studentGradeBUS = new StudentGradeBUS();
     private List<StudentGrade> list;
     private final DefaultTableCellRenderer cellRightRenderer = new DefaultTableCellRenderer();
     private DefaultTableModel tableModel;
-    
+
     EditManageStudentGrade EditFrame;
     DetailManageStudentGrade DetailFrame;
     AddManageStudentGrade AddFrame;
@@ -37,8 +36,6 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         SetUpTable();
         Resetpanel();
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,7 +49,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblGrade = new javax.swing.JTable();
         txtFindContent = new javax.swing.JTextField();
-        btnFind = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
@@ -90,10 +87,10 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             tblGrade.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        btnFind.setText("Search");
-        btnFind.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFindActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -145,7 +142,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(txtFindContent, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnFind)
+                            .addComponent(btnSearch)
                             .addGap(160, 160, 160)
                             .addComponent(btnReload)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -166,7 +163,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
                     .addContainerGap()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtFindContent)
-                        .addComponent(btnFind, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,23 +175,45 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         if (txtFindContent.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Please type something in the TextBox first.", "Message", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please type StudentID in the TextBox first.", "Message", JOptionPane.ERROR_MESSAGE);
             txtFindContent.setText("");
             txtFindContent.requestFocus();
             return;
         }
-//        try {
-//            List<CourseInstructor> resultList = courseInstructorBUS.Find(txtFindContent.getText().trim());
-//            LoadCourseInstructor(rdSortByTeacher.isSelected(), resultList);
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(this, "An error occured when Finding data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-//            ex.printStackTrace();
-//            return;
-//        }
-    }//GEN-LAST:event_btnFindActionPerformed
 
+        int studentID;
+        try {
+            studentID = Integer.parseInt(txtFindContent.getText().trim());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid StudentID.", "Message", JOptionPane.ERROR_MESSAGE);
+            txtFindContent.setText("");
+            txtFindContent.requestFocus();
+            return;
+        }
+
+        List<StudentGrade> resultList;
+        try {
+            resultList = studentGradeBUS.FindByStudentID(studentID);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "An error occurred when finding data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+            return;
+        }
+
+        LoadStudentGrades(resultList);
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void LoadStudentGrades(List<StudentGrade> resultList) {
+        DefaultTableModel tableModel = (DefaultTableModel) tblGrade.getModel();
+        tableModel.setRowCount(0); // Clear the existing rows in the table
+        for (StudentGrade studentGrade : resultList) {
+            Object[] rowData = {studentGrade.getEnrollmentID(), studentGrade.getCourseID(), studentGrade.getStudentID(), studentGrade.getGrade()};
+            tableModel.addRow(rowData); // Add each student grade as a row in the table
+        }
+    }
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         if (tblGrade.getSelectedRowCount() != 1) {
             JOptionPane.showMessageDialog(this, "Please choose ONE Student Grade", "Message", JOptionPane.ERROR_MESSAGE);
@@ -244,7 +263,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             return;
         }
         int enrollmentID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 0).toString());
-        
+
         DetailFrame = new DetailManageStudentGrade(enrollmentID);
         DetailFrame.setVisible(true);
     }//GEN-LAST:event_btnViewActionPerformed
@@ -258,13 +277,13 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         txtFindContent.setText("");
         LoadCourseInstructor(list);
     }
-    
+
     private void SetUpTable() {
         for (int i = 0; i < tblGrade.getColumnCount(); i++) {
             tblGrade.getColumnModel().getColumn(i).setCellRenderer(new LeftAlignedCellRenderer());
         }
     }
-    
+
     public void GetAllList() {
         try {
             this.list = studentGradeBUS.Get();
@@ -274,7 +293,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             return;
         }
     }
-    
+
     private void LoadStudentGrades() {
         GetAllList(); // Get the list of student grades from the database
         tableModel.setRowCount(0); // Clear the existing rows in the table
@@ -289,8 +308,8 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnFind;
     private javax.swing.JButton btnReload;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnView;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblGrade;

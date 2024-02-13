@@ -45,4 +45,8 @@ public class StudentGradeBUS {
     public int getLastEnrollmentIDFromDatabase() throws Exception {
         return studentGradeDAO.getLastEnrollmentIDFromDatabase();
     }
+    
+    public List<StudentGrade> FindByStudentID(int studentID) throws Exception {
+        return studentGradeDAO.FindByStudentID(studentID);
+    }
 }

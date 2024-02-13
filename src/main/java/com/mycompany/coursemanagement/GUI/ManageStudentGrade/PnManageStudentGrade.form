@@ -25,7 +25,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="txtFindContent" min="-2" pref="246" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnFind" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnSearch" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="160" pref="160" max="-2" attributes="0"/>
                           <Component id="btnReload" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -51,7 +51,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="txtFindContent" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnFind" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="btnSearch" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="btnDelete" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="btnEdit" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="btnAdd" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
@@ -114,12 +114,12 @@
     </Container>
     <Component class="javax.swing.JTextField" name="txtFindContent">
     </Component>
-    <Component class="javax.swing.JButton" name="btnFind">
+    <Component class="javax.swing.JButton" name="btnSearch">
       <Properties>
         <Property name="text" type="java.lang.String" value="Search"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFindActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnDelete">
