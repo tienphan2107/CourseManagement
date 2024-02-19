@@ -232,6 +232,9 @@ public class PnCourseInstructor extends javax.swing.JPanel {
 
         int courseID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 2).toString());
         int teacherID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 0).toString());
+        if(DetailFrame != null){
+            DetailFrame.dispose();
+        }
         DetailFrame = new CourseInstructorDetail(courseID, teacherID);
         DetailFrame.setVisible(true);
     }//GEN-LAST:event_btnViewActionPerformed
@@ -268,6 +271,9 @@ public class PnCourseInstructor extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        if(AddFrame != null){
+            AddFrame.dispose();
+        }
         AddFrame = new AddCourseInstructor();
         AddFrame.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
@@ -283,7 +289,9 @@ public class PnCourseInstructor extends javax.swing.JPanel {
         }
         int courseID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 2).toString());
         int teacherID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 0).toString());
-        
+        if(EditFrame != null){
+            EditFrame.dispose();
+        }
         EditFrame = new EditCourseInstructor(courseID, teacherID);
         EditFrame.setVisible(true);
     }//GEN-LAST:event_btnEditActionPerformed
