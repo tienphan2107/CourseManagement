@@ -4,7 +4,9 @@
  */
 package com.mycompany.coursemanagement.BUS;
 
+import com.mycompany.coursemanagement.DAO.PersonDAO;
 import com.mycompany.coursemanagement.DAO.StudentGradeDAO;
+import com.mycompany.coursemanagement.Models.Person;
 import com.mycompany.coursemanagement.Models.StudentGrade;
 
 import java.sql.SQLException;
@@ -17,6 +19,7 @@ import java.util.List;
  */
 public class StudentGradeBUS {
     private final StudentGradeDAO studentGradeDAO = new StudentGradeDAO();
+    private PersonDAO personDAO = new PersonDAO();
     
     public StudentGradeBUS() {
 
@@ -36,6 +39,10 @@ public class StudentGradeBUS {
     
     public StudentGrade getStudentGradeByCourseAndStudent(int enrollmentID) throws SQLException {
         return studentGradeDAO.getStudentGradeByCourseAndStudent(enrollmentID);
+    }
+    
+    public Person GetStudentByID(int personID) throws Exception {
+        return personDAO.GetStudentByID(personID);
     }
     
     public int Edit(StudentGrade studentGrade) throws Exception{
