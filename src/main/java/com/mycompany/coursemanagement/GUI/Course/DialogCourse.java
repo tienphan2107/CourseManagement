@@ -1,4 +1,4 @@
-package com.mycompany.coursemanagement.GUI;
+package com.mycompany.coursemanagement.GUI.Course;
 
 import com.mycompany.coursemanagement.BUS.OnlineCourseBUS;
 import com.mycompany.coursemanagement.BUS.OnsiteCourseBUS;
@@ -392,11 +392,11 @@ public class DialogCourse extends javax.swing.JDialog {
         cbCourseType = new javax.swing.JComboBox<>();
         btnGoToCourseInfo = new javax.swing.JButton();
         pOnlineCourseInfo = new javax.swing.JPanel();
-        pOnlineCourse = new com.mycompany.coursemanagement.GUI.PnOnlineCourse();
+        pOnlineCourse = new com.mycompany.coursemanagement.GUI.Course.PnOnlineCourse();
         btnBack1 = new javax.swing.JButton();
         btnConfirmActionOnlineCourse = new javax.swing.JButton();
         pOnsiteCourseInfo = new javax.swing.JPanel();
-        pOnsiteCourse = new com.mycompany.coursemanagement.GUI.PnOnsiteCourse();
+        pOnsiteCourse = new com.mycompany.coursemanagement.GUI.Course.PnOnsiteCourse();
         btnBack2 = new javax.swing.JButton();
         btnConfirmActionOnsiteCourse = new javax.swing.JButton();
 
@@ -623,9 +623,9 @@ public class DialogCourse extends javax.swing.JDialog {
     private javax.swing.JPanel pChooseType;
     private javax.swing.JPanel pHeader;
     private javax.swing.JPanel pMain;
-    private com.mycompany.coursemanagement.GUI.PnOnlineCourse pOnlineCourse;
+    private com.mycompany.coursemanagement.GUI.Course.PnOnlineCourse pOnlineCourse;
     private javax.swing.JPanel pOnlineCourseInfo;
-    private com.mycompany.coursemanagement.GUI.PnOnsiteCourse pOnsiteCourse;
+    private com.mycompany.coursemanagement.GUI.Course.PnOnsiteCourse pOnsiteCourse;
     private javax.swing.JPanel pOnsiteCourseInfo;
     // End of variables declaration//GEN-END:variables
 }
