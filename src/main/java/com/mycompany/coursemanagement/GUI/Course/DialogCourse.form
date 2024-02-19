@@ -178,7 +178,7 @@
             <Property name="useNullLayout" type="boolean" value="false"/>
           </Layout>
           <SubComponents>
-            <Component class="com.mycompany.coursemanagement.GUI.PnOnlineCourse" name="pOnlineCourse">
+            <Component class="com.mycompany.coursemanagement.GUI.Course.PnOnlineCourse" name="pOnlineCourse">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="50" width="500" height="250"/>
@@ -238,7 +238,7 @@
             <Property name="useNullLayout" type="boolean" value="false"/>
           </Layout>
           <SubComponents>
-            <Component class="com.mycompany.coursemanagement.GUI.PnOnsiteCourse" name="pOnsiteCourse">
+            <Component class="com.mycompany.coursemanagement.GUI.Course.PnOnsiteCourse" name="pOnsiteCourse">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="20" y="0" width="-1" height="-1"/>

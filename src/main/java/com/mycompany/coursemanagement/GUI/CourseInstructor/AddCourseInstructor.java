@@ -10,6 +10,7 @@ import com.mycompany.coursemanagement.BUS.PersonBUS;
 import com.mycompany.coursemanagement.Models.Course;
 import com.mycompany.coursemanagement.Models.CourseInstructor;
 import com.mycompany.coursemanagement.Models.Person;
+import java.io.IOException;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -318,7 +319,7 @@ public class AddCourseInstructor extends javax.swing.JFrame {
 //            if (!title.equals(course.getTitle())) {
 //                cbbTitle.setSelectedItem(course.getTitle());
 //            }// nếu title trùng khớp rồi thì không cần đặt lại cbb
-            if(cbbTitle.getSelectedIndex()!=cbbCourseID.getSelectedIndex()){
+            if (cbbTitle.getSelectedIndex() != cbbCourseID.getSelectedIndex()) {
                 cbbTitle.setSelectedIndex(cbbCourseID.getSelectedIndex());
             }
         } catch (Exception ex) {
@@ -338,7 +339,7 @@ public class AddCourseInstructor extends javax.swing.JFrame {
 //            if (cbbTitle.getSelectedItem().toString().equals(courseInstructorBUS.GetCourseByID(courseID).getTitle())) {
 //                return;
 //            } 
-            if(cbbTitle.getSelectedIndex()!=cbbCourseID.getSelectedIndex()){
+            if (cbbTitle.getSelectedIndex() != cbbCourseID.getSelectedIndex()) {
                 cbbCourseID.setSelectedIndex(cbbTitle.getSelectedIndex());
             }// nếu như title trùng khớp ròi thì không cần thay đổi courseID lại
 
@@ -417,6 +418,9 @@ public class AddCourseInstructor extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Add Instructor Success !");
             }
             this.dispose();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured when Add Data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();

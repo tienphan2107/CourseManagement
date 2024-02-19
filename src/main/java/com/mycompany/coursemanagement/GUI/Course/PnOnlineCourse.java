@@ -1,6 +1,6 @@
-package com.mycompany.coursemanagement.GUI;
+package com.mycompany.coursemanagement.GUI.Course;
 
-import com.mycompany.coursemanagement.GUI.DialogChooseDepartment.DepartmentDialogListener;
+import com.mycompany.coursemanagement.GUI.Course.DialogChooseDepartment.DepartmentDialogListener;
 import com.mycompany.coursemanagement.Models.Department;
 import javax.swing.JButton;
 import javax.swing.JDialog;
