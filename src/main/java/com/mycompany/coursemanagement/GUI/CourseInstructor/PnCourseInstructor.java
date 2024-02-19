@@ -9,6 +9,7 @@ import com.mycompany.coursemanagement.Models.Course;
 import com.mycompany.coursemanagement.Models.CourseInstructor;
 import com.mycompany.coursemanagement.Models.Person;
 import java.awt.Font;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -255,6 +256,9 @@ public class PnCourseInstructor extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Delete Instructor Success !");
                 btnReloadActionPerformed(evt);
             }
+        }catch (IOException ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured when Delete Data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
