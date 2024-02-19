@@ -1,4 +1,4 @@
-package com.mycompany.coursemanagement.GUI;
+package com.mycompany.coursemanagement.GUI.Course;
 
 import com.mycompany.coursemanagement.BUS.CourseBUS;
 import com.mycompany.coursemanagement.BUS.OnlineCourseBUS;

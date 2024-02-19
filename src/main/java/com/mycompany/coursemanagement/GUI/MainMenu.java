@@ -4,6 +4,7 @@
  */
 package com.mycompany.coursemanagement.GUI;
 
+import com.mycompany.coursemanagement.GUI.Course.PnCourse;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.mycompany.coursemanagement.GUI.CourseInstructor.PnCourseInstructor;
 import com.mycompany.coursemanagement.GUI.ManageStudentGrade.PnManageStudentGrade;
