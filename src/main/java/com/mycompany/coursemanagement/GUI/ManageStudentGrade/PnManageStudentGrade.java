@@ -264,8 +264,9 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             return;
         }
         int enrollmentID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 0).toString());
-
-        EditFrame = new EditManageStudentGrade(enrollmentID);
+        int personID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 2).toString());
+        
+        EditFrame = new EditManageStudentGrade(enrollmentID, personID);
         EditFrame.setVisible(true);
     }//GEN-LAST:event_btnEditActionPerformed
 
