@@ -35,6 +35,10 @@ public class CourseInstructorBUS {
     public Person GetTeacherByID(int personID) throws Exception {
         return personDAO.GetTeacherByID(personID);
     }
+    
+    public Person GetStudentByID(int personID) throws Exception {
+        return personDAO.GetStudentByID(personID);
+    }
 
     public List<CourseInstructor> Find(String condition) throws Exception { // hàm tìm kiếm theo id, name, title có phân biệt chữ hoa.
         List<CourseInstructor> resultList = new ArrayList<>();

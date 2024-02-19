@@ -5,6 +5,7 @@
 package com.mycompany.coursemanagement.GUI.ManageStudentGrade;
 
 import com.mycompany.coursemanagement.BUS.StudentGradeBUS;
+import com.mycompany.coursemanagement.Models.Person;
 import com.mycompany.coursemanagement.Models.StudentGrade;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -55,6 +56,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         btnView = new javax.swing.JButton();
         btnReload = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         tblGrade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -68,7 +70,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -129,11 +131,16 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setText("Search By StudentID");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 880, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(345, 345, 345)
+                .addComponent(jLabel1)
+                .addContainerGap(428, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -157,7 +164,10 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(470, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -209,9 +219,16 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     private void LoadStudentGrades(List<StudentGrade> resultList) {
         DefaultTableModel tableModel = (DefaultTableModel) tblGrade.getModel();
         tableModel.setRowCount(0); // Clear the existing rows in the table
-        for (StudentGrade studentGrade : resultList) {
-            Object[] rowData = {studentGrade.getEnrollmentID(), studentGrade.getCourseID(), studentGrade.getStudentID(), studentGrade.getGrade()};
-            tableModel.addRow(rowData); // Add each student grade as a row in the table
+        try {
+            for (StudentGrade studentGrade : resultList) {
+                Object[] rowData = {studentGrade.getEnrollmentID(), studentGrade.getCourseID(), studentGrade.getStudentID(),studentGrade.getGrade()};
+                tableModel.addRow(rowData); // Add each student grade as a row in the table
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "An error occured when Load Data to GUI, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+            tableModel.setRowCount(0);
+            return;
         }
     }
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -263,8 +280,9 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             return;
         }
         int enrollmentID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 0).toString());
+        int personID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 2).toString());
 
-        DetailFrame = new DetailManageStudentGrade(enrollmentID);
+        DetailFrame = new DetailManageStudentGrade(enrollmentID, personID);
         DetailFrame.setVisible(true);
     }//GEN-LAST:event_btnViewActionPerformed
 
@@ -311,6 +329,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     private javax.swing.JButton btnReload;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnView;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblGrade;
     private javax.swing.JTextField txtFindContent;
