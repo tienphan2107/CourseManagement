@@ -10,6 +10,7 @@ import com.mycompany.coursemanagement.DAO.PersonDAO;
 import com.mycompany.coursemanagement.Models.Course;
 import com.mycompany.coursemanagement.Models.CourseInstructor;
 import com.mycompany.coursemanagement.Models.Person;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class CourseInstructorBUS {
         return courseInstructorDAO.GetCourseIDHaveNoInstructor();
     }
     
-    public Course GetCourseByID(int courseID) throws SQLException {
+    public Course GetCourseByID(int courseID) throws Exception {
         return courseDAO.GetCourseByID("", courseID);
     }
 
@@ -50,14 +51,23 @@ public class CourseInstructorBUS {
     }
     
     public int Delete(int courseID, int personID) throws Exception{
+        if(GetCourseByID(courseID)==null || GetTeacherByID(personID)==null){
+            throw new IOException("Cannot find the Instructor");
+        }
         return courseInstructorDAO.Delete(courseID,personID);
     }
     
     public int Add(CourseInstructor courseInstructor) throws Exception{
+        if(courseInstructor == null){
+            throw new IOException("Cannot find the Instructor");
+        }
         return courseInstructorDAO.Add(courseInstructor);
     }
     
     public int Edit(CourseInstructor courseInstructor) throws Exception{
+        if(courseInstructor == null){
+            throw new IOException("Cannot find the Instructor");
+        }
         return courseInstructorDAO.Edit(courseInstructor);
     }
 }
