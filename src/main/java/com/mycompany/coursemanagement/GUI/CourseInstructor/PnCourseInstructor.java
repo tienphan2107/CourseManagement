@@ -299,6 +299,7 @@ public class PnCourseInstructor extends javax.swing.JPanel {
         for (int i = 0; i < tblInstructor.getColumnCount(); i++) {
             tblInstructor.getColumnModel().getColumn(i).setCellRenderer(new LeftAlignedCellRenderer());
         }
+        tblInstructor.getTableHeader().setReorderingAllowed(false);
     }
 
     public void GetAllList() {

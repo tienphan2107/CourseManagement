@@ -8,6 +8,7 @@ import com.mycompany.coursemanagement.GUI.Course.PnCourse;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.mycompany.coursemanagement.GUI.CourseInstructor.PnCourseInstructor;
 import com.mycompany.coursemanagement.GUI.ManageStudentGrade.PnManageStudentGrade;
+import com.mycompany.coursemanagement.GUI.Student.PnStudent;
 
 
 import java.awt.BorderLayout;
@@ -68,7 +69,12 @@ public class MainMenu extends javax.swing.JFrame {
 
         jButton1.setText("Chức Năng 1");
 
-        jButton2.setText("Chức Năng 2");
+        jButton2.setText("Students");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Chức Năng 3");
 
@@ -145,7 +151,7 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Phần Mềm Quản Lý Khóa Học");
+        jLabel1.setText("Courses Management System");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -285,6 +291,13 @@ public class MainMenu extends javax.swing.JFrame {
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5MouseClicked
+//Students
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        pnMainContent.removeAll();
+        pnMainContent.add(new PnStudent());
+        pnMainContent.repaint();
+        pnMainContent.revalidate();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
