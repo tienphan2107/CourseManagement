@@ -259,6 +259,13 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
             e.printStackTrace();
             return;
         }
+        
+        if (result > 0) {
+            JOptionPane.showMessageDialog(this, "Add successfully");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
