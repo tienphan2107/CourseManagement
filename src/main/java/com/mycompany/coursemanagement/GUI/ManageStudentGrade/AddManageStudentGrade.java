@@ -8,7 +8,10 @@ import com.mycompany.coursemanagement.BUS.CourseBUS;
 import com.mycompany.coursemanagement.BUS.StudentGradeBUS;
 import com.mycompany.coursemanagement.Models.Course;
 import com.mycompany.coursemanagement.Models.StudentGrade;
+import helper.EmptyFieldException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -232,17 +235,28 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
 //        int teacherID = Integer.parseInt(cbbCourseID.getSelectedItem().toString());
         // Lấy dữ liệu từ các trường nhập liệu
         int enrollmentID = Integer.parseInt(txtEnrollmentID.getText());
-        int studentID = Integer.parseInt(txtStudentID.getText());
+        String studentID = txtStudentID.getText();
         int courseID = Integer.parseInt(cbbCourseID.getSelectedItem().toString());
-        double grade = Double.parseDouble(txtGrade.getText());
+        String grade = txtGrade.getText();
+        int result;
         try {
-            if (studentGradeBUS.Add(new StudentGrade(enrollmentID, courseID, studentID, grade)) > 0) {
-                JOptionPane.showMessageDialog(this, "Add Instructor Success !");
+            result = studentGradeBUS.add(enrollmentID, courseID, studentID, grade);
+//            this.dispose();
+        } catch (EmptyFieldException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
+            if (e.getFieldName().equalsIgnoreCase("StudentId")) {
+                txtStudentID.requestFocus();
+            } else if (e.getFieldName().equalsIgnoreCase("Grade")) {
+                txtGrade.requestFocus();
             }
-            this.dispose();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "An error occured when Add Data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
+            return;
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            return;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
             return;
         }
     }//GEN-LAST:event_btnSaveActionPerformed
