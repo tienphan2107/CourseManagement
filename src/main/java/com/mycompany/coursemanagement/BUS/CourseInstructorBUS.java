@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CourseInstructorBUS {
 
@@ -24,10 +26,13 @@ public class CourseInstructorBUS {
     public List<CourseInstructor> Get() throws Exception {
         return courseInstructorDAO.Get();
     }
-    
-    public List<Integer> GetCourseIDHaveNoInstructor() throws Exception{
-        return courseInstructorDAO.GetCourseIDHaveNoInstructor();
+    public List<Person> GetTeachersDidNotTeachThisCourse(int courseID) throws Exception{
+        return courseInstructorDAO.GetTeacherDidNotTeachThisCourse(courseID);
     }
+    
+//    public List<Integer> GetCourseIDHaveNoInstructor() throws Exception{
+//        return courseInstructorDAO.GetCourseIDHaveNoInstructor();
+//    }
     
     public Course GetCourseByID(int courseID) throws Exception {
         return courseDAO.GetCourseByID("", courseID);

@@ -5,7 +5,9 @@
 package com.mycompany.coursemanagement.DAO;
 
 import com.mycompany.coursemanagement.Models.CourseInstructor;
+import com.mycompany.coursemanagement.Models.Person;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,21 +60,24 @@ public class CourseInstructorDAO {
         return list;
     }
 
-    public List<Integer> GetCourseIDHaveNoInstructor() throws Exception { // hàm này lấy ra danh sách các courseID chưa có giáo viên dạy
-        List<Integer> list = new ArrayList<>();
+    public List<Person> GetTeacherDidNotTeachThisCourse(int courseID) throws Exception {
+        List<Person> list = new ArrayList<>();
         try {
             conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
-            String query = "SELECT c.CourseID\n"
-                    + " FROM courseinstructor ci RIGHT JOIN course c ON ci.CourseID=c.CourseID\n"
-                    + " WHERE ci.CourseID IS NULL";
+            String query = "SELECT p.* FROM courseinstructor ci join person p on p.PersonID != ci.PersonID\n"
+                    + "WHERE ci.CourseID="+courseID+" and p.HireDate IS NOT null;";
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int courseID = rs.getInt("CourseID");
-                list.add(courseID);
+                int personID = rs.getInt("PersonID");
+                String lastName = rs.getString("Lastname");
+                String firstName = rs.getString("Firstname");
+                Date hireDate = rs.getDate("Hiredate");
+                Date enrollmentDate = null;
+                list.add(new Person(personID, lastName, firstName, hireDate, enrollmentDate));
             }
             rs.close();
             ps.close();
@@ -83,6 +88,32 @@ public class CourseInstructorDAO {
         }
         return list;
     }
+
+//    public List<Integer> GetCourseIDHaveNoInstructor() throws Exception { // hàm này lấy ra danh sách các courseID chưa có giáo viên dạy
+//        List<Integer> list = new ArrayList<>();
+//        try {
+//            conn = db.getConnection();
+//            if (conn == null) {
+//                throw new SQLException("Connection error");
+//            }
+//            String query = "SELECT c.CourseID\n"
+//                    + " FROM courseinstructor ci RIGHT JOIN course c ON ci.CourseID=c.CourseID\n"
+//                    + " WHERE ci.CourseID IS NULL";
+//            ps = conn.prepareStatement(query);
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                int courseID = rs.getInt("CourseID");
+//                list.add(courseID);
+//            }
+//            rs.close();
+//            ps.close();
+//        } catch (Exception ex) {
+//            throw ex;
+//        } finally {
+//            db.closeConnection(conn);
+//        }
+//        return list;
+//    }
 
     public int Add(CourseInstructor courseInstructor) throws Exception {
         int result = 0;

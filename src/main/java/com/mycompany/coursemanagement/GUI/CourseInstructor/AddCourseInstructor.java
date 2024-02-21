@@ -40,21 +40,10 @@ public class AddCourseInstructor extends javax.swing.JFrame {
             teacherList = personBUS.GetAllTeacher();
             courseList = new CourseBUS().getCourseList("");
 
-            for (int i : courseInstructorBUS.GetCourseIDHaveNoInstructor()) {
-                Course course = courseInstructorBUS.GetCourseByID(i);
+            for (Course course : courseList) {
                 cbbCourseID.addItem(course.getCourseID() + "");
                 cbbTitle.addItem(course.getTitle());
             }
-
-            for (Person p : teacherList) {
-                cbbTeacherID.addItem(p.getPersonID() + "");
-                cbbFirstName.addItem(p.getFirstName());
-            }
-
-//            cbbCourseID.setSelectedIndex(0);
-//            cbbTitle.setSelectedIndex(0);
-//            cbbTeacherID.setSelectedIndex(0);
-//            cbbFirstName.setSelectedIndex(0);
             LoadValueTextField();
 
         } catch (Exception ex) {
@@ -306,22 +295,40 @@ public class AddCourseInstructor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void loadCbbTeacherForEachCourse(int courseID) {
+        cbbTeacherID.removeAllItems();
+        cbbFirstName.removeAllItems();
+        try {
+            if (courseInstructorBUS.GetTeachersDidNotTeachThisCourse(courseID).isEmpty()) {
+                for (Person p : teacherList) {
+                    cbbTeacherID.addItem(p.getPersonID() + "");
+                    cbbFirstName.addItem(p.getFirstName());
+                }
+            } else {
+                for (Person p : courseInstructorBUS.GetTeachersDidNotTeachThisCourse(courseID)) {
+                    cbbTeacherID.addItem(p.getPersonID() + "");
+                    cbbFirstName.addItem(p.getFirstName());
+                }
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "An error occured , please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+            return;
+        }
 
+    }
     private void cbbCourseIDItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbCourseIDItemStateChanged
         if (cbbTitle.getItemCount() <= 0) {
             return;
         }
-        //String title = cbbTitle.getSelectedItem().toString();
         try {
             Course course = courseInstructorBUS.GetCourseByID(Integer.parseInt(cbbCourseID.getSelectedItem().toString()));
             txtCredits.setText(course.getCredits() + "");
             txtDepartmentID.setText(course.getDepartmentID() + "");
-//            if (!title.equals(course.getTitle())) {
-//                cbbTitle.setSelectedItem(course.getTitle());
-//            }// nếu title trùng khớp rồi thì không cần đặt lại cbb
             if (cbbTitle.getSelectedIndex() != cbbCourseID.getSelectedIndex()) {
                 cbbTitle.setSelectedIndex(cbbCourseID.getSelectedIndex());
             }
+            loadCbbTeacherForEachCourse(course.getCourseID()); // hàm này load lại ds gvien dạy được môn đó
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured , please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
@@ -335,21 +342,12 @@ public class AddCourseInstructor extends javax.swing.JFrame {
         }
         //Course course = new Course();
         try {
-            //int courseID = Integer.parseInt(cbbCourseID.getSelectedItem().toString());
-//            if (cbbTitle.getSelectedItem().toString().equals(courseInstructorBUS.GetCourseByID(courseID).getTitle())) {
-//                return;
-//            } 
+
             if (cbbTitle.getSelectedIndex() != cbbCourseID.getSelectedIndex()) {
                 cbbCourseID.setSelectedIndex(cbbTitle.getSelectedIndex());
             }// nếu như title trùng khớp ròi thì không cần thay đổi courseID lại
-
-//            for (Course c : this.courseList) {
-//                if (c.getTitle().equals(cbbTitle.getSelectedItem().toString())) {
-//                    course = c;
-//                    break;
-//                }
-//            }
-            //cbbCourseID.setSelectedItem(course.getCourseID() + "");
+            Course course = courseInstructorBUS.GetCourseByID(Integer.parseInt(cbbCourseID.getSelectedItem().toString()));
+            loadCbbTeacherForEachCourse(course.getCourseID()); // hàm này load lại ds gvien dạy được môn đó
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured , please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
@@ -358,7 +356,8 @@ public class AddCourseInstructor extends javax.swing.JFrame {
     }//GEN-LAST:event_cbbTitleItemStateChanged
 
     private void cbbTeacherIDItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbTeacherIDItemStateChanged
-        if (cbbFirstName.getItemCount() <= 0) {
+
+        if(cbbFirstName.getItemCount()<1 || cbbTeacherID.getItemCount() < 1){
             return;
         }
         String firstName = cbbFirstName.getSelectedItem().toString();
@@ -378,7 +377,8 @@ public class AddCourseInstructor extends javax.swing.JFrame {
     }//GEN-LAST:event_cbbTeacherIDItemStateChanged
 
     private void cbbFirstNameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbFirstNameItemStateChanged
-        if (cbbTeacherID.getItemCount() <= 0) {
+
+        if(cbbTeacherID.getItemCount()<1 || cbbFirstName.getItemCount()<1){
             return;
         }
         int teacherID = Integer.parseInt(cbbTeacherID.getSelectedItem().toString());
