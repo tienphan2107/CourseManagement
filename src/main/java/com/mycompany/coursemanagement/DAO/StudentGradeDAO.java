@@ -242,5 +242,22 @@ public class StudentGradeDAO {
         }
         return result;
     }
+    
+    public boolean isStudentIDValid(int studentID) {
+        String query = "SELECT PersonID FROM person WHERE PersonID = ?";
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, studentID);
+            rs = ps.executeQuery();
+            return rs.next(); // Trả về true nếu có kết quả từ truy vấn, ngược lại trả về false
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }
