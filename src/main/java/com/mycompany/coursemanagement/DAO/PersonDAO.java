@@ -143,8 +143,38 @@ public class PersonDAO {
         }
         return result;
     }
+    
+    public List<Person> GetStudentID() throws Exception {
+        List<Person> list = new ArrayList<>();
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "SELECT PersonID FROM person WHERE HireDate IS null;";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int personID = rs.getInt("PersonID");
+                String lastName = rs.getString("Lastname");
+                String firstName = rs.getString("Firstname");
+                Date hireDate = rs.getDate("Hiredate");
+                Date enrollmentDate = null;
+                list.add(new Person(personID, lastName, firstName, hireDate, enrollmentDate));
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            db.closeConnection(conn);
+        }
+        return list;
+    }
     public boolean AddStudent(Person person){
         return false;
     }
+    
+    
 
 }
