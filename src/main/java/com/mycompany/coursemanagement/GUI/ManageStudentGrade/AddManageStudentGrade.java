@@ -229,7 +229,7 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
         int courseID = Integer.parseInt(cbbCourseID.getSelectedItem().toString());
         int result;
         try {
-            result = studentGradeBUS.Add(studentGrade);
+            result = studentGradeBUS.Add(new StudentGrade(enrollmentID, courseID, studentID, 0));
         } 
 //        catch (EmptyFieldException e) {
 //            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
@@ -249,12 +249,12 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
             return;
         }
         
-//        if (result > 0) {
-//            JOptionPane.showMessageDialog(this, "Add successfully");
-//            this.dispose();
-//        } else {
-//            JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-//        }
+        if (result > 0) {
+            JOptionPane.showMessageDialog(this, "Add successfully");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
