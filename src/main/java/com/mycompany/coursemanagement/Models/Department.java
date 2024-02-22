@@ -4,23 +4,24 @@
  */
 package com.mycompany.coursemanagement.Models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author PC
  */
 public class Department {
+
     private int departmentID;
     private String name;
     private Double budget;
-    private Date startDate;
+    private LocalDateTime startDate; // Sử dụng kiểu LocalDateTime thay cho Date
     private int administrator;
 
     public Department() {
     }
 
-    public Department(int departmentID, String name, Double budget, Date startDate, int administrator) {
+    public Department(int departmentID, String name, Double budget, LocalDateTime startDate, int administrator) {
         this.departmentID = departmentID;
         this.name = name;
         this.budget = budget;
@@ -52,11 +53,11 @@ public class Department {
         this.budget = budget;
     }
 
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
@@ -72,5 +73,5 @@ public class Department {
     public String toString() {
         return "Department{" + "departmentID=" + departmentID + ", name=" + name + ", budget=" + budget + ", startDate=" + startDate + ", administrator=" + administrator + '}';
     }
-    
+
 }
