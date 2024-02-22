@@ -25,6 +25,7 @@ public class DepartmentBUS {
         return departmentDAO.getDepartmentList(name);
     }
 
+
     public void addDepartment(Department department) throws SQLException {
         departmentDAO.addDepartment(department);
     }
@@ -39,4 +40,5 @@ public class DepartmentBUS {
     public void deleteDepartment(int departmentId) throws SQLException{
         departmentDAO.deleteDepartment(departmentId);
     }
+
 }

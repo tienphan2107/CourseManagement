@@ -5,13 +5,14 @@
 
 package com.mycompany.coursemanagement;
 import com.mycompany.coursemanagement.GUI.MainMenu;
+import javax.swing.UnsupportedLookAndFeelException;
 /**
  *
  * @author PC
  */
 public class CourseManagement {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedLookAndFeelException {
        MainMenu.main(args);
     }
 }

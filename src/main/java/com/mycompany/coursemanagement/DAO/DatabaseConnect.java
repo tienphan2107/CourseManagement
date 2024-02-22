@@ -1,37 +1,60 @@
 package com.mycompany.coursemanagement.DAO;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnect {
 
-    private Connection conn = null;
+    private Connection c = null;
 
     public DatabaseConnect() {
-        conn = null;
+        c = null;
     }
 
-    public Connection Open() {
-        try {
-            String dbURL = "jdbc:mysql://localhost:3306/School";
-            String username = "root";
-            String password = "";
-            conn = DriverManager.getConnection(dbURL, username, password);
-        } catch (SQLException ex) {
-            System.out.println("Lỗi kết nối: " + ex.getMessage());
-            return null;
-        }
-        return conn;
-    }
+    public Connection getConnection() {
+		Connection c = null;
+		
+		try {
+			// Đăng ký MySQL Driver với DriverManager
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			
+			// Các thông số
+			String url = "jdbc:mysql://localhost:3306/school";
+			String username = "root";
+			String password = "";
+			
+			// Tạo kết nối
+			c = DriverManager.getConnection(url, username, password);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return c;
+	}
 
-    public void Close(Connection conn) {
+    public void closeConnection(Connection c) {
         try {
-            if (conn != null && !conn.isClosed()) {
-                conn.close();
+            if (c != null && !c.isClosed()) {
+                c.close();
             }
         } catch (SQLException ex) {
             System.out.println("Lỗi đóng kết nối: " + ex.getMessage());
         }
     }
+    
+    public static void printInfo(Connection c) {
+		try {
+			if(c!=null) {
+				DatabaseMetaData mtdt = c.getMetaData();
+				System.out.println(mtdt.getDatabaseProductName());
+				System.out.println(mtdt.getDatabaseProductVersion());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
