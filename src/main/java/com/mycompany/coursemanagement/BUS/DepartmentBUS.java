@@ -24,4 +24,21 @@ public class DepartmentBUS {
     public ArrayList<Department> getDepartmentList(String name) throws SQLException {
         return departmentDAO.getDepartmentList(name);
     }
+
+
+    public void addDepartment(Department department) throws SQLException {
+        departmentDAO.addDepartment(department);
+    }
+    public int getNextDepartmentId() throws SQLException {
+        return departmentDAO.getNextDepartmentId();
+    }
+    
+    public void updateDepartment(Department department) throws SQLException {
+        departmentDAO.updateDepartment(department);
+    }
+    
+    public void deleteDepartment(int departmentId) throws SQLException{
+        departmentDAO.deleteDepartment(departmentId);
+    }
+
 }
