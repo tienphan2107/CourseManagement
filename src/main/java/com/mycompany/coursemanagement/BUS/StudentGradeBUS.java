@@ -48,6 +48,10 @@ public class StudentGradeBUS {
     public Person GetStudentByID(int personID) throws Exception {
         return personDAO.GetStudentByID(personID);
     }
+    
+    public List<Person> GetAllStudent() throws Exception {
+        return personDAO.GetAllStudent();
+    }
 
     public int Edit(StudentGrade studentGrade) throws Exception {
         return studentGradeDAO.editStudentGrade(studentGrade);
