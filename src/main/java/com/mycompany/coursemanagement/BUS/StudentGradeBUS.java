@@ -90,16 +90,9 @@ public class StudentGradeBUS {
         return new StudentGrade(EnrollmentID, CourseID, id, Double.parseDouble(Grade));
     }
     
-    public StudentGrade validateEditStudentGrade(int EnrollmentID, int CourseID, String StudentID, String Grade) throws Exception {
-        if (StudentID.isEmpty()) {
-            throw new EmptyFieldException("StudentId", "StudentID can not be empty");
-        }
+    public StudentGrade validateEditStudentGrade(int EnrollmentID, int CourseID, int StudentID, String Grade) throws Exception {
         if (Grade.isEmpty()) {
             throw new EmptyFieldException("Grade", "Grade can not be empty");
-        }
-
-        if (!Pattern.matches("^[0-9]+$", StudentID)) {
-            throw new IllegalArgumentException("Student ID must be an integer");
         }
         
         if (!Pattern.matches("^\\d+(\\.\\d*)?|\\.\\d+", Grade)) {
@@ -112,7 +105,7 @@ public class StudentGradeBUS {
 //            throw new IllegalArgumentException("Student ID is not existed");
 //        }
 
-        return new StudentGrade(EnrollmentID, CourseID, Integer.parseInt(StudentID), Double.parseDouble(Grade));
+        return new StudentGrade(EnrollmentID, CourseID, StudentID, Double.parseDouble(Grade));
     }
     
     public int add(int EnrollmentID, int CourseID, String StudentID, String Grade) throws Exception {
@@ -126,7 +119,7 @@ public class StudentGradeBUS {
         return result;
     }
     
-    public int edit(int EnrollmentID, int CourseID, String StudentID, String Grade) throws Exception {
+    public int edit(int EnrollmentID, int CourseID, int StudentID, String Grade) throws Exception {
         StudentGrade s = validateEditStudentGrade(EnrollmentID, CourseID, StudentID, Grade);
         int result;
         try {
