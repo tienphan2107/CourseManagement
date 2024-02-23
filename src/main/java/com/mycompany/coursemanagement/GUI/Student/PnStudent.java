@@ -18,11 +18,13 @@ import javax.swing.table.DefaultTableModel;
  * @author PC
  */
 public class PnStudent extends javax.swing.JPanel {
-    
+
     private PersonBUS personBus = new PersonBUS();
     private List<Person> list;
-    
+
     AddStudent addFrame;
+    EditStudent editFrame;
+
     /**
      * Creates new form pnSinhVien
      */
@@ -32,11 +34,13 @@ public class PnStudent extends javax.swing.JPanel {
         SetUpTable();
         Resetpanel();
     }
+
     public void Resetpanel() {
         GetAllList();
         txtFindContent.setText("");
         LoadStudent(list);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,20 +68,20 @@ public class PnStudent extends javax.swing.JPanel {
 
         tblStudent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Student ID", "First Name", "Last Name", "Enrollment Date"
+                "#", "Student ID", "First Name", "Last Name", "Enrollment Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -88,8 +92,13 @@ public class PnStudent extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblStudent.setEnabled(false);
         jScrollPane1.setViewportView(tblStudent);
+        if (tblStudent.getColumnModel().getColumnCount() > 0) {
+            tblStudent.getColumnModel().getColumn(0).setMinWidth(1);
+            tblStudent.getColumnModel().getColumn(0).setPreferredWidth(1);
+            tblStudent.getColumnModel().getColumn(1).setMinWidth(1);
+            tblStudent.getColumnModel().getColumn(1).setPreferredWidth(1);
+        }
 
         btnFind.setText("Find");
         btnFind.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +149,7 @@ public class PnStudent extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtFindContent, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFind)
@@ -155,7 +164,9 @@ public class PnStudent extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelete)
                         .addContainerGap())
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addGap(36, 36, 36))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +190,7 @@ public class PnStudent extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 886, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,19 +201,28 @@ public class PnStudent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
-        
+
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        
+        if (tblStudent.getSelectedRowCount() != 1) {
+            JOptionPane.showMessageDialog(this, "Please choose ONE Student", "Message", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int studentID = Integer.parseInt(tblStudent.getModel().getValueAt(tblStudent.getSelectedRow(), 1).toString());
+        if(editFrame != null){
+            editFrame.dispose();
+        }
+        editFrame = new EditStudent(studentID);
+        editFrame.setVisible(true);
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        if(addFrame != null){
+        if (addFrame != null) {
             addFrame.dispose();
         }
         addFrame = new AddStudent();
@@ -210,11 +230,11 @@ public class PnStudent extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-       
+
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
-       Resetpanel();
+        Resetpanel();
     }//GEN-LAST:event_btnReloadActionPerformed
     public void SetUpTable() {
         for (int i = 0; i < tblStudent.getColumnCount(); i++) {
@@ -222,6 +242,7 @@ public class PnStudent extends javax.swing.JPanel {
         }
         tblStudent.getTableHeader().setReorderingAllowed(false);
     }
+
     public void GetAllList() {
         try {
             this.list = personBus.GetAllStudent();
@@ -231,6 +252,7 @@ public class PnStudent extends javax.swing.JPanel {
             return;
         }
     }
+
     public void LoadStudent(List<Person> list) {
         if (list == null || list.isEmpty()) {
             JOptionPane.showMessageDialog(this, "There are no Student to be show !");
@@ -238,14 +260,10 @@ public class PnStudent extends javax.swing.JPanel {
         }
         DefaultTableModel tableModel = (DefaultTableModel) tblStudent.getModel();
         tableModel.setRowCount(0);
+        int stt = 1;
         try {
             for (Person student : list) {
-                int studentID = student.getPersonID();
-                String firstName = student.getFirstName();
-                String lastName = student.getLastName();
-                Date enrollmentDate = student.getEnrollmentDate();
-                Object[] row = {studentID,firstName,lastName,enrollmentDate};
-                tableModel.addRow(row);
+                tableModel.addRow(new Object[]{stt++, student.getPersonID(), student.getFirstName(), student.getLastName(), student.getEnrollmentDate()});
             }
 
         } catch (Exception ex) {
@@ -270,10 +288,10 @@ public class PnStudent extends javax.swing.JPanel {
     private javax.swing.JTextField txtFindContent;
     // End of variables declaration//GEN-END:variables
 }
+
 class LeftAlignedCellRenderer extends DefaultTableCellRenderer {
 
     public LeftAlignedCellRenderer() {
         setHorizontalAlignment(SwingConstants.LEFT); // Đặt căn chỉnh sang trái
     }
 }
-

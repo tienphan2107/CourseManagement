@@ -42,8 +42,7 @@ public class AddStudent extends javax.swing.JFrame {
     public void LoadValueComponent() {
         try {
             //Tự khởi tạo ID (tăng dần)
-            studentList = personBUS.GetAllStudent();
-            int id = studentList.size() + 1;
+            int id = personBUS.getCurrentID() + 1;
             txtStudentID.setText(Integer.toString(id));
             //Tự khởi tạo Enrollment Date bằng thời điểm hiện tại
             Calendar currentTime = Calendar.getInstance();
@@ -122,12 +121,8 @@ public class AddStudent extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(327, 327, 327))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(90, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,7 +139,7 @@ public class AddStudent extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(111, 111, 111)
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(141, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,19 +147,20 @@ public class AddStudent extends javax.swing.JFrame {
                             .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(108, 108, 108))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(159, 159, 159))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(txtStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(46, 46, 46)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,19 +196,27 @@ public class AddStudent extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
-            int id = Integer.parseInt(txtStudentID.getText());
-            Date temp = dtpickerEnrollmentDate.getDate();
-            java.sql.Date enrollmentDate = new java.sql.Date(temp.getTime());
-            String firstName = txtFirstName.getText();
-            String lastName = txtLastName.getText();
-            Person ps = new Person(id, lastName, firstName, null, enrollmentDate);
-            boolean result = personBUS.AddStudent(ps);
-            if(result == true){
-                JOptionPane.showMessageDialog(this, "Save successfully !.", "Notification", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(this, "Can't save, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            Person ps = new Person();
+            if (checkString(txtFirstName.getText()) == true && checkString(txtLastName.getText()) == true) {
+                ps.setFirstName(txtFirstName.getText());
+                ps.setLastName(txtLastName.getText());
+                int id = Integer.parseInt(txtStudentID.getText());
+                ps.setPersonID(id);
+                Date temp = dtpickerEnrollmentDate.getDate();
+                java.sql.Date enrollmentDate = new java.sql.Date(temp.getTime());
+                ps.setEnrollmentDate(enrollmentDate);
+                boolean result = personBUS.AddStudent(ps);
+                if (result == true) {
+                    JOptionPane.showMessageDialog(this, "Save successfully !.", "Notification", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Can't save, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "The inputed infomation is invalid !");
+                return;
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Can't save, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
             return;
@@ -221,9 +225,22 @@ public class AddStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        this.dispose();
+        if(txtFirstName.getText() != "" || txtLastName.getText() != ""){
+            int choose = JOptionPane.showConfirmDialog(this, "Cancel adding student ?\n Your inputed WON'T be saved !", "Confirm", JOptionPane.YES_NO_OPTION);
+            if (choose == JOptionPane.NO_OPTION) { // đổi ý không xóa nữa
+                return;
+            }else{
+                this.dispose();
+            }
+        }
     }//GEN-LAST:event_btnExitActionPerformed
-
+    private boolean checkString(String input) {
+        if (input.isEmpty()) {
+            return false;
+        }
+        // Cho phép chữ cái từ A-Z, a-z và các ký tự tiếng Việt (bao gồm các dấu)
+        return input.matches("[\\p{L} ]+");
+    }
     private void txtStudentIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStudentIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStudentIDActionPerformed
