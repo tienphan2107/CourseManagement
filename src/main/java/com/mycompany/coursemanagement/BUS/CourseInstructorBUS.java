@@ -22,6 +22,10 @@ public class CourseInstructorBUS {
     private CourseInstructorDAO courseInstructorDAO = new CourseInstructorDAO();
     private CourseDAO courseDAO = new CourseDAO();
     private PersonDAO personDAO = new PersonDAO();
+    
+    public CourseInstructorBUS() {
+        
+    }
 
     public List<CourseInstructor> Get() throws Exception {
         return courseInstructorDAO.Get();
@@ -78,5 +82,9 @@ public class CourseInstructorBUS {
             throw new IOException("Cannot find the Instructor");
         }
         return courseInstructorDAO.Edit(courseInstructor);
+    }
+    
+    public boolean anyInstructorFound(int courseId) throws SQLException {
+        return courseInstructorDAO.anyInstructorFound(courseId);
     }
 }
