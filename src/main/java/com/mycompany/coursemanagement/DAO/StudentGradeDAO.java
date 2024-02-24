@@ -260,4 +260,27 @@ public class StudentGradeDAO {
         }
     }
 
+    public boolean anyEnrollmentFound(int courseId) throws SQLException {
+        boolean result = false;
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "SELECT * FROM studentgrade WHERE CourseID = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, courseId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                result = true;
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            ps.close();
+            rs.close();
+            db.closeConnection(conn);
+        }
+        return result;
+    }
 }

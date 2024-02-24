@@ -1,8 +1,10 @@
 package com.mycompany.coursemanagement.GUI.Course;
 
 import com.mycompany.coursemanagement.BUS.CourseBUS;
+import com.mycompany.coursemanagement.BUS.CourseInstructorBUS;
 import com.mycompany.coursemanagement.BUS.OnlineCourseBUS;
 import com.mycompany.coursemanagement.BUS.OnsiteCourseBUS;
+import com.mycompany.coursemanagement.BUS.StudentGradeBUS;
 import com.mycompany.coursemanagement.Models.Course;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
@@ -18,6 +20,8 @@ public class PnCourse extends javax.swing.JPanel {
     private final CourseBUS courseBUS = new CourseBUS();
     private final OnlineCourseBUS onlineCourseBUS = new OnlineCourseBUS();
     private final OnsiteCourseBUS onsiteCourseBUS = new OnsiteCourseBUS();
+    private final CourseInstructorBUS courseInstructorBUS = new CourseInstructorBUS();
+    private final StudentGradeBUS studentGradeBUS = new StudentGradeBUS();
     private final DefaultTableCellRenderer cellRightRenderer = new DefaultTableCellRenderer();
     private ArrayList<Course> data;
     private DefaultTableModel tableModel;
@@ -94,6 +98,24 @@ public class PnCourse extends javax.swing.JPanel {
                 "Course",
                 JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
+            boolean canBeDeleted = true;
+            try {
+                canBeDeleted = !courseInstructorBUS.anyInstructorFound(courseId) && !studentGradeBUS.anyEnrollmentFound(courseId);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Connection error", "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+                return;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+                return;
+            }
+            
+            if (!canBeDeleted) {
+                JOptionPane.showMessageDialog(this, "Course '"+ course.getTitle() + "' (" + course.getCourseID() + ") cannot be deleted as it already has instructors assigned or students enrolled.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             int result = 0;
             try {
                 if (course.getOnsiteCourse().getDays() == null) {

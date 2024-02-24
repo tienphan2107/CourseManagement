@@ -133,4 +133,8 @@ public class StudentGradeBUS {
         }
         return result;
     }
+    
+    public boolean anyEnrollmentFound(int courseId) throws SQLException {
+        return studentGradeDAO.anyEnrollmentFound(courseId);
+    }
 }
