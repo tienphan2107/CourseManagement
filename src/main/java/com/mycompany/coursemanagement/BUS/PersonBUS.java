@@ -7,6 +7,7 @@ package com.mycompany.coursemanagement.BUS;
 import com.mycompany.coursemanagement.DAO.PersonDAO;
 import com.mycompany.coursemanagement.Models.Person;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -67,5 +68,13 @@ public class PersonBUS {
     }
     public boolean EditStudent(Person person) throws Exception{
         return personDAO.EditStudent(person);
+    }
+    public boolean DeleteStudent(int studentID) throws SQLException{
+        return personDAO.DeleteStudent(studentID);
+    }
+    public List<Person> FindStudent(String condition) throws Exception {
+        return personDAO.FindStudent(condition);
+    }public List<Person> GetAllStudent() throws Exception {
+        return personDAO.GetAllStudent();
     }
 }

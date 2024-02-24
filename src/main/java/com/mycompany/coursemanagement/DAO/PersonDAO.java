@@ -357,7 +357,7 @@ public class PersonDAO {
         }
         return list;
     }
-}
+
 
 
 
@@ -414,6 +414,63 @@ public class PersonDAO {
             if (conn != null) {
                 conn.close();
             }
+        }
+    }
+     public boolean DeleteStudent(int studentID) throws SQLException {
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "DELETE FROM person \n WHERE PersonID = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, studentID);
+            int rowAffected = ps.executeUpdate();
+            ps.close();
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    public List<Person> FindStudent(String condition) throws SQLException {
+        List<Person> list = new ArrayList<>();
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "SELECT * FROM `person` WHERE HireDate IS NULL AND (PersonID LIKE '%"+condition+"%' OR Firstname LIKE '%"+condition+"%' OR Lastname LIKE '%"+condition+"%' OR EnrollmentDate LIKE '%"+condition+"%')";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int personID = rs.getInt("PersonID");
+                String lastName = rs.getString("Lastname");
+                String firstName = rs.getString("Firstname");
+                Date hireDate = null;
+                Date enrollmentDate = rs.getDate("EnrollmentDate");
+                list.add(new Person(personID, lastName, firstName, hireDate, enrollmentDate));
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            return list;
         }
     }
 }
