@@ -74,7 +74,8 @@ public class PersonBUS {
     }
     public List<Person> FindStudent(String condition) throws Exception {
         return personDAO.FindStudent(condition);
-    }public List<Person> GetAllStudent() throws Exception {
+    }
+    public List<Person> GetAllStudent() throws Exception{
         return personDAO.GetAllStudent();
     }
 }
