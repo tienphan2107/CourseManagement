@@ -65,23 +65,23 @@ public class PnCourse extends javax.swing.JPanel {
 
     private void handleViewCourseDetail(int row) {
         Course course = data.get(row);
-        if (course.getOnsiteCourse().getDays() == null) {
-            DialogCourse dialog = new DialogCourse(this, (JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true, "view", course, "online");
+        String courseType = course.getOnsiteCourse().getDays() == null ? "online" : "onsite";
+        try {
+            DialogCourse dialog = new DialogCourse(this, (JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true, "view", course, courseType);
             dialog.setVisible(true);
-        } else {
-            DialogCourse dialog = new DialogCourse(this, (JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true, "view", course, "onsite");
-            dialog.setVisible(true);
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void handleEditCourse(int row) {
         Course course = data.get(row);
-        if (course.getOnsiteCourse().getDays() == null) {
-            DialogCourse dialog = new DialogCourse(this, (JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true, "edit", course, "online");
+        String courseType = course.getOnsiteCourse().getDays() == null ? "online" : "onsite";
+        try {
+            DialogCourse dialog = new DialogCourse(this, (JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true, "edit", course, courseType);
             dialog.setVisible(true);
-        } else {
-            DialogCourse dialog = new DialogCourse(this, (JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), true, "edit", course, "onsite");
-            dialog.setVisible(true);
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
