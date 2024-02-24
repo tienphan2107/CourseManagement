@@ -24,6 +24,7 @@ public class PnStudent extends javax.swing.JPanel {
 
     AddStudent addFrame;
     EditStudent editFrame;
+    StudentDetails detailFrame;
 
     /**
      * Creates new form pnSinhVien
@@ -201,11 +202,47 @@ public class PnStudent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
-
+        if (txtFindContent.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Please type something in the TextBox first.", "Message", JOptionPane.ERROR_MESSAGE);
+            txtFindContent.setText("");
+            txtFindContent.requestFocus();
+            return;
+        }
+        try {
+            List<Person> result = personBus.FindStudent(txtFindContent.getText());
+            LoadStudent(result);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "An error occured when finding a suitable content, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+            return;
+        }
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-
+        if (tblStudent.getSelectedRowCount() != 1) {
+            JOptionPane.showMessageDialog(this, "Please choose ONE student to delete", "Message", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int choose = JOptionPane.showConfirmDialog(this, "Delete this student ?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (choose == JOptionPane.NO_OPTION) { // đổi ý không xóa nữa
+            return;
+        }
+        int studentID = Integer.parseInt(tblStudent.getModel().getValueAt(tblStudent.getSelectedRow(), 1).toString());
+        try {
+            boolean result = personBus.DeleteStudent(studentID);
+            if (result == true) {
+                JOptionPane.showMessageDialog(this, "Delete student success !, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                btnReloadActionPerformed(evt);
+                return;
+            } else {
+                JOptionPane.showMessageDialog(this, "An error occured, please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "An error occured when Deleting Data in Database, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -214,7 +251,7 @@ public class PnStudent extends javax.swing.JPanel {
             return;
         }
         int studentID = Integer.parseInt(tblStudent.getModel().getValueAt(tblStudent.getSelectedRow(), 1).toString());
-        if(editFrame != null){
+        if (editFrame != null) {
             editFrame.dispose();
         }
         editFrame = new EditStudent(studentID);
@@ -230,7 +267,17 @@ public class PnStudent extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        if (tblStudent.getSelectedRowCount() != 1) {
+            JOptionPane.showMessageDialog(this, "Please choose ONE Course Instructor", "Message", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
+        int studentID = Integer.parseInt(tblStudent.getModel().getValueAt(tblStudent.getSelectedRow(), 1).toString());
+        if(detailFrame != null){
+            detailFrame.dispose();
+        }
+        detailFrame = new StudentDetails(studentID);
+        detailFrame.setVisible(true);
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
