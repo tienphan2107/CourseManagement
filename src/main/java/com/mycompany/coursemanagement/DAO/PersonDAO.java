@@ -1,4 +1,4 @@
- /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -118,7 +118,7 @@ public class PersonDAO {
         }
         return list;
     }
-  
+
     //Lấy danh sách person
     public List<Person> GetAllPerson() throws Exception {
         List<Person> list = new ArrayList<>();
@@ -148,7 +148,7 @@ public class PersonDAO {
         }
         return list;
     }
-  
+
     public Person GetStudentByID(int personID) throws Exception {
         Person result = new Person();
         try {
@@ -176,10 +176,6 @@ public class PersonDAO {
         }
         return result;
     }
-  
-
-  
-  
 
     //Hàm thêm Teacher
     public int addTeacher(Person teacher) throws SQLException {
@@ -205,7 +201,6 @@ public class PersonDAO {
         }
         return result;
     }
-    
 
     public List<Person> GetStudentID() throws Exception {
         List<Person> list = new ArrayList<>();
@@ -234,13 +229,6 @@ public class PersonDAO {
         }
         return list;
     }
-    
-  
-  
-  
-  
-  
-
 
     public boolean AddStudent(Person person) {
         try {
@@ -271,9 +259,6 @@ public class PersonDAO {
             db.closeConnection(conn);
         }
     }
-  
-  
-  
 
     //Hàm sửa Teacher
     public int editTeacher(Person teacher) throws SQLException {
@@ -301,12 +286,6 @@ public class PersonDAO {
         return result;
     }
 
-
-
-
-
-
-
     //Hàm xóa Teacher
     public int deleteTeacher(int personID) throws SQLException {
         int result = 0;
@@ -327,8 +306,9 @@ public class PersonDAO {
         }
         return result;
     }
+
     //Hàm tìm kiếm
-    public List<Person> findTeacher(String value) throws Exception{
+    public List<Person> findTeacher(String value) throws Exception {
         List<Person> list = new ArrayList<>();
         try {
             conn = db.getConnection();
@@ -357,16 +337,6 @@ public class PersonDAO {
         }
         return list;
     }
-}
-
-
-
-
-
-
-
-
-
 
     public int getCurrentMaxID() {
         int id = -1;
@@ -397,11 +367,11 @@ public class PersonDAO {
                 throw new SQLException("Connection error");
             }
             String query = "UPDATE person\n"
-                + "SET Firstname = ?, Lastname = ? WHERE PersonID = ?";
+                    + "SET Firstname = ?, Lastname = ? WHERE PersonID = ?";
             ps = conn.prepareStatement(query);
-            ps.setString(1,person.getFirstName());
-            ps.setString(2,person.getLastName());
-            ps.setInt(3,person.getPersonID());
+            ps.setString(1, person.getFirstName());
+            ps.setString(2, person.getLastName());
+            ps.setInt(3, person.getPersonID());
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
         } catch (Exception ex) {

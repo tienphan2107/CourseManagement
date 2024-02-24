@@ -68,4 +68,8 @@ public class PersonBUS {
     public boolean EditStudent(Person person) throws Exception{
         return personDAO.EditStudent(person);
     }
+    
+    public List<Person> GetAllStudent() throws Exception{
+        return personDAO.GetAllStudent();
+    }
 }
