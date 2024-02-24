@@ -6,6 +6,7 @@ package com.mycompany.coursemanagement.BUS;
 
 import com.mycompany.coursemanagement.DAO.PersonDAO;
 import com.mycompany.coursemanagement.Models.Person;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class PersonBUS {
     public List<Person> GetAllTeacher() throws Exception{
         return personDAO.GetAllTeacher();
     }
+
     public Person GetTeacherByID(int personID) throws Exception {
         return personDAO.GetTeacherByID(personID);
     }
@@ -35,5 +37,13 @@ public class PersonBUS {
     } 
     public List<Person> findTeacher(String value) throws Exception{
         return personDAO.findTeacher(value);
+
+    public List<Person> GetAllStudent() throws Exception{
+        return personDAO.GetAllStudent();
+    }
+    public boolean AddStudent(Person ps){
+        if(personDAO.AddStudent(ps)) return true;
+        return false;
+
     }
 }

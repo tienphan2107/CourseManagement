@@ -90,6 +90,35 @@ public class PersonDAO {
         }
         return result;
     }
+
+    public List<Person> GetAllStudent() throws Exception {
+        List<Person> list = new ArrayList<>();
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "SELECT * FROM Person WHERE HireDate IS NULL";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int personID = rs.getInt("PersonID");
+                String lastName = rs.getString("Lastname");
+                String firstName = rs.getString("Firstname");
+                Date hireDate = null;
+                Date enrollmentDate = rs.getDate("EnrollmentDate");
+                list.add(new Person(personID, lastName, firstName, hireDate, enrollmentDate));
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            db.closeConnection(conn);
+        }
+        return list;
+    }
+  
     //Lấy danh sách person
     public List<Person> GetAllPerson() throws Exception {
         List<Person> list = new ArrayList<>();
@@ -99,6 +128,7 @@ public class PersonDAO {
                 throw new SQLException("Connection error");
             }
             String query = "SELECT * FROM Person";
+
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -118,6 +148,45 @@ public class PersonDAO {
         }
         return list;
     }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    public Person GetStudentByID(int personID) throws Exception {
+        Person result = new Person();
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "SELECT * FROM person WHERE PersonID = " + personID + " AND HireDate IS null;";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int personIDResult = rs.getInt("PersonID");
+                String lastName = rs.getString("Lastname");
+                String firstName = rs.getString("Firstname");
+                Date hireDate = rs.getDate("Hiredate");
+                Date enrollmentDate = null;
+                result = new Person(personID, lastName, firstName, hireDate, enrollmentDate);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            db.closeConnection(conn);
+        }
+        return result;
+    }
+  
+  
+
     //Hàm thêm Teacher
     public int addTeacher(Person teacher) throws SQLException {
         int result = 0;
@@ -142,6 +211,48 @@ public class PersonDAO {
         }
         return result;
     }
+    
+    
+    
+
+    
+    public List<Person> GetStudentID() throws Exception {
+        List<Person> list = new ArrayList<>();
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "SELECT PersonID FROM person WHERE HireDate IS null;";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int personID = rs.getInt("PersonID");
+                String lastName = rs.getString("Lastname");
+                String firstName = rs.getString("Firstname");
+                Date hireDate = rs.getDate("Hiredate");
+                Date enrollmentDate = null;
+                list.add(new Person(personID, lastName, firstName, hireDate, enrollmentDate));
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            db.closeConnection(conn);
+        }
+        return list;
+    }
+    public boolean AddStudent(Person person){
+        return false;
+    }
+    
+
+
+
+
+
+
     //Hàm sửa Teacher
     public int editTeacher(Person teacher) throws SQLException {
         int result = 0;
@@ -167,6 +278,13 @@ public class PersonDAO {
         }
         return result;
     }
+
+
+
+
+
+
+
     //Hàm xóa Teacher
     public int deleteTeacher(int personID) throws SQLException {
         int result = 0;

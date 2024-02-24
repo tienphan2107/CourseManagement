@@ -10,6 +10,7 @@ import com.mycompany.coursemanagement.BUS.PersonBUS;
 import com.mycompany.coursemanagement.Models.Course;
 import com.mycompany.coursemanagement.Models.CourseInstructor;
 import com.mycompany.coursemanagement.Models.Person;
+import java.io.IOException;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -264,12 +265,26 @@ public class EditCourseInstructor extends javax.swing.JFrame {
             txtCredits.setText(course.getCredits() + "");
             txtDepartmentID.setText(course.getDepartmentID() + "");
 
-            for (Person p : teacherList) {
-                cbbTeacherID.addItem(p.getPersonID() + "");
-                cbbFirstName.addItem(p.getFirstName());
-            }
+            loadCbbTeacherForEachCourse(courseID);
 
             cbbTeacherID.setSelectedItem(teacher.getPersonID() + "");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "An error occured , please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+            return;
+        }
+
+    }
+
+    public void loadCbbTeacherForEachCourse(int courseID) {
+        cbbTeacherID.removeAllItems();
+        cbbFirstName.removeAllItems();
+        try {
+            for (Person p : courseInstructorBUS.GetTeachersDidNotTeachThisCourse(courseID)) {
+                cbbTeacherID.addItem(p.getPersonID() + "");
+                cbbFirstName.addItem(p.getFirstName());
+
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured , please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
@@ -345,8 +360,11 @@ public class EditCourseInstructor extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Add Instructor Success !");
             }
             this.dispose();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "An error occured when Add Data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "An error occured when Save Data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
             return;
         }

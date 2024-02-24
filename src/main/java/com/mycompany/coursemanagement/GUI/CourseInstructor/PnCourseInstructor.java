@@ -9,6 +9,7 @@ import com.mycompany.coursemanagement.Models.Course;
 import com.mycompany.coursemanagement.Models.CourseInstructor;
 import com.mycompany.coursemanagement.Models.Person;
 import java.awt.Font;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -231,6 +232,9 @@ public class PnCourseInstructor extends javax.swing.JPanel {
 
         int courseID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 2).toString());
         int teacherID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 0).toString());
+        if(DetailFrame != null){
+            DetailFrame.dispose();
+        }
         DetailFrame = new CourseInstructorDetail(courseID, teacherID);
         DetailFrame.setVisible(true);
     }//GEN-LAST:event_btnViewActionPerformed
@@ -255,6 +259,9 @@ public class PnCourseInstructor extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Delete Instructor Success !");
                 btnReloadActionPerformed(evt);
             }
+        }catch (IOException ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured when Delete Data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
@@ -264,6 +271,9 @@ public class PnCourseInstructor extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        if(AddFrame != null){
+            AddFrame.dispose();
+        }
         AddFrame = new AddCourseInstructor();
         AddFrame.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
@@ -279,7 +289,9 @@ public class PnCourseInstructor extends javax.swing.JPanel {
         }
         int courseID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 2).toString());
         int teacherID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 0).toString());
-        
+        if(EditFrame != null){
+            EditFrame.dispose();
+        }
         EditFrame = new EditCourseInstructor(courseID, teacherID);
         EditFrame.setVisible(true);
     }//GEN-LAST:event_btnEditActionPerformed
@@ -287,6 +299,7 @@ public class PnCourseInstructor extends javax.swing.JPanel {
         for (int i = 0; i < tblInstructor.getColumnCount(); i++) {
             tblInstructor.getColumnModel().getColumn(i).setCellRenderer(new LeftAlignedCellRenderer());
         }
+        tblInstructor.getTableHeader().setReorderingAllowed(false);
     }
 
     public void GetAllList() {

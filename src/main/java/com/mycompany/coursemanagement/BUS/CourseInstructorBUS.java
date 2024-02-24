@@ -10,9 +10,12 @@ import com.mycompany.coursemanagement.DAO.PersonDAO;
 import com.mycompany.coursemanagement.Models.Course;
 import com.mycompany.coursemanagement.Models.CourseInstructor;
 import com.mycompany.coursemanagement.Models.Person;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CourseInstructorBUS {
 
@@ -23,17 +26,24 @@ public class CourseInstructorBUS {
     public List<CourseInstructor> Get() throws Exception {
         return courseInstructorDAO.Get();
     }
-    
-    public List<Integer> GetCourseIDHaveNoInstructor() throws Exception{
-        return courseInstructorDAO.GetCourseIDHaveNoInstructor();
+    public List<Person> GetTeachersDidNotTeachThisCourse(int courseID) throws Exception{
+        return courseInstructorDAO.GetTeacherDidNotTeachThisCourse(courseID);
     }
     
-    public Course GetCourseByID(int courseID) throws SQLException {
+//    public List<Integer> GetCourseIDHaveNoInstructor() throws Exception{
+//        return courseInstructorDAO.GetCourseIDHaveNoInstructor();
+//    }
+    
+    public Course GetCourseByID(int courseID) throws Exception {
         return courseDAO.GetCourseByID("", courseID);
     }
 
     public Person GetTeacherByID(int personID) throws Exception {
         return personDAO.GetTeacherByID(personID);
+    }
+    
+    public Person GetStudentByID(int personID) throws Exception {
+        return personDAO.GetStudentByID(personID);
     }
 
     public List<CourseInstructor> Find(String condition) throws Exception { // hàm tìm kiếm theo id, name, title có phân biệt chữ hoa.
@@ -50,14 +60,23 @@ public class CourseInstructorBUS {
     }
     
     public int Delete(int courseID, int personID) throws Exception{
+        if(GetCourseByID(courseID)==null || GetTeacherByID(personID)==null){
+            throw new IOException("Cannot find the Instructor");
+        }
         return courseInstructorDAO.Delete(courseID,personID);
     }
     
     public int Add(CourseInstructor courseInstructor) throws Exception{
+        if(courseInstructor == null){
+            throw new IOException("Cannot find the Instructor");
+        }
         return courseInstructorDAO.Add(courseInstructor);
     }
     
     public int Edit(CourseInstructor courseInstructor) throws Exception{
+        if(courseInstructor == null){
+            throw new IOException("Cannot find the Instructor");
+        }
         return courseInstructorDAO.Edit(courseInstructor);
     }
 }
