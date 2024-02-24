@@ -63,4 +63,130 @@ public class DepartmentDAO {
         }
         return list;
     }
+
+    public void addDepartment(Department department) throws SQLException {
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+
+            String query = "INSERT INTO department (DepartmentID, Name, Budget, StartDate, Administrator) VALUES (?, ?, ?, ?, ?)";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, department.getDepartmentID());
+            ps.setString(2, department.getName());
+            ps.setDouble(3, department.getBudget());
+            ps.setTimestamp(4, Timestamp.valueOf(department.getStartDate()));
+            ps.setInt(5, department.getAdministrator());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            db.closeConnection(conn);
+        }
+    }
+
+    public int getNextDepartmentId() throws SQLException {
+        int nextId = 0;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+
+            String query = "SELECT MAX(DepartmentID) AS MaxId FROM department";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                nextId = rs.getInt("MaxId") + 1;
+            } else {
+                nextId = 1; // If no departments exist yet, start with 1
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    db.closeConnection(conn);
+                }
+            } catch (SQLException ex) {
+                // Log or handle exception
+            }
+        }
+
+        return nextId;
+    }
+
+    public void updateDepartment(Department department) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+
+            String query = "UPDATE department SET Name = ?, Budget = ?, StartDate = ?, Administrator = ? WHERE DepartmentID = ?";
+            ps = conn.prepareStatement(query);
+            ps.setString(1, department.getName());
+            ps.setDouble(2, department.getBudget());
+            ps.setTimestamp(3, Timestamp.valueOf(department.getStartDate()));
+            ps.setInt(4, department.getAdministrator());
+            ps.setInt(5, department.getDepartmentID());
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new SQLException("Update failed, department with ID " + department.getDepartmentID() + " not found");
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                db.closeConnection(conn);
+            }
+        }
+    }
+
+    public void deleteDepartment(int departmentId) throws SQLException {
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "DELETE FROM department WHERE DepartmentID = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, departmentId);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new SQLException("Failed to delete department. DepartmentID not found: " + departmentId);
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            db.closeConnection(conn);
+        }
+    }
+
 }

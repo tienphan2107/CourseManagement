@@ -67,7 +67,6 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="txtStudentID" min="-2" max="-2" attributes="0"/>
-                              <Component id="dtpickerEnrollmentDate" min="-2" pref="156" max="-2" attributes="0"/>
                               <Component id="txtLastName" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
                               <Component id="txtFirstName" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
                           </Group>
@@ -103,10 +102,7 @@
                       <Component id="txtLastName" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel10" min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="dtpickerEnrollmentDate" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel10" min="-2" pref="36" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnSave" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
@@ -168,8 +164,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExitActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="dtpickerEnrollmentDate">
         </Component>
         <Component class="javax.swing.JTextField" name="txtStudentID">
           <Properties>

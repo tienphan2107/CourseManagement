@@ -48,6 +48,10 @@ public class StudentGradeBUS {
     public Person GetStudentByID(int personID) throws Exception {
         return personDAO.GetStudentByID(personID);
     }
+    
+    public List<Person> GetAllStudent() throws Exception {
+        return personDAO.GetAllStudent();
+    }
 
     public int Edit(StudentGrade studentGrade) throws Exception {
         return studentGradeDAO.editStudentGrade(studentGrade);
@@ -77,7 +81,7 @@ public class StudentGradeBUS {
             throw new IllegalArgumentException("Student ID must be an integer");
         }
         
-        if (!Pattern.matches("^[0-9]+$", Grade)) {
+        if (!Pattern.matches("^\\d+(\\.\\d*)?|\\.\\d+", Grade)) {
             throw new IllegalArgumentException("Grade must be an integer");
         }
 
@@ -90,11 +94,40 @@ public class StudentGradeBUS {
         return new StudentGrade(EnrollmentID, CourseID, id, Double.parseDouble(Grade));
     }
     
+    public StudentGrade validateEditStudentGrade(int EnrollmentID, int CourseID, int StudentID, String Grade) throws Exception {
+        if (Grade.isEmpty()) {
+            throw new EmptyFieldException("Grade", "Grade can not be empty");
+        }
+        
+        if (!Pattern.matches("^\\d+(\\.\\d*)?|\\.\\d+", Grade)) {
+            throw new IllegalArgumentException("Grade must be an double");
+        }
+
+//        int id = Integer.parseInt(StudentID);
+
+//        if (!isStudentIDValid(StudentID)) {
+//            throw new IllegalArgumentException("Student ID is not existed");
+//        }
+
+        return new StudentGrade(EnrollmentID, CourseID, StudentID, Double.parseDouble(Grade));
+    }
+    
     public int add(int EnrollmentID, int CourseID, String StudentID, String Grade) throws Exception {
         StudentGrade s = validateStudentGradeInfo(EnrollmentID, CourseID, StudentID, Grade);
         int result;
         try {
             result = studentGradeDAO.addStudentGrade(s);
+        } catch (SQLException e) {
+            throw e;
+        }
+        return result;
+    }
+    
+    public int edit(int EnrollmentID, int CourseID, int StudentID, String Grade) throws Exception {
+        StudentGrade s = validateEditStudentGrade(EnrollmentID, CourseID, StudentID, Grade);
+        int result;
+        try {
+            result = studentGradeDAO.editStudentGrade(s);
         } catch (SQLException e) {
             throw e;
         }
