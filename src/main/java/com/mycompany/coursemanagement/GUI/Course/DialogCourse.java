@@ -40,6 +40,9 @@ public class DialogCourse extends javax.swing.JDialog {
 
         if (!dialogMode.equalsIgnoreCase("add")) {
             this.course = getCourseDetail(course.getCourseID());
+            if (this.course.getTitle() == null) {
+                throw new IllegalArgumentException("Course info not found");
+            }
             displayInfo(this.course, courseType);
         }
 

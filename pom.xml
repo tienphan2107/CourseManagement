@@ -23,16 +23,13 @@
             <version>19.13.0.0.1</version>
 
         </dependency>
-
-
-
         <dependency>
 
             <groupId>mysql</groupId>
 
             <artifactId>mysql-connector-java</artifactId>
 
-            <version>8.0.26</version>
+            <version>8.0.28</version>
 
         </dependency>
         <dependency>
@@ -49,8 +46,15 @@
             <groupId>unknown.binary</groupId>
             <artifactId>jcalendar-1.4</artifactId>
             <version>SNAPSHOT</version>
-        </dependency>
+        </dependency> 
+        <!--t mới xóa bớt 1 cái đi-->
         <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
+          
+          <dependency>
             <groupId>org.swinglabs</groupId>
             <artifactId>swingx</artifactId>
             <version>1.6.1</version>

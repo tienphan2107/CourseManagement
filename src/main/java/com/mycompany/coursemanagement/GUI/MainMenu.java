@@ -7,8 +7,13 @@ package com.mycompany.coursemanagement.GUI;
 import com.mycompany.coursemanagement.GUI.Course.PnCourse;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.mycompany.coursemanagement.GUI.CourseInstructor.PnCourseInstructor;
+import com.mycompany.coursemanagement.GUI.Department.pnDepartment;
 import com.mycompany.coursemanagement.GUI.ManageStudentGrade.PnManageStudentGrade;
+
+import com.mycompany.coursemanament.GUI.Teacher.PnManageTeacher;
+
 import com.mycompany.coursemanagement.GUI.Student.PnStudent;
+
 
 
 import java.awt.BorderLayout;
@@ -80,7 +85,7 @@ public class MainMenu extends javax.swing.JFrame {
         pnMenu.setAlignmentY(0.0F);
         pnMenu.setPreferredSize(new java.awt.Dimension(0, 45));
 
-        jButton1.setText("Chức Năng 1");
+        jButton1.setText("Department");
 
         btnStudent.setText("Students");
         btnStudent.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +94,12 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Chức Năng 3");
+        jButton3.setText("Teacher");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         btnGrade.setText("Grade");
         btnGrade.addActionListener(new java.awt.event.ActionListener() {
@@ -412,6 +422,21 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        pnMainContent.removeAll();
+        pnMainContent.add(new PnManageTeacher());
+        pnMainContent.repaint();
+        pnMainContent.revalidate();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        pnMainContent.removeAll();
+        pnMainContent.add(new pnDepartment());
+        pnMainContent.repaint();
+        pnMainContent.revalidate();
+    }  
     /**
      * @param args the command line arguments
      * @throws javax.swing.UnsupportedLookAndFeelException

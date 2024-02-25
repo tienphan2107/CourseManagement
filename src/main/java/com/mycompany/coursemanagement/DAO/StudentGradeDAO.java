@@ -261,29 +261,28 @@ public class StudentGradeDAO {
     }
 
     public boolean isStudentEnrolled(int studentID, int courseID) {
-        String query = "SELECT * FROM studentgrade WHERE StudentID = ? AND CourseID = ?";
+    String query = "SELECT * FROM studentgrade WHERE StudentID = ? AND CourseID = ?";
+    try {
+        conn = db.getConnection();
+        if (conn == null) {
+            throw new SQLException("Connection error");
+        }
+        ps = conn.prepareStatement(query);
+        ps.setInt(1, studentID);
+        ps.setInt(2, courseID);
+        rs = ps.executeQuery();
+        return rs.next(); // Trả về true nếu có kết quả từ truy vấn, ngược lại trả về false
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    } finally {
         try {
-            conn = db.getConnection();
-            if (conn == null) {
-                throw new SQLException("Connection error");
-            }
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, studentID);
-            ps.setInt(2, courseID);
-            rs = ps.executeQuery();
-            return rs.next(); // Trả về true nếu có kết quả từ truy vấn, ngược lại trả về false
+            rs.close();
+            ps.close();
+            db.closeConnection(conn);
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
-        } finally {
-            try {
-                rs.close();
-                ps.close();
-                db.closeConnection(conn);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
-
+}
 }
