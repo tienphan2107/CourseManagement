@@ -68,6 +68,10 @@ public class StudentGradeBUS {
     public boolean isStudentIDValid(int studentID) throws Exception {
         return studentGradeDAO.isStudentIDValid(studentID);
     }
+    
+    public boolean isStudentEnrolled(int studentID, int courseID) throws Exception {
+        return studentGradeDAO.isStudentEnrolled(studentID, courseID);
+    }
 
     public StudentGrade validateStudentGradeInfo(int EnrollmentID, int CourseID, String StudentID, String Grade) throws Exception {
         if (StudentID.isEmpty()) {
@@ -112,8 +116,18 @@ public class StudentGradeBUS {
         return new StudentGrade(EnrollmentID, CourseID, StudentID, Double.parseDouble(Grade));
     }
     
-    public int add(int EnrollmentID, int CourseID, String StudentID, String Grade) throws Exception {
-        StudentGrade s = validateStudentGradeInfo(EnrollmentID, CourseID, StudentID, Grade);
+    public StudentGrade validateAddStudentGrade(int EnrollmentID, int CourseID, int StudentID, double Grade) throws Exception {
+//        int id = Integer.parseInt(StudentID);
+
+        if (!isStudentEnrolled(StudentID, CourseID)) {
+            throw new IllegalArgumentException("Student ID is existed in this Course");
+        }
+
+        return new StudentGrade(EnrollmentID, CourseID, StudentID, Grade);
+    }
+    
+    public int add(int EnrollmentID, int CourseID, int StudentID, double Grade) throws Exception {
+        StudentGrade s = validateAddStudentGrade(EnrollmentID, CourseID, StudentID, Grade);
         int result;
         try {
             result = studentGradeDAO.addStudentGrade(s);
@@ -134,7 +148,4 @@ public class StudentGradeBUS {
         return result;
     }
     
-    public boolean anyEnrollmentFound(int courseId) throws SQLException {
-        return studentGradeDAO.anyEnrollmentFound(courseId);
-    }
 }

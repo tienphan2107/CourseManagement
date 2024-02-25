@@ -220,7 +220,7 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
         int courseID = Integer.parseInt(cbbStudentID.getSelectedItem().toString());
         int result;
         try {
-            result = studentGradeBUS.Add(new StudentGrade(enrollmentID, courseID, studentID, 0));
+            result = studentGradeBUS.add(enrollmentID, courseID, studentID, 0);
         } 
 //        catch (EmptyFieldException e) {
 //            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
@@ -230,11 +230,11 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
 //                txtGrade.requestFocus();
 //            }
 //            return;
-//        } catch (IllegalArgumentException e) {
-//            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//            e.printStackTrace();
-//            return;
-        catch (Exception e) {
+        catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            return;
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             return;

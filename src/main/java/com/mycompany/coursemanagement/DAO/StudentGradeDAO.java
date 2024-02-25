@@ -214,7 +214,7 @@ public class StudentGradeDAO {
         }
         return resultList;
     }
-    
+
     public Person GetStudentByID(int personID) throws Exception {
         Person result = new Person();
         try {
@@ -242,7 +242,7 @@ public class StudentGradeDAO {
         }
         return result;
     }
-    
+
     public boolean isStudentIDValid(int studentID) {
         String query = "SELECT PersonID FROM person WHERE PersonID = ?";
         try {
@@ -260,27 +260,29 @@ public class StudentGradeDAO {
         }
     }
 
-    public boolean anyEnrollmentFound(int courseId) throws SQLException {
-        boolean result = false;
-        try {
-            conn = db.getConnection();
-            if (conn == null) {
-                throw new SQLException("Connection error");
-            }
-            String query = "SELECT * FROM studentgrade WHERE CourseID = ?";
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, courseId);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                result = true;
-            }
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            ps.close();
-            rs.close();
-            db.closeConnection(conn);
+    public boolean isStudentEnrolled(int studentID, int courseID) {
+    String query = "SELECT * FROM studentgrade WHERE StudentID = ? AND CourseID = ?";
+    try {
+        conn = db.getConnection();
+        if (conn == null) {
+            throw new SQLException("Connection error");
         }
-        return result;
+        ps = conn.prepareStatement(query);
+        ps.setInt(1, studentID);
+        ps.setInt(2, courseID);
+        rs = ps.executeQuery();
+        return rs.next(); // Trả về true nếu có kết quả từ truy vấn, ngược lại trả về false
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    } finally {
+        try {
+            rs.close();
+            ps.close();
+            db.closeConnection(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+}
 }
