@@ -243,10 +243,7 @@ public class EditStudent extends javax.swing.JFrame {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            this.dispose();
-        }
-
+        } 
     }//GEN-LAST:event_btnExitActionPerformed
     private boolean checkString(String input) {
         if (input.isEmpty()) {
