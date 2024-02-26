@@ -19,6 +19,7 @@ public class CourseInstructorDetail extends javax.swing.JFrame {
      * Creates new form CourseInstructorDetail
      */
     private CourseInstructorBUS courseInstructorBUS = new CourseInstructorBUS();
+    private EditCourseInstructor EditFrame;
 
     public CourseInstructorDetail() {
         initComponents();
@@ -34,15 +35,15 @@ public class CourseInstructorDetail extends javax.swing.JFrame {
         try {
             Course course = courseInstructorBUS.GetCourseByID(courseID);
             Person teacher = courseInstructorBUS.GetTeacherByID(personID);
-            txtCourseID.setText(course.getCourseID()+"");
-            txtCredits.setText(course.getCredits()+"");
+            txtCourseID.setText(course.getCourseID() + "");
+            txtCredits.setText(course.getCredits() + "");
             txtTitle.setText(course.getTitle());
-            txtDepartmentID.setText(course.getDepartmentID()+"");
-            txtPersonID.setText(teacher.getPersonID()+"");
+            txtDepartmentID.setText(course.getDepartmentID() + "");
+            txtPersonID.setText(teacher.getPersonID() + "");
             txtFirstName.setText(teacher.getFirstName());
             txtLastName.setText(teacher.getLastName());
             txtHireDate.setText(teacher.getHireDate().toString());
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured when Loading data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
             return;
@@ -136,6 +137,11 @@ public class CourseInstructorDetail extends javax.swing.JFrame {
 
         btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDelete.setText("Delete");
@@ -306,6 +312,26 @@ public class CourseInstructorDetail extends javax.swing.JFrame {
     private void txtPersonIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPersonIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPersonIDActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        if (EditFrame != null) {
+            EditFrame.dispose();
+        }
+        try {
+            int courseID = Integer.parseInt(txtCourseID.getText());
+            int teacherID = Integer.parseInt(txtPersonID.getText());
+
+            EditFrame = new EditCourseInstructor(courseID, teacherID);
+            EditFrame.setVisible(true);
+            this.dispose();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "An error occured when Load Data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+            return;
+        }
+
+
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments
