@@ -29,7 +29,7 @@
 
             <artifactId>mysql-connector-java</artifactId>
 
-            <version>8.0.28</version>
+            <version>8.0.25</version>
 
         </dependency>
         <dependency>
@@ -54,10 +54,16 @@
             <version>1.4</version>
         </dependency>
           
-          <dependency>
+        <dependency>
             <groupId>org.swinglabs</groupId>
             <artifactId>swingx</artifactId>
             <version>1.6.1</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.dracula</groupId>
+            <artifactId>dracula-theme</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
     <properties>
