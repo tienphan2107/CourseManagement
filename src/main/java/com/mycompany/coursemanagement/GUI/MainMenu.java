@@ -86,6 +86,11 @@ public class MainMenu extends javax.swing.JFrame {
         pnMenu.setPreferredSize(new java.awt.Dimension(0, 45));
 
         jButton1.setText("Department");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnStudent.setText("Students");
         btnStudent.addActionListener(new java.awt.event.ActionListener() {
@@ -430,13 +435,14 @@ public class MainMenu extends javax.swing.JFrame {
         pnMainContent.revalidate();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         pnMainContent.removeAll();
         pnMainContent.add(new pnDepartment());
         pnMainContent.repaint();
         pnMainContent.revalidate();
-    }  
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      * @throws javax.swing.UnsupportedLookAndFeelException
