@@ -203,10 +203,8 @@ public class addDepartment extends javax.swing.JFrame {
             LocalDateTime startDate = LocalDateTime.ofInstant(jDateChooser1.getDate().toInstant(), ZoneId.systemDefault());
             int administrator = Integer.parseInt(jTextField5.getText());
 
-          
-
             Department department = new Department(departmentID, name, budget, startDate, administrator);
-            bus.addDepartment(department);
+            bus.add(department);
             JOptionPane.showMessageDialog(this, "Department added successfully");
 
             jTextField1.setText(String.valueOf(bus.getNextDepartmentId()));
@@ -220,8 +218,6 @@ public class addDepartment extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error adding department: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
