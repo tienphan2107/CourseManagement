@@ -72,6 +72,14 @@ public class StudentGradeBUS {
     public boolean isStudentEnrolled(int studentID, int courseID) throws Exception {
         return studentGradeDAO.isStudentEnrolled(studentID, courseID);
     }
+    
+    public int getCourseIDByTitle(String title) throws SQLException {
+        return studentGradeDAO.getCourseIDByTitle(title);
+    }
+    
+    public int getStudentIDByLastName(String lastName) throws SQLException {
+        return studentGradeDAO.getStudentIDByLastName(lastName);
+    }
 
     public StudentGrade validateStudentGradeInfo(int EnrollmentID, int CourseID, String StudentID, String Grade) throws Exception {
         if (StudentID.isEmpty()) {
@@ -119,7 +127,7 @@ public class StudentGradeBUS {
     public StudentGrade validateAddStudentGrade(int EnrollmentID, int CourseID, int StudentID, double Grade) throws Exception {
 //        int id = Integer.parseInt(StudentID);
 
-        if (!isStudentEnrolled(StudentID, CourseID)) {
+        if (isStudentEnrolled(StudentID, CourseID)) {
             throw new IllegalArgumentException("Student ID is existed in this Course");
         }
 
