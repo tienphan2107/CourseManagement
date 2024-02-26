@@ -10,10 +10,6 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-/**
- *
- * @author PC
- */
 public class DepartmentBUS {
 
     private final DepartmentDAO departmentDAO = new DepartmentDAO();
