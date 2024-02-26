@@ -178,4 +178,28 @@ public class CourseDAO {
         }
         return result;
     }
+
+    public String getTitleByCourseID(int courseID) throws SQLException {
+        String title = null;
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "SELECT Title FROM course WHERE CourseID = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, courseID);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                title = rs.getString("Title");
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            ps.close();
+            rs.close();
+            db.closeConnection(conn);
+        }
+        return title;
+    }
 }

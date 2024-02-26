@@ -33,4 +33,8 @@ public class CourseBUS {
     public boolean checkCourseExisted(int courseId) throws SQLException {
         return courseDAO.checkCourseExisted(courseId);
     }
+    
+    public String getTitleByCourseID(int courseID) throws SQLException {
+        return courseDAO.getTitleByCourseID(courseID);
+    }
 }
