@@ -297,7 +297,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     private void Resetpanel() {
         GetAllList();
         txtFindContent.setText("");
-        LoadCourseInstructor(list);
+        LoadStudentGrade(list);
     }
 
     private void SetUpTable() {
@@ -339,7 +339,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     private javax.swing.JTextField txtFindContent;
     // End of variables declaration//GEN-END:variables
 
-    private void LoadCourseInstructor(List<StudentGrade> list) {
+    private void LoadStudentGrade(List<StudentGrade> list) {
         DefaultTableModel tableModel = (DefaultTableModel) tblGrade.getModel();
         tableModel.setRowCount(0);
         try {
