@@ -337,6 +337,7 @@ public class PersonDAO {
         }
         return list;
     }
+
     public int getCurrentMaxID() {
         int id = -1;
         try {
@@ -385,18 +386,16 @@ public class PersonDAO {
             }
         }
     }
-     public boolean DeleteStudent(int studentID) throws SQLException {
+
+    public boolean DeleteStudent(int studentID) throws SQLException {
         try {
-            conn = db.getConnection();
-            if (conn == null) {
-                throw new SQLException("Connection error");
+            if (hasReferences(studentID) == 0) {
+                // Nếu không có tham chiếu, xóa đối tượng person
+                deletePersonById(studentID);
+                return true;
+            } else {
+                return false;
             }
-            String query = "DELETE FROM person \n WHERE PersonID = ?";
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, studentID);
-            int rowAffected = ps.executeUpdate();
-            ps.close();
-            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -409,6 +408,42 @@ public class PersonDAO {
             }
         }
     }
+    // Phương thức để kiểm tra xem có tham chiếu từ bảng khác không
+
+    private int hasReferences(int personId) {
+        // Viết truy vấn SQL để kiểm tra tham chiếu từ bảng studentgrade
+        String query = "SELECT COUNT(*) AS Ref FROM studentgrade WHERE StudentID = "+personId;
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+            int id = 0;
+            if (rs.next()) {
+                id = rs.getInt("Ref");
+            }
+            return id;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    private void deletePersonById(int personId) {//Hàm nhỏ để gọi thôi
+        // Viết truy vấn SQL để xóa đối tượng person từ bảng persons
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "DELETE FROM person WHERE PersonID = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, personId);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
 
     public List<Person> FindStudent(String condition) throws SQLException {
         List<Person> list = new ArrayList<>();
@@ -417,7 +452,7 @@ public class PersonDAO {
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
-            String query = "SELECT * FROM `person` WHERE HireDate IS NULL AND (PersonID LIKE '%"+condition+"%' OR Firstname LIKE '%"+condition+"%' OR Lastname LIKE '%"+condition+"%' OR EnrollmentDate LIKE '%"+condition+"%')";
+            String query = "SELECT * FROM `person` WHERE HireDate IS NULL AND (PersonID LIKE '%" + condition + "%' OR Firstname LIKE '%" + condition + "%' OR Lastname LIKE '%" + condition + "%' OR EnrollmentDate LIKE '%" + condition + "%')";
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -441,5 +476,10 @@ public class PersonDAO {
             }
             return list;
         }
+    }
+    public static void main(String[] args) {
+        PersonDAO person = new PersonDAO();
+        person.conn = person.db.getConnection();
+        System.out.println("" + person.hasReferences(2));
     }
 }

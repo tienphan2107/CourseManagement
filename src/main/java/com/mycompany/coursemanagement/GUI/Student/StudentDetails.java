@@ -6,6 +6,7 @@ package com.mycompany.coursemanagement.GUI.Student;
 
 import com.mycompany.coursemanagement.BUS.PersonBUS;
 import com.mycompany.coursemanagement.Models.Person;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -60,7 +61,7 @@ public class StudentDetails extends javax.swing.JFrame {
         txtLastName = new javax.swing.JTextField();
         dtpickerEnrollmentDate = new com.toedter.calendar.JDateChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

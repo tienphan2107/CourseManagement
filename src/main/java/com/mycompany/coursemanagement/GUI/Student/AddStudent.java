@@ -40,6 +40,7 @@ public class AddStudent extends javax.swing.JFrame {
     }
 
     public void LoadValueComponent() {
+        this.setTitle("Add Student");
         try {
             //Tự khởi tạo ID (tăng dần)
             int id = personBUS.getCurrentID() + 1;
