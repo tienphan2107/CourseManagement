@@ -33,7 +33,7 @@ public class PnCourseInstructor extends javax.swing.JPanel {
     CourseInstructorDetail DetailFrame;
     AddCourseInstructor AddFrame;
     EditCourseInstructor EditFrame;
-    
+
     public PnCourseInstructor() {
         initComponents();
         this.setSize(885, 515);
@@ -108,7 +108,7 @@ public class PnCourseInstructor extends javax.swing.JPanel {
             tblInstructor.getColumnModel().getColumn(3).setPreferredWidth(60);
         }
 
-        btnFind.setText("Find");
+        btnFind.setIcon(new javax.swing.ImageIcon("C:\\PROJECT_FILE_SAVE_LOCATION\\Java\\CourseManagement\\src\\main\\java\\com\\mycompany\\coursemanagement\\GUI\\Icon\\search.png")); // NOI18N
         btnFind.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFindActionPerformed(evt);
@@ -168,9 +168,9 @@ public class PnCourseInstructor extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtFindContent, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFind)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rdSortByTeacher, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                        .addComponent(btnFind, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rdSortByTeacher, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnReload)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -197,7 +197,7 @@ public class PnCourseInstructor extends javax.swing.JPanel {
                     .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdSortByTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -232,7 +232,7 @@ public class PnCourseInstructor extends javax.swing.JPanel {
 
         int courseID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 2).toString());
         int teacherID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 0).toString());
-        if(DetailFrame != null){
+        if (DetailFrame != null) {
             DetailFrame.dispose();
         }
         DetailFrame = new CourseInstructorDetail(courseID, teacherID);
@@ -248,30 +248,30 @@ public class PnCourseInstructor extends javax.swing.JPanel {
         //Xác nhận 
         int choose = JOptionPane.showConfirmDialog(this, "Delete This Course Instructor ?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (choose == JOptionPane.NO_OPTION) { // đổi ý không xóa nữa
-            return;
-        }
-
-        //xóa
-        int courseID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 2).toString());
-        int teacherID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 0).toString());
-        try {
-            if (courseInstructorBUS.Delete(courseID, teacherID) > 0) {
-                JOptionPane.showMessageDialog(this, "Delete Instructor Success !");
-                btnReloadActionPerformed(evt);
+            //xóa
+            int courseID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 2).toString());
+            int teacherID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 0).toString());
+            try {
+                if (courseInstructorBUS.Delete(courseID, teacherID) > 0) {
+                    JOptionPane.showMessageDialog(this, "Delete Instructor Success !");
+                    btnReloadActionPerformed(evt);
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "An error occured when Delete Data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
+                return;
             }
-        }catch (IOException ex){
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "An error occured when Delete Data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
+        } else {
             return;
         }
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        if(AddFrame != null){
+        if (AddFrame != null) {
             AddFrame.dispose();
         }
         AddFrame = new AddCourseInstructor();
@@ -289,7 +289,7 @@ public class PnCourseInstructor extends javax.swing.JPanel {
         }
         int courseID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 2).toString());
         int teacherID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 0).toString());
-        if(EditFrame != null){
+        if (EditFrame != null) {
             EditFrame.dispose();
         }
         EditFrame = new EditCourseInstructor(courseID, teacherID);

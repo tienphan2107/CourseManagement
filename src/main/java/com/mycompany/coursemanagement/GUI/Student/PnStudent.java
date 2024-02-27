@@ -6,6 +6,7 @@ package com.mycompany.coursemanagement.GUI.Student;
 
 import com.mycompany.coursemanagement.BUS.PersonBUS;
 import com.mycompany.coursemanagement.Models.Person;
+import java.awt.Color;
 import java.sql.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -101,42 +102,53 @@ public class PnStudent extends javax.swing.JPanel {
             tblStudent.getColumnModel().getColumn(1).setPreferredWidth(1);
         }
 
-        btnFind.setText("Find");
+        btnFind.setIcon(new javax.swing.ImageIcon("C:\\PROJECT_FILE_SAVE_LOCATION\\Java\\CourseManagement\\src\\main\\java\\com\\mycompany\\coursemanagement\\GUI\\Icon\\search.png")); // NOI18N
+        btnFind.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnFind.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFindActionPerformed(evt);
             }
         });
 
+        btnDelete.setIcon(new javax.swing.ImageIcon("C:\\PROJECT_FILE_SAVE_LOCATION\\Java\\CourseManagement\\src\\main\\java\\com\\mycompany\\coursemanagement\\GUI\\Icon\\delete-user.png")); // NOI18N
         btnDelete.setText("Delete");
+        btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
             }
         });
 
+        btnEdit.setIcon(new javax.swing.ImageIcon("C:\\PROJECT_FILE_SAVE_LOCATION\\Java\\CourseManagement\\src\\main\\java\\com\\mycompany\\coursemanagement\\GUI\\Icon\\edit-user.png")); // NOI18N
         btnEdit.setText("Edit");
+        btnEdit.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
             }
         });
 
+        btnAdd.setIcon(new javax.swing.ImageIcon("C:\\PROJECT_FILE_SAVE_LOCATION\\Java\\CourseManagement\\src\\main\\java\\com\\mycompany\\coursemanagement\\GUI\\Icon\\add-user.png")); // NOI18N
         btnAdd.setText("Add");
+        btnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
 
+        btnView.setIcon(new javax.swing.ImageIcon("C:\\PROJECT_FILE_SAVE_LOCATION\\Java\\CourseManagement\\src\\main\\java\\com\\mycompany\\coursemanagement\\GUI\\Icon\\user-detail.png")); // NOI18N
         btnView.setText("View");
+        btnView.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewActionPerformed(evt);
             }
         });
 
+        btnReload.setIcon(new javax.swing.ImageIcon("C:\\PROJECT_FILE_SAVE_LOCATION\\Java\\CourseManagement\\src\\main\\java\\com\\mycompany\\coursemanagement\\GUI\\Icon\\refresh.png")); // NOI18N
         btnReload.setText("Reload");
+        btnReload.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnReload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReloadActionPerformed(evt);
@@ -150,11 +162,12 @@ public class PnStudent extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtFindContent, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFind)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                        .addComponent(btnFind, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                         .addComponent(btnReload)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnView)
@@ -163,11 +176,8 @@ public class PnStudent extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEdit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDelete)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addGap(36, 36, 36))))
+                        .addComponent(btnDelete)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,25 +234,28 @@ public class PnStudent extends javax.swing.JPanel {
             return;
         }
         int choose = JOptionPane.showConfirmDialog(this, "Delete this student ?", "Confirm", JOptionPane.YES_NO_OPTION);
-        if (choose == JOptionPane.NO_OPTION) { // đổi ý không xóa nữa
-            return;
-        }
-        int studentID = Integer.parseInt(tblStudent.getModel().getValueAt(tblStudent.getSelectedRow(), 1).toString());
-        try {
-            boolean result = personBus.DeleteStudent(studentID);
-            if (result == true) {
-                JOptionPane.showMessageDialog(this, "Delete student success !, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-                btnReloadActionPerformed(evt);
-                return;
-            } else {
-                JOptionPane.showMessageDialog(this, "An error occured, please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (choose == JOptionPane.YES_OPTION) { // đổi ý không xóa nữa
+            int studentID = Integer.parseInt(tblStudent.getModel().getValueAt(tblStudent.getSelectedRow(), 1).toString());
+            try {
+                boolean result = personBus.DeleteStudent(studentID);
+                if (result == true) {
+                    JOptionPane.showMessageDialog(this, "Delete student success !", "Notification", JOptionPane.ERROR_MESSAGE);
+                    btnReloadActionPerformed(evt);
+                    return;
+                } else {
+                    JOptionPane.showMessageDialog(this, "There is one or many references that relate to the student you wanted to delete that exist.\n You CAN'T delete this student without deleting that references first !", "Error", JOptionPane.ERROR_MESSAGE);
+                    btnReloadActionPerformed(evt);
+                    return;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "An error occured when Deleting Data in Database, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "An error occured when Deleting Data in Database, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
             return;
         }
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -268,12 +281,12 @@ public class PnStudent extends javax.swing.JPanel {
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         if (tblStudent.getSelectedRowCount() != 1) {
-            JOptionPane.showMessageDialog(this, "Please choose ONE Course Instructor", "Message", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please choose ONE student to see the detail", "Message", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         int studentID = Integer.parseInt(tblStudent.getModel().getValueAt(tblStudent.getSelectedRow(), 1).toString());
-        if(detailFrame != null){
+        if (detailFrame != null) {
             detailFrame.dispose();
         }
         detailFrame = new StudentDetails(studentID);
