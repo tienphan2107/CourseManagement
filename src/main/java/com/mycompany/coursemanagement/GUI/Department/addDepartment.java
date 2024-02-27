@@ -196,15 +196,15 @@ public class addDepartment extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int departmentID = Integer.parseInt(jTextField1.getText());
-        String name = jTextField2.getText();
-        double budget = Double.parseDouble(jTextField3.getText());
-        LocalDateTime startDate = LocalDateTime.ofInstant(jDateChooser1.getDate().toInstant(), ZoneId.systemDefault());
-        int administrator = Integer.parseInt(jTextField5.getText());
-
-        Department department = new Department(departmentID, name, budget, startDate, administrator);
         try {
-            bus.addDepartment(department);
+            int departmentID = Integer.parseInt(jTextField1.getText());
+            String name = jTextField2.getText();
+            double budget = Double.parseDouble(jTextField3.getText());
+            LocalDateTime startDate = LocalDateTime.ofInstant(jDateChooser1.getDate().toInstant(), ZoneId.systemDefault());
+            int administrator = Integer.parseInt(jTextField5.getText());
+
+            Department department = new Department(departmentID, name, budget, startDate, administrator);
+            bus.add(department);
             JOptionPane.showMessageDialog(this, "Department added successfully");
 
             jTextField1.setText(String.valueOf(bus.getNextDepartmentId()));
@@ -213,11 +213,11 @@ public class addDepartment extends javax.swing.JFrame {
             jTextField5.setText("");
             jDateChooser1.setDate(null);
 
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter valid numeric values", "Invalid Input", JOptionPane.WARNING_MESSAGE);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error adding department: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed

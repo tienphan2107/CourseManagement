@@ -214,7 +214,7 @@ public class StudentGradeDAO {
         }
         return resultList;
     }
-    
+
     public Person GetStudentByID(int personID) throws Exception {
         Person result = new Person();
         try {
@@ -242,7 +242,7 @@ public class StudentGradeDAO {
         }
         return result;
     }
-    
+
     public boolean isStudentIDValid(int studentID) {
         String query = "SELECT PersonID FROM person WHERE PersonID = ?";
         try {
@@ -260,4 +260,101 @@ public class StudentGradeDAO {
         }
     }
 
+    public boolean isStudentEnrolled(int studentID, int courseID) {
+        String query = "SELECT * FROM studentgrade WHERE StudentID = ? AND CourseID = ?";
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, studentID);
+            ps.setInt(2, courseID);
+            rs = ps.executeQuery();
+            return rs.next(); // Trả về true nếu có kết quả từ truy vấn, ngược lại trả về false
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                db.closeConnection(conn);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public boolean anyEnrollmentFound(int courseId) throws SQLException {
+        boolean result = false;
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "SELECT * FROM studentgrade WHERE CourseID = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, courseId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                result = true;
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            ps.close();
+            rs.close();
+            db.closeConnection(conn);
+        }
+        return result;
+    }
+
+    public int getCourseIDByTitle(String title) throws SQLException {
+        int courseID = 0;
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "SELECT CourseID FROM course WHERE Title = ?";
+            ps = conn.prepareStatement(query);
+            ps.setString(1, title);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                courseID = rs.getInt("CourseID");
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            ps.close();
+            rs.close();
+            db.closeConnection(conn);
+        }
+        return courseID;
+    }
+
+    public int getStudentIDByLastName(String lastName) throws SQLException {
+        int personID = 0;
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "SELECT PersonID FROM person WHERE LastName = ?";
+            ps = conn.prepareStatement(query);
+            ps.setString(1, lastName);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                personID = rs.getInt("PersonID");
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            ps.close();
+            rs.close();
+            db.closeConnection(conn);
+        }
+        return personID;
+    }
 }

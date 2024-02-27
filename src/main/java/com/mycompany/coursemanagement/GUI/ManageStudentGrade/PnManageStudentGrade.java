@@ -103,14 +103,14 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             }
         });
 
-        btnEdit.setText("Edit");
+        btnEdit.setText("Input");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
             }
         });
 
-        btnAdd.setText("Add");
+        btnAdd.setText("Register");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -140,7 +140,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(345, 345, 345)
                 .addComponent(jLabel1)
-                .addContainerGap(428, Short.MAX_VALUE))
+                .addContainerGap(429, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -221,7 +221,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         tableModel.setRowCount(0); // Clear the existing rows in the table
         try {
             for (StudentGrade studentGrade : resultList) {
-                Object[] rowData = {studentGrade.getEnrollmentID(), studentGrade.getCourseID(), studentGrade.getStudentID(),studentGrade.getGrade()};
+                Object[] rowData = {studentGrade.getEnrollmentID(), studentGrade.getCourseID(), studentGrade.getStudentID(), studentGrade.getGrade()};
                 tableModel.addRow(rowData); // Add each student grade as a row in the table
             }
         } catch (Exception ex) {
@@ -264,9 +264,11 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             return;
         }
         int enrollmentID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 0).toString());
-        int personID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 2).toString());
-        
-        EditFrame = new EditManageStudentGrade(enrollmentID, personID);
+        int personID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 2).toString());        
+        int courseID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 1).toString());
+
+
+        EditFrame = new EditManageStudentGrade(enrollmentID, personID, courseID);
         EditFrame.setVisible(true);
     }//GEN-LAST:event_btnEditActionPerformed
 
@@ -282,8 +284,9 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         }
         int enrollmentID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 0).toString());
         int personID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 2).toString());
+        int courseID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 1).toString());
 
-        DetailFrame = new DetailManageStudentGrade(enrollmentID, personID);
+        DetailFrame = new DetailManageStudentGrade(enrollmentID, personID, courseID);
         DetailFrame.setVisible(true);
     }//GEN-LAST:event_btnViewActionPerformed
 

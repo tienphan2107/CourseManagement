@@ -24,11 +24,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pnMenu" alignment="0" pref="924" max="32767" attributes="0"/>
+          <Component id="pnMenu" alignment="0" pref="912" max="32767" attributes="0"/>
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnMainContent" pref="912" max="32767" attributes="0"/>
+              <Component id="pnMainContent" pref="900" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -77,7 +77,7 @@
                   <Component id="btnInstructor" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnExit" min="-2" pref="100" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="170" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -96,8 +96,11 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ch&#x1ee9;c N&#x103;ng 1"/>
+            <Property name="text" type="java.lang.String" value="Department"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnStudent">
           <Properties>
@@ -142,7 +145,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnExit">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Tho&#xe1;t"/>
+            <Property name="text" type="java.lang.String" value="Exit"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExitActionPerformed"/>
@@ -212,9 +215,9 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   <Component id="pnIntroduction" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -241,7 +244,7 @@
                               <Component id="jLabel3" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" pref="387" max="-2" attributes="0"/>
-                              <EmptySpace pref="28" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -328,7 +331,7 @@
                           <Component id="jTextField6" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="jTextField12" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="350" max="32767" attributes="0"/>
+                      <EmptySpace pref="143" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -424,7 +427,11 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="3121410223"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField7ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField8">
               <Properties>
@@ -432,6 +439,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="3121410258"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField9">
@@ -440,6 +448,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="3121410336"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField10">
@@ -448,6 +457,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="3121410370"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField11">
@@ -456,6 +466,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="3121410444"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField12">
@@ -464,6 +475,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="3121410502"/>
               </Properties>
             </Component>
           </SubComponents>

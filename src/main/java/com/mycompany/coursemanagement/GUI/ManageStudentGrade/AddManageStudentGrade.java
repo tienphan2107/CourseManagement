@@ -10,6 +10,7 @@ import com.mycompany.coursemanagement.Models.Course;
 import com.mycompany.coursemanagement.Models.Person;
 import com.mycompany.coursemanagement.Models.StudentGrade;
 import helper.EmptyFieldException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,13 +42,13 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
             txtEnrollmentID.setText(String.valueOf(nextEnrollmentID));
 
             for (Course i : courseBUS.get()) {
-                int courseID = i.getCourseID();
-                cbbCourseID.addItem(courseID + "");
+                String courseTitle = i.getTitle();
+                cbbCourseTitle.addItem(courseTitle);
             }
             
             for (Person i : studentGradeBUS.GetAllStudent()) {
-                int studentID = i.getPersonID();
-                cbbStudentID.addItem(studentID + "");
+                String studentName = i.getLastName();
+                cbbStudentName.addItem(studentName);
             }
 
         } catch (Exception ex) {
@@ -56,6 +57,10 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
             return;
         }
     }
+    
+    public static String getVariableType(Object variable) {
+    return variable.getClass().getSimpleName();
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,11 +76,11 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtEnrollmentID = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
-        cbbStudentID = new combo_suggestion.ComboBoxSuggestion();
-        cbbCourseID = new combo_suggestion.ComboBoxSuggestion();
+        cbbStudentName = new combo_suggestion.ComboBoxSuggestion();
+        cbbCourseTitle = new combo_suggestion.ComboBoxSuggestion();
+        txtEnrollmentID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -85,17 +90,9 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
 
         jLabel4.setText("Enrollment ID :");
 
-        jLabel7.setText("CourseID :");
+        jLabel7.setText("CourseTitle :");
 
-        jLabel9.setText("StudentID :");
-
-        txtEnrollmentID.setEditable(false);
-        txtEnrollmentID.setPreferredSize(new java.awt.Dimension(156, 36));
-        txtEnrollmentID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEnrollmentIDActionPerformed(evt);
-            }
-        });
+        jLabel9.setText("StudentName :");
 
         btnSave.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSave.setText("Save");
@@ -113,15 +110,23 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
             }
         });
 
-        cbbStudentID.addActionListener(new java.awt.event.ActionListener() {
+        cbbStudentName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbStudentIDActionPerformed(evt);
+                cbbStudentNameActionPerformed(evt);
             }
         });
 
-        cbbCourseID.addActionListener(new java.awt.event.ActionListener() {
+        cbbCourseTitle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbCourseIDActionPerformed(evt);
+                cbbCourseTitleActionPerformed(evt);
+            }
+        });
+
+        txtEnrollmentID.setEditable(false);
+        txtEnrollmentID.setPreferredSize(new java.awt.Dimension(156, 36));
+        txtEnrollmentID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEnrollmentIDActionPerformed(evt);
             }
         });
 
@@ -130,74 +135,67 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(145, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(182, 182, 182)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cbbCourseID, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cbbStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(6, 6, 6)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbbStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(txtEnrollmentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(139, 139, 139))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(92, 92, 92))))
-                        .addGap(0, 3, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbbCourseTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(214, 214, 214)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(161, 213, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtEnrollmentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbbStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbbCourseID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(103, 103, 103)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtEnrollmentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbbStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbbCourseTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -216,11 +214,24 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
 //        int teacherID = Integer.parseInt(cbbCourseID.getSelectedItem().toString());
         // Lấy dữ liệu từ các trường nhập liệu
         int enrollmentID = Integer.parseInt(txtEnrollmentID.getText());
-        int studentID = Integer.parseInt(cbbStudentID.getSelectedItem().toString());
-        int courseID = Integer.parseInt(cbbStudentID.getSelectedItem().toString());
+        String studentName = cbbStudentName.getSelectedItem().toString();
+        System.out.print(studentName);
+        String Title = cbbCourseTitle.getSelectedItem().toString();
+//        System.out.print(Title);
+//        int courseID;
+//        try {
+//            courseID = studentGradeBUS.getCourseIDByTitle(Title);
+//            System.out.print(courseID);
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+//            e.printStackTrace();
+//        }
         int result;
         try {
-            result = studentGradeBUS.Add(new StudentGrade(enrollmentID, courseID, studentID, 0));
+            int courseID = studentGradeBUS.getCourseIDByTitle(Title);
+            int studentID = studentGradeBUS.getStudentIDByLastName(studentName);
+            System.out.print(studentID);
+            result = studentGradeBUS.add(enrollmentID, courseID, studentID, 0);
         } 
 //        catch (EmptyFieldException e) {
 //            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
@@ -230,11 +241,11 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
 //                txtGrade.requestFocus();
 //            }
 //            return;
-//        } catch (IllegalArgumentException e) {
-//            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//            e.printStackTrace();
-//            return;
-        catch (Exception e) {
+        catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            return;
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             return;
@@ -252,17 +263,17 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
-    private void cbbStudentIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbStudentIDActionPerformed
+    private void cbbStudentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbStudentNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbbStudentIDActionPerformed
+    }//GEN-LAST:event_cbbStudentNameActionPerformed
+
+    private void cbbCourseTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbCourseTitleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbbCourseTitleActionPerformed
 
     private void txtEnrollmentIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnrollmentIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEnrollmentIDActionPerformed
-
-    private void cbbCourseIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbCourseIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbbCourseIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,8 +313,8 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnSave;
-    private combo_suggestion.ComboBoxSuggestion cbbCourseID;
-    private combo_suggestion.ComboBoxSuggestion cbbStudentID;
+    private combo_suggestion.ComboBoxSuggestion cbbCourseTitle;
+    private combo_suggestion.ComboBoxSuggestion cbbStudentName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;

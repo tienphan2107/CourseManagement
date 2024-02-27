@@ -225,7 +225,7 @@ public class editDepartment extends javax.swing.JFrame {
             Department updatedDepartment = new Department(departmentID, name, budget, startDate, administrator);
 
             DepartmentBUS departmentBUS = new DepartmentBUS();
-            departmentBUS.updateDepartment(updatedDepartment);
+            departmentBUS.update(updatedDepartment);
 
             JOptionPane.showMessageDialog(this, "Department updated successfully");
 
