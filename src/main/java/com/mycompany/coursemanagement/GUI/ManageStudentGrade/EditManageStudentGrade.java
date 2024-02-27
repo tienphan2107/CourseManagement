@@ -270,7 +270,7 @@ public class EditManageStudentGrade extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
         //Xác nhận
-        int choose = JOptionPane.showConfirmDialog(this, "Update This Student Grade ?", "Confirm", JOptionPane.YES_NO_OPTION);
+        int choose = JOptionPane.showConfirmDialog(this, "Input This Student Grade ?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (choose == JOptionPane.NO_OPTION) { // đổi ý không xóa nữa
             return;
         }
@@ -302,7 +302,7 @@ public class EditManageStudentGrade extends javax.swing.JFrame {
         }
 
         if (result > 0) {
-            JOptionPane.showMessageDialog(this, "Edit successfully");
+            JOptionPane.showMessageDialog(this, "Input Grade successfully");
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
