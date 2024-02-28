@@ -149,14 +149,15 @@ public class AddManageTeacher extends javax.swing.JFrame {
         if (choose == JOptionPane.NO_OPTION) { 
             return;
         }
-        // Lấy dữ liệu từ các trường nhập liệu
-        int teacherID = Integer.parseInt(txtTeacherID.getText());
-        String Lastname = String.valueOf(txtLastname.getText());
-        String Firstname = String.valueOf(txtFirstname.getText());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String date = sdf.format(dcHireDate.getDate());
-        Date HireDate = Date.valueOf(date);
+        
         try {
+            // Lấy dữ liệu từ các trường nhập liệu
+            int teacherID = Integer.parseInt(txtTeacherID.getText());
+            String Lastname = String.valueOf(txtLastname.getText());
+            String Firstname = String.valueOf(txtFirstname.getText());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String date = sdf.format(dcHireDate.getDate());
+            Date HireDate = Date.valueOf(date);
             if (teacherBUS.addTeacher(new Person(teacherID, Lastname, Firstname, HireDate, null)) > 0) {
                 JOptionPane.showMessageDialog(this, "Add Instructor Success !");
             }
