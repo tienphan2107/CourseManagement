@@ -247,7 +247,7 @@ public class PnCourseInstructor extends javax.swing.JPanel {
 
         //Xác nhận 
         int choose = JOptionPane.showConfirmDialog(this, "Delete This Course Instructor ?", "Confirm", JOptionPane.YES_NO_OPTION);
-        if (choose == JOptionPane.NO_OPTION) { // đổi ý không xóa nữa
+        if (choose == JOptionPane.YES_OPTION) { // đổi ý không xóa nữa
             //xóa
             int courseID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 2).toString());
             int teacherID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 0).toString());

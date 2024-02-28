@@ -289,7 +289,9 @@ public class CourseInstructorDetail extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         //xác nhận 
-        int choose = JOptionPane.showConfirmDialog(this, "Delete This Course Instructor ?", "Confirm", JOptionPane.YES_NO_OPTION);
+        int choose = JOptionPane.NO_OPTION;
+
+        choose = JOptionPane.showConfirmDialog(this, "Delete This Course Instructor ?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (choose == JOptionPane.NO_OPTION) { // đổi ý không xóa nữa
             return;
         }
