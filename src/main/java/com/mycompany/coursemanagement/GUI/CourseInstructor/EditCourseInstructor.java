@@ -347,7 +347,8 @@ public class EditCourseInstructor extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
         //Xác nhận
-        int choose = JOptionPane.showConfirmDialog(this, "Edit This Course Instructor ?", "Confirm", JOptionPane.YES_NO_OPTION);
+        int choose = JOptionPane.NO_OPTION;
+        choose = JOptionPane.showConfirmDialog(this, "Edit This Course Instructor ?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (choose == JOptionPane.NO_OPTION) { // đổi ý không xóa nữa
             return;
         }

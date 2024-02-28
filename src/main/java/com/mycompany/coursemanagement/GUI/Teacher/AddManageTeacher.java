@@ -15,7 +15,9 @@ import javax.swing.JOptionPane;
  * @author Home
  */
 public class AddManageTeacher extends javax.swing.JFrame {
+
     PersonBUS teacherBUS = new PersonBUS();
+
     /**
      * Creates new form AddManageTeacher
      */
@@ -145,8 +147,9 @@ public class AddManageTeacher extends javax.swing.JFrame {
 
     private void btnAddTeacherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTeacherActionPerformed
         //Xác nhận
-        int choose = JOptionPane.showConfirmDialog(this, "Add This Teacher ?", "Confirm", JOptionPane.YES_NO_OPTION);
-        if (choose == JOptionPane.NO_OPTION) { 
+        int choose = JOptionPane.NO_OPTION;
+        choose = JOptionPane.showConfirmDialog(this, "Add This Teacher ?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (choose == JOptionPane.NO_OPTION) {
             return;
         }
         // Lấy dữ liệu từ các trường nhập liệu
@@ -172,15 +175,16 @@ public class AddManageTeacher extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
-    public void loadTeacherID(){   
+    public void loadTeacherID() {
         try {
-            txtTeacherID.setText((teacherBUS.GetAllPerson().size()+1)+"");
+            txtTeacherID.setText((teacherBUS.GetAllPerson().size() + 1) + "");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured , please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
             return;
         }
     }
+
     /**
      * @param args the command line arguments
      */
