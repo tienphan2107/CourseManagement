@@ -7,6 +7,7 @@ package com.mycompany.coursemanagement.GUI.ManageStudentGrade;
 import com.mycompany.coursemanagement.BUS.StudentGradeBUS;
 import com.mycompany.coursemanagement.Models.Person;
 import com.mycompany.coursemanagement.Models.StudentGrade;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -88,6 +89,17 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         if (tblGrade.getColumnModel().getColumnCount() > 0) {
             tblGrade.getColumnModel().getColumn(0).setResizable(false);
         }
+
+        txtFindContent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFindContentActionPerformed(evt);
+            }
+        });
+        txtFindContent.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFindContentKeyPressed(evt);
+            }
+        });
 
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +197,37 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {                                     
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (txtFindContent.getText().isBlank()) {
+            txtFindContent.setText("");
+            txtFindContent.requestFocus();
+            return;
+        }
 
+        int studentID;
+        try {
+            studentID = Integer.parseInt(txtFindContent.getText().trim());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid StudentID.", "Message", JOptionPane.ERROR_MESSAGE);
+            txtFindContent.setText("");
+            txtFindContent.requestFocus();
+            return;
+        }
+
+        List<StudentGrade> resultList;
+        try {
+            resultList = studentGradeBUS.FindByStudentID(studentID);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "An error occurred when finding data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+            return;
+        }
+
+        LoadStudentGrades(resultList);
+        }
+    }
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         if (txtFindContent.getText().isBlank()) {
             JOptionPane.showMessageDialog(this, "Please type StudentID in the TextBox first.", "Message", JOptionPane.ERROR_MESSAGE);
@@ -293,6 +335,41 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
         Resetpanel();
     }//GEN-LAST:event_btnReloadActionPerformed
+
+    private void txtFindContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFindContentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFindContentActionPerformed
+
+    private void txtFindContentKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindContentKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (txtFindContent.getText().isBlank()) {
+            txtFindContent.setText("");
+            txtFindContent.requestFocus();
+            return;
+        }
+
+        int studentID;
+        try {
+            studentID = Integer.parseInt(txtFindContent.getText().trim());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid StudentID.", "Message", JOptionPane.ERROR_MESSAGE);
+            txtFindContent.setText("");
+            txtFindContent.requestFocus();
+            return;
+        }
+
+        List<StudentGrade> resultList;
+        try {
+            resultList = studentGradeBUS.FindByStudentID(studentID);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "An error occurred when finding data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+            return;
+        }
+
+        LoadStudentGrades(resultList);
+        }
+    }//GEN-LAST:event_txtFindContentKeyPressed
 
     private void Resetpanel() {
         GetAllList();

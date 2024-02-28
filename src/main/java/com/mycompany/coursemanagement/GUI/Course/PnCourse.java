@@ -199,6 +199,11 @@ public class PnCourse extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         txtSearch.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSearchKeyPressed(evt);
@@ -389,6 +394,10 @@ public class PnCourse extends javax.swing.JPanel {
         }
         handleViewCourseDetail(row);
     }//GEN-LAST:event_btnDetailActionPerformed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

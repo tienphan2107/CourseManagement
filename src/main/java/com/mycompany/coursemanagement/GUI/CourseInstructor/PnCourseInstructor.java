@@ -108,7 +108,7 @@ public class PnCourseInstructor extends javax.swing.JPanel {
             tblInstructor.getColumnModel().getColumn(3).setPreferredWidth(60);
         }
 
-        btnFind.setIcon(new javax.swing.ImageIcon("C:\\PROJECT_FILE_SAVE_LOCATION\\Java\\CourseManagement\\src\\main\\java\\com\\mycompany\\coursemanagement\\GUI\\Icon\\search.png")); // NOI18N
+        btnFind.setText("Find");
         btnFind.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFindActionPerformed(evt);
@@ -168,9 +168,9 @@ public class PnCourseInstructor extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtFindContent, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFind, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnFind, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rdSortByTeacher, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                        .addComponent(rdSortByTeacher, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnReload)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -247,7 +247,7 @@ public class PnCourseInstructor extends javax.swing.JPanel {
 
         //Xác nhận 
         int choose = JOptionPane.showConfirmDialog(this, "Delete This Course Instructor ?", "Confirm", JOptionPane.YES_NO_OPTION);
-        if (choose == JOptionPane.NO_OPTION) { // đổi ý không xóa nữa
+        if (choose == JOptionPane.YES_OPTION) { // đổi ý không xóa nữa
             //xóa
             int courseID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 2).toString());
             int teacherID = Integer.parseInt(tblInstructor.getModel().getValueAt(tblInstructor.getSelectedRow(), 0).toString());

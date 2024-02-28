@@ -24,7 +24,6 @@ public class CourseInstructorBUS {
     private PersonDAO personDAO = new PersonDAO();
     
     public CourseInstructorBUS() {
-        
     }
 
     public List<CourseInstructor> Get() throws Exception {

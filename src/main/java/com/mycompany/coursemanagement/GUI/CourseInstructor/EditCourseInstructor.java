@@ -273,7 +273,6 @@ public class EditCourseInstructor extends javax.swing.JFrame {
             ex.printStackTrace();
             return;
         }
-
     }
 
     public void loadCbbTeacherForEachCourse(int courseID) {
@@ -290,7 +289,6 @@ public class EditCourseInstructor extends javax.swing.JFrame {
             ex.printStackTrace();
             return;
         }
-
     }
     private void cbbTeacherIDItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbTeacherIDItemStateChanged
         if (cbbFirstName.getItemCount() <= 0) {
