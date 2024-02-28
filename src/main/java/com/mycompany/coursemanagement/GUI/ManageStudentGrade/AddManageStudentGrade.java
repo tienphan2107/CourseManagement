@@ -45,7 +45,7 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
                 String courseTitle = i.getTitle();
                 cbbCourseTitle.addItem(courseTitle);
             }
-            
+
             for (Person i : studentGradeBUS.GetAllStudent()) {
                 String studentName = i.getLastName();
                 cbbStudentName.addItem(studentName);
@@ -57,10 +57,10 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
             return;
         }
     }
-    
+
     public static String getVariableType(Object variable) {
-    return variable.getClass().getSimpleName();
-}
+        return variable.getClass().getSimpleName();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -204,7 +204,8 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
         //Xác nhận
-        int choose = JOptionPane.showConfirmDialog(this, "Register This Student ?", "Confirm", JOptionPane.YES_NO_OPTION);
+        int choose = JOptionPane.NO_OPTION;
+        choose = JOptionPane.showConfirmDialog(this, "Register This Student ?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (choose == JOptionPane.NO_OPTION) { // đổi ý không xóa nữa
             return;
         }
@@ -232,15 +233,14 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
             int studentID = studentGradeBUS.getStudentIDByLastName(studentName);
             System.out.print(studentID);
             result = studentGradeBUS.add(enrollmentID, courseID, studentID, 0);
-        } 
-//        catch (EmptyFieldException e) {
-//            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
-//            if (e.getFieldName().equalsIgnoreCase("StudentId")) {
-//                txtStudentID.requestFocus();
-//            } else if (e.getFieldName().equalsIgnoreCase("Grade")) {
-//                txtGrade.requestFocus();
-//            }
-//            return;
+        } //        catch (EmptyFieldException e) {
+        //            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
+        //            if (e.getFieldName().equalsIgnoreCase("StudentId")) {
+        //                txtStudentID.requestFocus();
+        //            } else if (e.getFieldName().equalsIgnoreCase("Grade")) {
+        //                txtGrade.requestFocus();
+        //            }
+        //            return;
         catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
@@ -250,7 +250,7 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
             e.printStackTrace();
             return;
         }
-        
+
         if (result > 0) {
             JOptionPane.showMessageDialog(this, "Register successfully");
             this.dispose();

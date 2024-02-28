@@ -394,10 +394,11 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         int choose = JOptionPane.showConfirmDialog(this, "Exit ?", "Confirm", JOptionPane.YES_NO_OPTION);
-        if (choose == JOptionPane.NO_OPTION) { // đổi ý không xóa nữa
+        if (choose == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }else{
             return;
         }
-        this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseActionPerformed

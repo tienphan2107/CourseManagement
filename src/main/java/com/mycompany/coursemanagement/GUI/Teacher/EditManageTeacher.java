@@ -16,19 +16,23 @@ import javax.swing.JOptionPane;
  * @author Home
  */
 public class EditManageTeacher extends javax.swing.JFrame {
+
     PersonBUS teacherBUS = new PersonBUS();
+
     /**
      * Creates new form EditManageTeacher
      */
     public EditManageTeacher() {
         initComponents();
     }
+
     public EditManageTeacher(int teacherID) {
         initComponents();
         System.out.print(teacherID);
         setLocationRelativeTo(null);
         LoadValueComponent(teacherID);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,8 +151,10 @@ public class EditManageTeacher extends javax.swing.JFrame {
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         //Xác nhận
-        int choose = JOptionPane.showConfirmDialog(this, "Update This Teacher ?", "Confirm", JOptionPane.YES_NO_OPTION);
-        if (choose == JOptionPane.NO_OPTION) { 
+
+        int choose = JOptionPane.NO_OPTION;
+        choose = JOptionPane.showConfirmDialog(this, "Update This Teacher ?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (choose == JOptionPane.NO_OPTION) {
             return;
         }
 
@@ -184,10 +190,10 @@ public class EditManageTeacher extends javax.swing.JFrame {
         try {
             Person teacher = teacherBUS.GetTeacherByID(teacherID);
 
-            txtTeacherID.setText(teacher.getPersonID()+ "");
-            txtLastname.setText(teacher.getLastName()+ "");
-            txtFirstname.setText(teacher.getFirstName()+ "");
-            txtHireDate.setText(teacher.getHireDate()+ "");
+            txtTeacherID.setText(teacher.getPersonID() + "");
+            txtLastname.setText(teacher.getLastName() + "");
+            txtFirstname.setText(teacher.getFirstName() + "");
+            txtHireDate.setText(teacher.getHireDate() + "");
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured , please try again.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -196,6 +202,7 @@ public class EditManageTeacher extends javax.swing.JFrame {
         }
 
     }
+
     /**
      * @param args the command line arguments
      */

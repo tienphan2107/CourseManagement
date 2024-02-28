@@ -222,7 +222,8 @@ public class PnManageTeacher extends javax.swing.JPanel {
         }
 
         //Xác nhận
-        int choose = JOptionPane.showConfirmDialog(this, "Delete This Teacher ?", "Confirm", JOptionPane.YES_NO_OPTION);
+        int choose = JOptionPane.NO_OPTION;
+        choose = JOptionPane.showConfirmDialog(this, "Delete This Teacher ?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (choose == JOptionPane.NO_OPTION) {
             return;
         }

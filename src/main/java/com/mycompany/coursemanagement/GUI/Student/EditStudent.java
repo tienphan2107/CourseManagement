@@ -202,6 +202,8 @@ public class EditStudent extends javax.swing.JFrame {
         if (rootStudent.getFirstName().equals(changedStudent.getFirstName()) && rootStudent.getLastName().equals(changedStudent.getLastName())) {
             this.dispose();
         } else {
+            choose = JOptionPane.NO_OPTION;
+
             choose = JOptionPane.showConfirmDialog(this, "Edit This Student ?", "Confirm", JOptionPane.YES_NO_OPTION);
             if (choose == JOptionPane.NO_OPTION) { // đổi ý không xóa nữa
                 return;
@@ -242,7 +244,7 @@ public class EditStudent extends javax.swing.JFrame {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-        } 
+        }
     }//GEN-LAST:event_btnExitActionPerformed
     private boolean checkString(String input) {
         if (input.isEmpty()) {
@@ -251,6 +253,7 @@ public class EditStudent extends javax.swing.JFrame {
         // Cho phép chữ cái từ A-Z, a-z và các ký tự tiếng Việt (bao gồm các dấu)
         return input.matches("[\\p{L} ]+");
     }
+
     /**
      * @param args the command line arguments
      */

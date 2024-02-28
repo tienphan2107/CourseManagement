@@ -102,7 +102,7 @@ public class PnStudent extends javax.swing.JPanel {
             tblStudent.getColumnModel().getColumn(1).setPreferredWidth(1);
         }
 
-        btnFind.setIcon(new javax.swing.ImageIcon("C:\\PROJECT_FILE_SAVE_LOCATION\\Java\\CourseManagement\\src\\main\\java\\com\\mycompany\\coursemanagement\\GUI\\Icon\\search.png")); // NOI18N
+        btnFind.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/coursemanagement/GUI/Icon/refresh.png"))); // NOI18N
         btnFind.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnFind.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +110,7 @@ public class PnStudent extends javax.swing.JPanel {
             }
         });
 
-        btnDelete.setIcon(new javax.swing.ImageIcon("C:\\PROJECT_FILE_SAVE_LOCATION\\Java\\CourseManagement\\src\\main\\java\\com\\mycompany\\coursemanagement\\GUI\\Icon\\delete-user.png")); // NOI18N
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/coursemanagement/GUI/Icon/delete-user.png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +119,7 @@ public class PnStudent extends javax.swing.JPanel {
             }
         });
 
-        btnEdit.setIcon(new javax.swing.ImageIcon("C:\\PROJECT_FILE_SAVE_LOCATION\\Java\\CourseManagement\\src\\main\\java\\com\\mycompany\\coursemanagement\\GUI\\Icon\\edit-user.png")); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/coursemanagement/GUI/Icon/edit-user.png"))); // NOI18N
         btnEdit.setText("Edit");
         btnEdit.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +128,7 @@ public class PnStudent extends javax.swing.JPanel {
             }
         });
 
-        btnAdd.setIcon(new javax.swing.ImageIcon("C:\\PROJECT_FILE_SAVE_LOCATION\\Java\\CourseManagement\\src\\main\\java\\com\\mycompany\\coursemanagement\\GUI\\Icon\\add-user.png")); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/coursemanagement/GUI/Icon/add-user.png"))); // NOI18N
         btnAdd.setText("Add");
         btnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +137,7 @@ public class PnStudent extends javax.swing.JPanel {
             }
         });
 
-        btnView.setIcon(new javax.swing.ImageIcon("C:\\PROJECT_FILE_SAVE_LOCATION\\Java\\CourseManagement\\src\\main\\java\\com\\mycompany\\coursemanagement\\GUI\\Icon\\user-detail.png")); // NOI18N
+        btnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/coursemanagement/GUI/Icon/user-detail.png"))); // NOI18N
         btnView.setText("View");
         btnView.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnView.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +146,7 @@ public class PnStudent extends javax.swing.JPanel {
             }
         });
 
-        btnReload.setIcon(new javax.swing.ImageIcon("C:\\PROJECT_FILE_SAVE_LOCATION\\Java\\CourseManagement\\src\\main\\java\\com\\mycompany\\coursemanagement\\GUI\\Icon\\refresh.png")); // NOI18N
+        btnReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/coursemanagement/GUI/Icon/refresh.png"))); // NOI18N
         btnReload.setText("Reload");
         btnReload.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnReload.addActionListener(new java.awt.event.ActionListener() {
@@ -166,10 +166,8 @@ public class PnStudent extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtFindContent, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-
                         .addComponent(btnFind, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-
                         .addComponent(btnReload)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnView)
@@ -222,6 +220,7 @@ public class PnStudent extends javax.swing.JPanel {
         }
         try {
             List<Person> result = personBus.FindStudent(txtFindContent.getText());
+            System.out.println("Abc:" + result.size());
             LoadStudent(result);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured when finding a suitable content, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
