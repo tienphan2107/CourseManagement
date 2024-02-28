@@ -42,7 +42,7 @@ public class PersonDAO {
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
-            String query = "SELECT * FROM Person WHERE EnrollmentDate IS NULL";
+            String query = "SELECT * FROM person WHERE EnrollmentDate IS NULL";
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -98,7 +98,7 @@ public class PersonDAO {
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
-            String query = "SELECT * FROM Person WHERE HireDate IS NULL";
+            String query = "SELECT * FROM person WHERE HireDate IS NULL";
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -127,7 +127,7 @@ public class PersonDAO {
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
-            String query = "SELECT * FROM Person";
+            String query = "SELECT * FROM person";
 
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
@@ -268,7 +268,7 @@ public class PersonDAO {
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
-            String query = "UPDATE Person SET Lastname = ?, Firstname = ?, HireDate = ?, EnrollmentDate = ? WHERE PersonID = ?";
+            String query = "UPDATE person SET Lastname = ?, Firstname = ?, HireDate = ?, EnrollmentDate = ? WHERE PersonID = ?";
             ps = conn.prepareStatement(query);
             ps.setString(1, teacher.getLastName());
             ps.setString(2, teacher.getFirstName());
@@ -294,7 +294,7 @@ public class PersonDAO {
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
-            String query = "DELETE FROM Person WHERE PersonID = ?";
+            String query = "DELETE FROM person WHERE PersonID = ?";
             ps = conn.prepareStatement(query);
             ps.setInt(1, personID);
             result = ps.executeUpdate();
@@ -315,7 +315,7 @@ public class PersonDAO {
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
-            String query = "SELECT * FROM Person Where (Lastname LIKE ? OR Firstname LIKE ?) AND HireDate IS NOT null";
+            String query = "SELECT * FROM person Where (Lastname LIKE ? OR Firstname LIKE ?) AND HireDate IS NOT null";
             ps = conn.prepareStatement(query);
             ps.setString(1, "%" + value + "%");
             ps.setString(2, "%" + value + "%");
