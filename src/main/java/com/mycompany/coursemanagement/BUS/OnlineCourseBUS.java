@@ -5,7 +5,9 @@
 package com.mycompany.coursemanagement.BUS;
 
 import com.mycompany.coursemanagement.DAO.CourseDAO;
+import com.mycompany.coursemanagement.DAO.CourseInstructorDAO;
 import com.mycompany.coursemanagement.DAO.OnlineCourseDAO;
+import com.mycompany.coursemanagement.DAO.StudentGradeDAO;
 import com.mycompany.coursemanagement.Models.Course;
 import com.mycompany.coursemanagement.Models.Department;
 import com.mycompany.coursemanagement.Models.OnlineCourse;
@@ -21,6 +23,8 @@ public class OnlineCourseBUS {
 
     private final OnlineCourseDAO ocDAO = new OnlineCourseDAO();
     private final CourseDAO courseDAO = new CourseDAO();
+    private final CourseInstructorDAO courseInstructorDAO = new CourseInstructorDAO();
+    private final StudentGradeDAO studentGradeDAO = new StudentGradeDAO();
 
     public OnlineCourseBUS() {
     }
@@ -105,7 +109,20 @@ public class OnlineCourseBUS {
         return result;
     }
 
-    public int deleteOnlineCourse(int courseId) throws SQLException {
+    public int deleteOnlineCourse(int courseId, String courseTitle) throws SQLException, IllegalArgumentException {
+        boolean canBeDeleted = true;
+        try {
+            canBeDeleted = !courseInstructorDAO.anyInstructorFound(courseId) && !studentGradeDAO.anyEnrollmentFound(courseId);
+        } catch (SQLException e) {
+            throw e;
+        } catch (Exception e) {
+            throw e;
+        }
+
+        if (!canBeDeleted) {
+            throw new IllegalArgumentException("Course '" + courseTitle + "' (" + courseId + ") cannot be deleted as it already has instructors assigned or students enrolled.");
+        }
+
         return ocDAO.deleteOnlineCourse(courseId);
     }
 }

@@ -98,31 +98,16 @@ public class PnCourse extends javax.swing.JPanel {
                 "Course",
                 JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            boolean canBeDeleted = true;
-            try {
-                canBeDeleted = !courseInstructorBUS.anyInstructorFound(courseId) && !studentGradeBUS.anyEnrollmentFound(courseId);
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Connection error", "Error", JOptionPane.ERROR_MESSAGE);
-                e.printStackTrace();
-                return;
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-                e.printStackTrace();
-                return;
-            }
-            
-            if (!canBeDeleted) {
-                JOptionPane.showMessageDialog(this, "Course '"+ course.getTitle() + "' (" + course.getCourseID() + ") cannot be deleted as it already has instructors assigned or students enrolled.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
             int result = 0;
             try {
                 if (course.getOnsiteCourse().getDays() == null) {
-                    result = onlineCourseBUS.deleteOnlineCourse(courseId);
+                    result = onlineCourseBUS.deleteOnlineCourse(courseId, course.getTitle());
                 } else {
-                    result = onsiteCourseBUS.deleteOnsiteCourse(courseId);
+                    result = onsiteCourseBUS.deleteOnsiteCourse(courseId, course.getTitle());
                 }
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, "Connection error", "Error", JOptionPane.ERROR_MESSAGE);
                 e.printStackTrace();
