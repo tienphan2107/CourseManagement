@@ -24,7 +24,7 @@ public class Department {
 
     private LocalDateTime startDate; // Sử dụng kiểu LocalDateTime thay cho Date
 
-    private Date startDate;
+    //private Date startDate;
     private LocalDateTime localStartDate;
 
     private int administrator;
@@ -32,14 +32,14 @@ public class Department {
     public Department() {
     }
 
-    public Department(int departmentID, String name, Double budget, LocalDateTime startDate, int administrator) {
-        this.departmentID = departmentID;
-        this.name = name;
-        this.budget = budget;
-        this.startDate = startDate;
-        this.localStartDate = DateTimeHelper.convertDateObjToLDT(startDate);
-        this.administrator = administrator;
-    }
+//    public Department(int departmentID, String name, Double budget, LocalDateTime startDate, int administrator) {
+//        this.departmentID = departmentID;
+//        this.name = name;
+//        this.budget = budget;
+//        this.startDate = startDate;
+//        this.localStartDate = DateTimeHelper.convertDateObjToLDT(startDate);
+//        this.administrator = administrator;
+//    }
 
     public Department(int departmentID, String name, Double budget, LocalDateTime localStartDate, int administrator) {
         this.departmentID = departmentID;

@@ -37,7 +37,7 @@ public class PersonBUS {
     } 
     public List<Person> findTeacher(String value) throws Exception{
         return personDAO.findTeacher(value);
-
+    }
     public List<Person> GetAllStudent() throws Exception{
         return personDAO.GetAllStudent();
     }
