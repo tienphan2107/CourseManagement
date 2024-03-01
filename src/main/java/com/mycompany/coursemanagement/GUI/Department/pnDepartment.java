@@ -76,7 +76,7 @@ public class pnDepartment extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(885, 515));
 
-        jButton2.setText("Tìm");
+        jButton2.setText("Find");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -90,21 +90,21 @@ public class pnDepartment extends javax.swing.JPanel {
             }
         });
 
-        jButton3.setText("Thêm");
+        jButton3.setText("Add");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Sửa");
+        jButton4.setText("Edit");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Xóa");
+        jButton5.setText("Delete");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
