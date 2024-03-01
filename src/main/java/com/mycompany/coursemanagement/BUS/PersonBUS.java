@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -27,10 +28,46 @@ public class PersonBUS {
         return personDAO.GetTeacherByID(personID);
     }
     public int addTeacher(Person teacher)throws Exception{
-        return personDAO.addTeacher(teacher);
+         if (teacher == null) {
+            throw new IllegalArgumentException("Teacher object cannot be null");
+        }
+        // Kiểm tra các thuộc tính hợp lệ của giáo viên
+        if (!Pattern.matches("^[0-9]+$", teacher.getPersonID()+"")) {
+            throw new IllegalArgumentException("Person ID must be a positive integer");
+        }
+         if (teacher.getLastName()== null || teacher.getLastName().isEmpty()) {
+            throw new IllegalArgumentException("Last name cannot be null or empty");
+        }
+
+        if (teacher.getFirstName()== null || teacher.getFirstName().isEmpty()) {
+            throw new IllegalArgumentException("First name cannot be null or empty");
+        }
+
+        if (teacher.getHireDate() == null) {
+            throw new IllegalArgumentException("Hire date cannot be null");
+        }
+        int rs;
+        try {
+            rs = personDAO.addTeacher(teacher);
+        } catch (SQLException e) {
+            throw e;
+        }
+        return rs;
     } 
     public int editTeacher(Person teacher)throws Exception{
-        return personDAO.editTeacher(teacher);
+         if (teacher.getLastName()== null || teacher.getLastName().isEmpty()) {
+            throw new IllegalArgumentException("Last name cannot be null or empty");
+        }
+         if (teacher.getFirstName()== null || teacher.getFirstName().isEmpty()) {
+            throw new IllegalArgumentException("First name cannot be null or empty");
+        }
+         int rs;
+        try {
+            rs = personDAO.editTeacher(teacher);
+        } catch (SQLException e) {
+            throw e;
+        }
+        return rs;
     }
     public int deleteTeacher(int personID)throws Exception{
         return personDAO.deleteTeacher(personID);

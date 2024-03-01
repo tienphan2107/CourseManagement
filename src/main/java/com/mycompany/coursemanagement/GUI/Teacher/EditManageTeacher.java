@@ -9,6 +9,7 @@ import com.mycompany.coursemanagement.Models.Person;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,6 +32,7 @@ public class EditManageTeacher extends javax.swing.JFrame {
         System.out.print(teacherID);
         setLocationRelativeTo(null);
         LoadValueComponent(teacherID);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -170,16 +172,19 @@ public class EditManageTeacher extends javax.swing.JFrame {
             return;
         }
 
-        System.out.print(teacherID);
-        try {
-            if (teacherBUS.editTeacher(new Person(teacherID, Lastname, Firstname, hireDate, null)) > 0) {
-                JOptionPane.showMessageDialog(this, "Update Success !");
+        if(Lastname.isEmpty()||Firstname.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Empty Information");
+        }else{
+            try {
+                if (teacherBUS.editTeacher(new Person(teacherID, Lastname, Firstname, hireDate, null)) > 0) {
+                    JOptionPane.showMessageDialog(this, "Update Success !");
+                }
+                this.dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "An error occured when Add Data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
+                return;
             }
-            this.dispose();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "An error occured when Add Data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
-            return;
         }
     }//GEN-LAST:event_btnEditActionPerformed
 

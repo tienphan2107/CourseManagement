@@ -8,6 +8,8 @@ import com.mycompany.coursemanagement.BUS.PersonBUS;
 import com.mycompany.coursemanagement.Models.Person;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.util.Calendar;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +27,7 @@ public class AddManageTeacher extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         loadTeacherID();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -159,16 +162,20 @@ public class AddManageTeacher extends javax.swing.JFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(dcHireDate.getDate());
         Date HireDate = Date.valueOf(date);
-        try {
-            if (teacherBUS.addTeacher(new Person(teacherID, Lastname, Firstname, HireDate, null)) > 0) {
-                JOptionPane.showMessageDialog(this, "Add Instructor Success !");
+        if(Lastname.isEmpty() || Firstname.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Empty Information");
+        }else{
+            try {
+                if (teacherBUS.addTeacher(new Person(teacherID, Lastname, Firstname, HireDate, null)) > 0) {
+                    JOptionPane.showMessageDialog(this, "Add Instructor Success !");
+                }
+                this.dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "An error occured when Add Data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
+                return;
             }
-            this.dispose();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "An error occured when Add Data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
-            return;
-        }
+        }  
     }//GEN-LAST:event_btnAddTeacherActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -178,6 +185,7 @@ public class AddManageTeacher extends javax.swing.JFrame {
     public void loadTeacherID() {
         try {
             txtTeacherID.setText((teacherBUS.GetAllPerson().size() + 1) + "");
+            dcHireDate.setDate(Calendar.getInstance().getTime());
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured , please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();

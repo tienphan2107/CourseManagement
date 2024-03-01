@@ -6,6 +6,7 @@ package com.mycompany.coursemanament.GUI.Teacher;
 
 import com.mycompany.coursemanagement.BUS.PersonBUS;
 import com.mycompany.coursemanagement.Models.Person;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +26,7 @@ public class DetailManangeTeacher extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         LoadTeacherDetail(teacherID);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
     public void LoadTeacherDetail(int teacherID) {
