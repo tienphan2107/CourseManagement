@@ -142,6 +142,7 @@ public class AddCourseInstructor extends javax.swing.JFrame {
 
         jLabel8.setText("First Name:");
 
+        cbbFirstName.setEnabled(false);
         cbbFirstName.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbbFirstNameItemStateChanged(evt);
@@ -367,7 +368,6 @@ public class AddCourseInstructor extends javax.swing.JFrame {
             txtHireDate.setText(teacher.getHireDate().toString());
             if (cbbFirstName.getSelectedIndex() != cbbTeacherID.getSelectedIndex()) {
                 cbbFirstName.setSelectedIndex(cbbTeacherID.getSelectedIndex());
-
             }// nêú trùng rồi không cần load lại bên cbb 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured , please try again.", "Error", JOptionPane.ERROR_MESSAGE);
