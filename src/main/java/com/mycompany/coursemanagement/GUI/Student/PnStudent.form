@@ -57,8 +57,8 @@
                       <Group type="102" attributes="0">
                           <Component id="txtFindContent" min="-2" pref="246" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnFind" min="-2" pref="44" max="-2" attributes="0"/>
-                          <EmptySpace pref="194" max="32767" attributes="0"/>
+                          <Component id="btnFind" min="-2" pref="56" max="-2" attributes="0"/>
+                          <EmptySpace pref="182" max="32767" attributes="0"/>
                           <Component id="btnReload" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnView" min="-2" max="-2" attributes="0"/>
@@ -149,6 +149,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnFind">
           <Properties>
+            <Property name="text" type="java.lang.String" value="Find"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
           <Events>
