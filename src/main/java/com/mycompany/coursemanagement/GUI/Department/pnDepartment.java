@@ -90,6 +90,9 @@ public class pnDepartment extends javax.swing.JPanel {
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 255, 0));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/add-file.png"))); // NOI18N
         jButton3.setText("Add");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +100,8 @@ public class pnDepartment extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(0, 0, 255));
         jButton4.setText("Edit");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +109,8 @@ public class pnDepartment extends javax.swing.JPanel {
             }
         });
 
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 0, 0));
         jButton5.setText("Delete");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +168,7 @@ public class pnDepartment extends javax.swing.JPanel {
                     .addComponent(jButton5)
                     .addComponent(jButton1))
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleName("");

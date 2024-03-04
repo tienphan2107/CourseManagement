@@ -80,40 +80,56 @@ public class MainMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản Lý Khóa Học");
 
-        pnMenu.setBackground(new java.awt.Color(204, 204, 204));
+        pnMenu.setBackground(new java.awt.Color(233, 239, 252));
         pnMenu.setAlignmentX(0.0F);
         pnMenu.setAlignmentY(0.0F);
         pnMenu.setPreferredSize(new java.awt.Dimension(0, 45));
 
+        jButton1.setBackground(new java.awt.Color(209, 224, 255));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("Department");
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        btnStudent.setBackground(new java.awt.Color(209, 224, 255));
+        btnStudent.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnStudent.setText("Students");
+        btnStudent.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
         btnStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStudentActionPerformed(evt);
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(209, 224, 255));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton3.setText("Teacher");
+        jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
+        btnGrade.setBackground(new java.awt.Color(209, 224, 255));
+        btnGrade.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnGrade.setText("Grade");
+        btnGrade.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
         btnGrade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGradeActionPerformed(evt);
             }
         });
 
+        btnCourse.setBackground(new java.awt.Color(209, 224, 255));
+        btnCourse.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCourse.setText("Course");
+        btnCourse.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
         btnCourse.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCourseMouseClicked(evt);
@@ -125,14 +141,20 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        btnInstructor.setBackground(new java.awt.Color(209, 224, 255));
+        btnInstructor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnInstructor.setText("Instructor");
+        btnInstructor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
         btnInstructor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInstructorActionPerformed(evt);
             }
         });
 
+        btnExit.setBackground(new java.awt.Color(209, 224, 255));
+        btnExit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnExit.setText("Exit");
+        btnExit.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -144,21 +166,21 @@ public class MainMenu extends javax.swing.JFrame {
         pnMenuLayout.setHorizontalGroup(
             pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnMenuLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(50, 50, 50)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addComponent(btnStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addComponent(btnGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addComponent(btnCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addComponent(btnInstructor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         pnMenuLayout.setVerticalGroup(
             pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
