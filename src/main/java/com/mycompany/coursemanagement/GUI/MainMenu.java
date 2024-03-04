@@ -28,7 +28,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class MainMenu extends javax.swing.JFrame {
 
-    private PnStudent pnStudent = new PnStudent();
+//    private PnStudent pnStudent = new PnStudent();
 //    private ManageStudentGrade manageStudentGrade = new  ManageStudentGrade();
 
     /**
