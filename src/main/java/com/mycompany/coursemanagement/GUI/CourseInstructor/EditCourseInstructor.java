@@ -54,14 +54,12 @@ public class EditCourseInstructor extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         cbbTeacherID = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        cbbFirstName = new javax.swing.JComboBox<>();
+        cbbName = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtCredits = new javax.swing.JTextField();
         txtDepartmentID = new javax.swing.JTextField();
-        txtLastName = new javax.swing.JTextField();
         txtHireDate = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
@@ -94,20 +92,17 @@ public class EditCourseInstructor extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("First Name:");
+        jLabel8.setText("Name:");
 
-        cbbFirstName.setEnabled(false);
-        cbbFirstName.addItemListener(new java.awt.event.ItemListener() {
+        cbbName.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbbFirstNameItemStateChanged(evt);
+                cbbNameItemStateChanged(evt);
             }
         });
 
         jLabel9.setText("Title:");
 
         jLabel10.setText("Department ID:");
-
-        jLabel11.setText("Last Name:");
 
         jLabel12.setText("Hire Date:");
 
@@ -116,9 +111,6 @@ public class EditCourseInstructor extends javax.swing.JFrame {
 
         txtDepartmentID.setEditable(false);
         txtDepartmentID.setPreferredSize(new java.awt.Dimension(156, 36));
-
-        txtLastName.setEditable(false);
-        txtLastName.setPreferredSize(new java.awt.Dimension(156, 36));
 
         txtHireDate.setEditable(false);
         txtHireDate.setPreferredSize(new java.awt.Dimension(156, 36));
@@ -174,27 +166,27 @@ public class EditCourseInstructor extends javax.swing.JFrame {
                                         .addComponent(txtCredits, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                         .addComponent(txtCourseID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                         .addComponent(txtTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(93, 93, 93)
+                                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbbFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(12, 12, 12)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbbTeacherID, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtHireDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtHireDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbbName, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbbTeacherID, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addContainerGap(10, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -219,21 +211,19 @@ public class EditCourseInstructor extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbbFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbbName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCredits, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtHireDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDepartmentID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtHireDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtDepartmentID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -277,11 +267,11 @@ public class EditCourseInstructor extends javax.swing.JFrame {
 
     public void loadCbbTeacherForEachCourse(int courseID) {
         cbbTeacherID.removeAllItems();
-        cbbFirstName.removeAllItems();
+        cbbName.removeAllItems();
         try {
             for (Person p : courseInstructorBUS.GetTeachersDidNotTeachThisCourse(courseID)) {
                 cbbTeacherID.addItem(p.getPersonID() + "");
-                cbbFirstName.addItem(p.getFirstName());
+                cbbName.addItem(p.getFirstName() + " " + p.getLastName());
 
             }
         } catch (Exception ex) {
@@ -291,22 +281,15 @@ public class EditCourseInstructor extends javax.swing.JFrame {
         }
     }
     private void cbbTeacherIDItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbTeacherIDItemStateChanged
-        if (cbbFirstName.getItemCount() <= 0) {
+        if (cbbName.getItemCount() < 1 || cbbTeacherID.getItemCount() < 1) {
             return;
         }
-        String firstName = cbbFirstName.getSelectedItem().toString();
         try {
             Person teacher = courseInstructorBUS.GetTeacherByID(Integer.parseInt(cbbTeacherID.getSelectedItem().toString()));
-            txtLastName.setText(teacher.getLastName());
             txtHireDate.setText(teacher.getHireDate().toString());
-            if (cbbFirstName.getSelectedIndex() != cbbTeacherID.getSelectedIndex()) {
-                cbbFirstName.setSelectedIndex(cbbTeacherID.getSelectedIndex());
-
+            if (cbbName.getSelectedIndex() != cbbTeacherID.getSelectedIndex()) {
+                cbbName.setSelectedIndex(cbbTeacherID.getSelectedIndex());
             }// nêú trùng rồi không cần load lại bên cbb 
-
-//            if (!firstName.equals(teacher.getFirstName())) {
-//                cbbFirstName.setSelectedItem(teacher.getFirstName());
-//            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured , please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
@@ -314,33 +297,20 @@ public class EditCourseInstructor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbbTeacherIDItemStateChanged
 
-    private void cbbFirstNameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbFirstNameItemStateChanged
-        if (cbbTeacherID.getItemCount() <= 0) {
+    private void cbbNameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbNameItemStateChanged
+        if (cbbTeacherID.getItemCount() < 1 || cbbName.getItemCount() < 1) {
             return;
         }
-        int teacherID = Integer.parseInt(cbbTeacherID.getSelectedItem().toString());
         try {
-            Person teacher = new Person();
-            for (Person p : this.teacherList) {
-                if (p.getFirstName().equals(cbbFirstName.getSelectedItem().toString())) {
-                    teacher = p;
-                    break;
-                }
-            }
-            txtLastName.setText(teacher.getLastName());
-            txtHireDate.setText(teacher.getHireDate().toString());
-//            if (teacherID != teacher.getPersonID()) {
-//                cbbTeacherID.setSelectedItem(teacher.getPersonID() + "");
-//            }
-            if (cbbTeacherID.getSelectedIndex() != cbbFirstName.getSelectedIndex()) {
-                cbbTeacherID.setSelectedIndex(cbbFirstName.getSelectedIndex());
+            if (cbbTeacherID.getSelectedIndex() != cbbName.getSelectedIndex()) {
+                cbbTeacherID.setSelectedIndex(cbbName.getSelectedIndex());
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured , please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
             return;
         }
-    }//GEN-LAST:event_cbbFirstNameItemStateChanged
+    }//GEN-LAST:event_cbbNameItemStateChanged
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
@@ -356,7 +326,7 @@ public class EditCourseInstructor extends javax.swing.JFrame {
         int teacherID = Integer.parseInt(cbbTeacherID.getSelectedItem().toString());
         try {
             if (courseInstructorBUS.Edit(new CourseInstructor(courseID, teacherID)) > 0) {
-                JOptionPane.showMessageDialog(this, "Edit Instructor Success !");
+                JOptionPane.showMessageDialog(this, "Edit Instructor Success ! Please Reload this list");
             }
             this.dispose();
         } catch (IOException ex) {
@@ -411,11 +381,10 @@ public class EditCourseInstructor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<String> cbbFirstName;
+    private javax.swing.JComboBox<String> cbbName;
     private javax.swing.JComboBox<String> cbbTeacherID;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -429,7 +398,6 @@ public class EditCourseInstructor extends javax.swing.JFrame {
     private javax.swing.JTextField txtCredits;
     private javax.swing.JTextField txtDepartmentID;
     private javax.swing.JTextField txtHireDate;
-    private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtTitle;
     // End of variables declaration//GEN-END:variables
 }
