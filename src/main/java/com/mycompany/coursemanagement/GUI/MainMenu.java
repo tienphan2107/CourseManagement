@@ -87,6 +87,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(209, 224, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/department.png"))); // NOI18N
         jButton1.setText("Department");
         jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -98,6 +99,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         btnStudent.setBackground(new java.awt.Color(209, 224, 255));
         btnStudent.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnStudent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/student.png"))); // NOI18N
         btnStudent.setText("Students");
         btnStudent.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
         btnStudent.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +110,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(209, 224, 255));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/teacher.png"))); // NOI18N
         jButton3.setText("Teacher");
         jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +121,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         btnGrade.setBackground(new java.awt.Color(209, 224, 255));
         btnGrade.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnGrade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/grade.png"))); // NOI18N
         btnGrade.setText("Grade");
         btnGrade.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
         btnGrade.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +132,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         btnCourse.setBackground(new java.awt.Color(209, 224, 255));
         btnCourse.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCourse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/course.png"))); // NOI18N
         btnCourse.setText("Course");
         btnCourse.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
         btnCourse.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -143,6 +148,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         btnInstructor.setBackground(new java.awt.Color(209, 224, 255));
         btnInstructor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnInstructor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/instructor.png"))); // NOI18N
         btnInstructor.setText("Instructor");
         btnInstructor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
         btnInstructor.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +159,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         btnExit.setBackground(new java.awt.Color(209, 224, 255));
         btnExit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/exit.png"))); // NOI18N
         btnExit.setText("Exit");
         btnExit.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
         btnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -166,31 +173,32 @@ public class MainMenu extends javax.swing.JFrame {
         pnMenuLayout.setHorizontalGroup(
             pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnMenuLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addComponent(btnStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(btnGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(btnInstructor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
+                .addComponent(btnInstructor, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         pnMenuLayout.setVerticalGroup(
             pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnStudent, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-            .addComponent(btnGrade, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-            .addComponent(btnCourse, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-            .addComponent(btnInstructor, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-            .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+            .addGroup(pnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btnStudent, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addComponent(btnGrade, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addComponent(btnCourse, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addComponent(btnInstructor, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
+            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 255));
