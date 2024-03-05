@@ -58,7 +58,7 @@
                           <Component id="txtFindContent" min="-2" pref="246" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnFind" min="-2" pref="56" max="-2" attributes="0"/>
-                          <EmptySpace pref="182" max="32767" attributes="0"/>
+                          <EmptySpace pref="90" max="32767" attributes="0"/>
                           <Component id="btnReload" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnView" min="-2" max="-2" attributes="0"/>
@@ -84,8 +84,10 @@
                       <Component id="btnDelete" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="btnEdit" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="btnAdd" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="btnView" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="btnReload" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <Component id="btnView" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="btnReload" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" pref="465" max="32767" attributes="0"/>
@@ -149,7 +151,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnFind">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Find"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Icon/Search.png"/>
+            </Property>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
           <Events>
@@ -158,6 +162,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnDelete">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Icon/Delete-file.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Delete"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
@@ -167,6 +174,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnEdit">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Icon/Edit-file.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Edit"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
@@ -176,6 +186,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAdd">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Icon/Add-file.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Add"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
@@ -185,6 +198,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnView">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Icon/File-details.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="View"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
@@ -194,6 +210,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnReload">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Icon/Refresh.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Reload"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>

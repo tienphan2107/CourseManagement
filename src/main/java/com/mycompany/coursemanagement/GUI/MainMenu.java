@@ -78,7 +78,7 @@ public class MainMenu extends javax.swing.JFrame {
         jTextField12 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Quản Lý Khóa Học");
+        setTitle("Course Management");
         setResizable(false);
 
         pnMenu.setBackground(new java.awt.Color(233, 239, 252));
@@ -87,7 +87,7 @@ public class MainMenu extends javax.swing.JFrame {
         pnMenu.setPreferredSize(new java.awt.Dimension(0, 45));
 
         jButton1.setBackground(new java.awt.Color(209, 224, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/department.png"))); // NOI18N
         jButton1.setText("Department");
         jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
@@ -99,7 +99,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         btnStudent.setBackground(new java.awt.Color(209, 224, 255));
-        btnStudent.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnStudent.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnStudent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/student.png"))); // NOI18N
         btnStudent.setText("Students");
         btnStudent.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
@@ -110,7 +110,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         jButton3.setBackground(new java.awt.Color(209, 224, 255));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/teacher.png"))); // NOI18N
         jButton3.setText("Teacher");
         jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
@@ -121,7 +121,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         btnGrade.setBackground(new java.awt.Color(209, 224, 255));
-        btnGrade.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnGrade.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnGrade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/grade.png"))); // NOI18N
         btnGrade.setText("Grade");
         btnGrade.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
@@ -132,7 +132,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         btnCourse.setBackground(new java.awt.Color(209, 224, 255));
-        btnCourse.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCourse.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnCourse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/course.png"))); // NOI18N
         btnCourse.setText("Course");
         btnCourse.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
@@ -148,7 +148,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         btnInstructor.setBackground(new java.awt.Color(209, 224, 255));
-        btnInstructor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnInstructor.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnInstructor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/instructor.png"))); // NOI18N
         btnInstructor.setText("Instructor");
         btnInstructor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
@@ -159,7 +159,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         btnExit.setBackground(new java.awt.Color(209, 224, 255));
-        btnExit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnExit.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/exit.png"))); // NOI18N
         btnExit.setText("Exit");
         btnExit.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 132, 255), 3, true));
@@ -207,10 +207,10 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1.setAlignmentX(0.0F);
         jPanel1.setAlignmentY(0.0F);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Courses Management System");
+        jLabel1.setText("COURSE MANAGEMENT SYSTEM");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -218,7 +218,7 @@ public class MainMenu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(264, 264, 264)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -231,20 +231,20 @@ public class MainMenu extends javax.swing.JFrame {
 
         pnMainContent.setPreferredSize(new java.awt.Dimension(885, 515));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Group Information");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel3.setText("FullName");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel4.setText("Student Code");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField1.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jTextField1.setText("Đặng Lê Anh Huy");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,27 +253,27 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         jTextField2.setEditable(false);
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField2.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jTextField2.setText("Lê Duy Khánh");
 
         jTextField3.setEditable(false);
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField3.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jTextField3.setText("Trần Đăng Nam");
 
         jTextField4.setEditable(false);
-        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField4.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jTextField4.setText("Âu Hạo Nhiên");
 
         jTextField5.setEditable(false);
-        jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField5.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jTextField5.setText("Nguyễn Văn Tân");
 
         jTextField6.setEditable(false);
-        jTextField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField6.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jTextField6.setText("Phan Huỳnh Minh Tiến");
 
         jTextField7.setEditable(false);
-        jTextField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField7.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jTextField7.setText("3121410223");
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,23 +282,23 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         jTextField8.setEditable(false);
-        jTextField8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField8.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jTextField8.setText("3121410258");
 
         jTextField9.setEditable(false);
-        jTextField9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField9.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jTextField9.setText("3121410336");
 
         jTextField10.setEditable(false);
-        jTextField10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField10.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jTextField10.setText("3121410370");
 
         jTextField11.setEditable(false);
-        jTextField11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField11.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jTextField11.setText("3121410444");
 
         jTextField12.setEditable(false);
-        jTextField12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField12.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jTextField12.setText("3121410502");
 
         javax.swing.GroupLayout pnIntroductionLayout = new javax.swing.GroupLayout(pnIntroduction);
@@ -338,7 +338,7 @@ public class MainMenu extends javax.swing.JFrame {
                         .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(159, 159, 159))
+                .addGap(153, 153, 153))
         );
         pnIntroductionLayout.setVerticalGroup(
             pnIntroductionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
