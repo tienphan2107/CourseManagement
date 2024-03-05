@@ -79,6 +79,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản Lý Khóa Học");
+        setResizable(false);
 
         pnMenu.setBackground(new java.awt.Color(233, 239, 252));
         pnMenu.setAlignmentX(0.0F);
