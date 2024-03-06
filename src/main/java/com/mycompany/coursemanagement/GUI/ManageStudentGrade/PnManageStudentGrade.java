@@ -59,6 +59,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         btnReload = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        tblGrade.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         tblGrade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

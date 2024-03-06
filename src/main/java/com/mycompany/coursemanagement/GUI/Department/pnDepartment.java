@@ -124,6 +124,7 @@ public class pnDepartment extends javax.swing.JPanel {
             }
         });
 
+        jTable1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {},
             new String [] {

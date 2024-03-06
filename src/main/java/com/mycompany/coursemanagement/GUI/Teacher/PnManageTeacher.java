@@ -56,6 +56,7 @@ public class PnManageTeacher extends javax.swing.JPanel {
         btnView = new javax.swing.JButton();
         btnReload = new javax.swing.JButton();
 
+        tbTeacher.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         tbTeacher.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

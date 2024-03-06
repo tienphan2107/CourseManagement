@@ -71,7 +71,6 @@ public class StudentGradeDAO {
             String query = "SELECT * FROM studentgrade WHERE EnrollmentID = ?";
             ps = conn.prepareStatement(query);
             ps.setInt(1, enrollmentID);
-            System.out.print(query);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int enrollmentId = rs.getInt("EnrollmentID");

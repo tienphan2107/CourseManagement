@@ -70,6 +70,7 @@ public class PnCourseInstructor extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(880, 510));
 
+        tblInstructor.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         tblInstructor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
