@@ -51,10 +51,6 @@ public class DepartmentBUS {
             throw new IllegalArgumentException("Budget must be a non-negative value");
         }
 
-        if (startDate == null || startDate.isAfter(LocalDateTime.now())) {
-            throw new IllegalArgumentException("Start date must be in the past");
-        }
-
         if (administrator <= 0) {
             throw new IllegalArgumentException("Administrator ID must be greater than 0");
         }
