@@ -8,11 +8,17 @@ import com.mycompany.coursemanagement.BUS.StudentGradeBUS;
 import com.mycompany.coursemanagement.Models.Person;
 import com.mycompany.coursemanagement.Models.StudentGrade;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 
 /**
  *
@@ -35,8 +41,49 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     public PnManageStudentGrade() {
         initComponents();
         this.setSize(885, 515);
-        SetUpTable();
+//        SetUpTable();
+        initTable();
         Resetpanel();
+    }
+
+    private void initTable() {
+        List<StudentGrade> resultList;
+        try {
+            resultList = studentGradeBUS.Get();
+//            System.out.print(resultList.size());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "An error occurred when finding data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+            return;
+        }
+
+        List<StudentGrade> studentGradeList = new ArrayList<StudentGrade>();
+
+        for (int i = 0; i < resultList.size(); i++) {
+            // Tạo một đối tượng StudentGrade mới
+            StudentGrade studentgrade = resultList.get(i);
+
+            int enrollmentID = studentgrade.getEnrollmentID();
+            int courseID = studentgrade.getCourseID();
+            int studentID = studentgrade.getStudentID();
+            double grade = studentgrade.getGrade();
+            // Gán các thuộc tính của đối tượng StudentGrade
+            StudentGrade studentGrade = new StudentGrade(enrollmentID, courseID, studentID, grade);
+
+            // Thêm đối tượng StudentGrade vào danh sách 
+            studentGradeList.add(studentGrade);
+        }
+
+        // Create the model
+        JTableCustom model = new JTableCustom(studentGradeList);
+
+        // Create the table
+        JTable table = new JTable(model);
+        jScrollPane1.setViewportView(table);
+        table.getColumnModel().getColumn(0).setPreferredWidth(80);
+        table.getColumnModel().getColumn(1).setPreferredWidth(200);
+        table.getColumnModel().getColumn(2).setPreferredWidth(50);
+        table.getColumnModel().getColumn(3).setPreferredWidth(180);
     }
 
     /**
@@ -58,6 +105,12 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         btnView = new javax.swing.JButton();
         btnReload = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+        });
 
         tblGrade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,6 +136,16 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblGrade.setCellEditor(new DefaultCellEditor(new JTextField()));
+        tblGrade.setCellSelectionEnabled(true);
+        tblGrade.setColumnSelectionAllowed(true);
+        tblGrade.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tblGrade.getTableHeader().setReorderingAllowed(false);
+        tblGrade.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblGradeMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblGrade);
@@ -204,35 +267,35 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {                                     
+    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txtFindContent.getText().isBlank()) {
-            txtFindContent.setText("");
-            txtFindContent.requestFocus();
-            return;
-        }
+                txtFindContent.setText("");
+                txtFindContent.requestFocus();
+                return;
+            }
 
-        int studentID;
-        try {
-            studentID = Integer.parseInt(txtFindContent.getText().trim());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid StudentID.", "Message", JOptionPane.ERROR_MESSAGE);
-            txtFindContent.setText("");
-            txtFindContent.requestFocus();
-            return;
-        }
+            int studentID;
+            try {
+                studentID = Integer.parseInt(txtFindContent.getText().trim());
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Please enter a valid StudentID.", "Message", JOptionPane.ERROR_MESSAGE);
+                txtFindContent.setText("");
+                txtFindContent.requestFocus();
+                return;
+            }
 
-        List<StudentGrade> resultList;
-        try {
-            resultList = studentGradeBUS.FindByStudentID(studentID);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "An error occurred when finding data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
-            return;
-        }
+            List<StudentGrade> resultList;
+            try {
+                resultList = studentGradeBUS.FindByStudentID(studentID);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "An error occurred when finding data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
+                return;
+            }
 
-        LoadStudentGrades(resultList);
+            LoadStudentGrades(resultList);
         }
     }
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -287,8 +350,8 @@ private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {
         }
 
         //Xác nhận
-                int choose = JOptionPane.NO_OPTION;
- choose = JOptionPane.showConfirmDialog(this, "Delete This Student Grade ?", "Confirm", JOptionPane.YES_NO_OPTION);
+        int choose = JOptionPane.NO_OPTION;
+        choose = JOptionPane.showConfirmDialog(this, "Delete This Student Grade ?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (choose == JOptionPane.YES_OPTION) { // đổi ý không xóa nữa
             //xóa
             int courseID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 1).toString());
@@ -303,7 +366,7 @@ private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {
                 ex.printStackTrace();
                 return;
             }
-        }else{
+        } else {
             return;
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
@@ -350,33 +413,53 @@ private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {
     private void txtFindContentKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindContentKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txtFindContent.getText().isBlank()) {
-            txtFindContent.setText("");
-            txtFindContent.requestFocus();
-            return;
-        }
+                txtFindContent.setText("");
+                txtFindContent.requestFocus();
+                return;
+            }
 
-        int studentID;
-        try {
-            studentID = Integer.parseInt(txtFindContent.getText().trim());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid StudentID.", "Message", JOptionPane.ERROR_MESSAGE);
-            txtFindContent.setText("");
-            txtFindContent.requestFocus();
-            return;
-        }
+            int studentID;
+            try {
+                studentID = Integer.parseInt(txtFindContent.getText().trim());
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Please enter a valid StudentID.", "Message", JOptionPane.ERROR_MESSAGE);
+                txtFindContent.setText("");
+                txtFindContent.requestFocus();
+                return;
+            }
 
-        List<StudentGrade> resultList;
-        try {
-            resultList = studentGradeBUS.FindByStudentID(studentID);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "An error occurred when finding data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
-            return;
-        }
+            List<StudentGrade> resultList;
+            try {
+                resultList = studentGradeBUS.FindByStudentID(studentID);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "An error occurred when finding data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
+                return;
+            }
 
-        LoadStudentGrades(resultList);
+            LoadStudentGrades(resultList);
         }
     }//GEN-LAST:event_txtFindContentKeyPressed
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+    }//GEN-LAST:event_jScrollPane1MouseClicked
+
+    private void tblGradeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGradeMouseClicked
+        if (evt.getClickCount() == 2) {
+            int row = tblGrade.rowAtPoint(evt.getPoint());
+            int column = tblGrade.columnAtPoint(evt.getPoint());
+            System.out.print(row + "  " + column);
+            tblGrade.editCellAt(row, column);
+            //            if (column == 3) { // Chỉnh sửa cột thứ 2
+            //                // Lấy giá trị hiện tại của cột thứ 2
+            //                tblGrade.editCellAt(row, column);
+            ////                TableCellEditor cellEditor = tblGrade.getCellEditor(row, column);
+            ////                if (cellEditor != null) {
+            ////                    cellEditor.stopCellEditing();
+            ////                }
+            //            }
+        }
+    }//GEN-LAST:event_tblGradeMouseClicked
 
     private void Resetpanel() {
         GetAllList();
@@ -384,12 +467,11 @@ private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {
         LoadStudentGrade(list);
     }
 
-    private void SetUpTable() {
-        for (int i = 0; i < tblGrade.getColumnCount(); i++) {
-            tblGrade.getColumnModel().getColumn(i).setCellRenderer(new LeftAlignedCellRenderer());
-        }
-    }
-
+//    private void SetUpTable() {
+//        for (int i = 0; i < tblGrade.getColumnCount(); i++) {
+//            tblGrade.getColumnModel().getColumn(i).setCellRenderer(new LeftAlignedCellRenderer());
+//        }
+//    }
     public void GetAllList() {
         try {
             this.list = studentGradeBUS.Get();
