@@ -136,7 +136,9 @@ public class CourseInstructorDetail extends javax.swing.JFrame {
         jLabel11.setText("Teacher");
 
         btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Edit-file.png"))); // NOI18N
         btnEdit.setText("Edit");
+        btnEdit.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
@@ -144,7 +146,9 @@ public class CourseInstructorDetail extends javax.swing.JFrame {
         });
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Delete-file.png"))); // NOI18N
         btnDelete.setText("Delete");
+        btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -152,7 +156,9 @@ public class CourseInstructorDetail extends javax.swing.JFrame {
         });
 
         btnExit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/X.png"))); // NOI18N
         btnExit.setText("Exit");
+        btnExit.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);

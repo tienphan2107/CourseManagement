@@ -68,6 +68,7 @@ public class PnStudent extends javax.swing.JPanel {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(880, 510));
 
+        tblStudent.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         tblStudent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -102,7 +103,7 @@ public class PnStudent extends javax.swing.JPanel {
             tblStudent.getColumnModel().getColumn(1).setPreferredWidth(1);
         }
 
-        btnFind.setText("Find");
+        btnFind.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Search.png"))); // NOI18N
         btnFind.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnFind.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +111,7 @@ public class PnStudent extends javax.swing.JPanel {
             }
         });
 
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Delete-file.png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +120,7 @@ public class PnStudent extends javax.swing.JPanel {
             }
         });
 
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Edit-file.png"))); // NOI18N
         btnEdit.setText("Edit");
         btnEdit.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +129,7 @@ public class PnStudent extends javax.swing.JPanel {
             }
         });
 
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Add-file.png"))); // NOI18N
         btnAdd.setText("Add");
         btnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +138,7 @@ public class PnStudent extends javax.swing.JPanel {
             }
         });
 
+        btnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/File-details.png"))); // NOI18N
         btnView.setText("View");
         btnView.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnView.addActionListener(new java.awt.event.ActionListener() {
@@ -142,6 +147,7 @@ public class PnStudent extends javax.swing.JPanel {
             }
         });
 
+        btnReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Refresh.png"))); // NOI18N
         btnReload.setText("Reload");
         btnReload.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnReload.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +168,7 @@ public class PnStudent extends javax.swing.JPanel {
                         .addComponent(txtFindContent, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFind, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                         .addComponent(btnReload)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnView)
@@ -184,8 +190,9 @@ public class PnStudent extends javax.swing.JPanel {
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
         );

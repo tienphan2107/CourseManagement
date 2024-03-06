@@ -76,7 +76,9 @@ public class StudentDetails extends javax.swing.JFrame {
         jLabel10.setText("Enrollment Date :");
 
         btnClose.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/X.png"))); // NOI18N
         btnClose.setText("Close");
+        btnClose.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);

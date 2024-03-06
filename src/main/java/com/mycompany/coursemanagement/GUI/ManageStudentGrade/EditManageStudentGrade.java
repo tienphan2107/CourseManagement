@@ -92,7 +92,9 @@ public class EditManageStudentGrade extends javax.swing.JFrame {
         });
 
         btnSave.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Check-V.png"))); // NOI18N
         btnSave.setText("Save");
+        btnSave.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -100,7 +102,9 @@ public class EditManageStudentGrade extends javax.swing.JFrame {
         });
 
         btnExit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/X.png"))); // NOI18N
         btnExit.setText("Exit");
+        btnExit.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);

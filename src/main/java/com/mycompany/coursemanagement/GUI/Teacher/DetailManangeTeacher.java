@@ -86,7 +86,9 @@ public class DetailManangeTeacher extends javax.swing.JFrame {
 
         txtFirstname.setEnabled(false);
 
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/X.png"))); // NOI18N
         btnExit.setText("Exit");
+        btnExit.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -144,7 +146,7 @@ public class DetailManangeTeacher extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(txtLastname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtHireDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(btnExit)
                 .addGap(39, 39, 39))
         );
