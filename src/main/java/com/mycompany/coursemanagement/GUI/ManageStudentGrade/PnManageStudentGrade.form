@@ -31,7 +31,7 @@
               <Component id="btnEdit" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="129" max="32767" attributes="0"/>
+              <EmptySpace pref="85" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
@@ -146,12 +146,20 @@
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSearch">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Icon/search.png"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnDelete">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Icon/delete-file.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Delete"/>
         <Property name="horizontalTextPosition" type="int" value="2"/>
       </Properties>
@@ -161,6 +169,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnEdit">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Icon/Check-V.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Save"/>
         <Property name="horizontalTextPosition" type="int" value="2"/>
       </Properties>
@@ -170,6 +181,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnAdd">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Icon/add-file.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Register"/>
         <Property name="horizontalTextPosition" type="int" value="2"/>
       </Properties>
@@ -179,6 +193,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnView">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Icon/File-details.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="View"/>
         <Property name="horizontalTextPosition" type="int" value="2"/>
       </Properties>
@@ -188,6 +205,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnReload">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Icon/refresh.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Reload"/>
         <Property name="horizontalTextPosition" type="int" value="2"/>
       </Properties>

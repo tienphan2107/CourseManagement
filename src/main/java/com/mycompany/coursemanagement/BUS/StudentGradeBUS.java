@@ -81,8 +81,8 @@ public class StudentGradeBUS {
         return studentGradeDAO.getCourseIDByTitle(title);
     }
     
-    public int getStudentIDByLastName(String lastName) throws SQLException {
-        return studentGradeDAO.getStudentIDByLastName(lastName);
+    public int getStudentIDByName(String Name) throws SQLException {
+        return studentGradeDAO.getStudentIDByName(Name);
     }
 
     public StudentGrade validateStudentGradeInfo(int EnrollmentID, int CourseID, String StudentID, String Grade) throws Exception {

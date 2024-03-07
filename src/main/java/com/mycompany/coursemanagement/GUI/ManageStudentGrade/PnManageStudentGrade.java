@@ -8,6 +8,7 @@ import com.mycompany.coursemanagement.BUS.StudentGradeBUS;
 import com.mycompany.coursemanagement.Models.Person;
 import com.mycompany.coursemanagement.Models.StudentGrade;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -35,6 +36,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     private DefaultTableModel tableModel;
     private JTable table;
     private String query;
+    private Font font = new Font("Arial", Font.PLAIN, 15);
 
     EditManageStudentGrade EditFrame;
     DetailManageStudentGrade DetailFrame;
@@ -89,16 +91,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         table.getColumnModel().getColumn(1).setPreferredWidth(200);
         table.getColumnModel().getColumn(2).setPreferredWidth(50);
         table.getColumnModel().getColumn(3).setPreferredWidth(180);
-
-//        int rows = table.getSelectedRowCount();
-//        System.out.print(rows);
-//        table.addMouseListener(new MouseAdapter() {
-//            public void mouseClicked(MouseEvent e) {
-//                
-//
-//                
-//            }
-//        });
+        table.setFont(font);
     }
 
     /**
@@ -179,12 +172,14 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             }
         });
 
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/search.png"))); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
             }
         });
 
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete-file.png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -193,6 +188,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             }
         });
 
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Check-V.png"))); // NOI18N
         btnEdit.setText("Save");
         btnEdit.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -201,6 +197,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             }
         });
 
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/add-file.png"))); // NOI18N
         btnAdd.setText("Register");
         btnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -209,6 +206,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             }
         });
 
+        btnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/File-details.png"))); // NOI18N
         btnView.setText("View");
         btnView.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnView.addActionListener(new java.awt.event.ActionListener() {
@@ -217,6 +215,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             }
         });
 
+        btnReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/refresh.png"))); // NOI18N
         btnReload.setText("Reload");
         btnReload.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnReload.addActionListener(new java.awt.event.ActionListener() {
@@ -246,7 +245,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
                 .addComponent(btnEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -363,8 +362,42 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         if (choose == JOptionPane.NO_OPTION) { // đổi ý không xóa nữa
             return;
         }
+
+        // Update List
+        List<StudentGrade> updatedGrades = new ArrayList<>();
+        for (int i = 0; i < table.getRowCount(); i++) {
+            boolean isEdited = Double.parseDouble(table.getValueAt(i, 3).toString())>0.0 ? true:false;
+            if (isEdited) {
+                // Dòng này đã được chỉnh sửa, trích xuất thông tin và tạo đối tượng StudentGrade
+                int enrollmentID = (int) table.getValueAt(i, 0);
+                int courseID = (int) table.getValueAt(i, 1);
+                int studentID = (int) table.getValueAt(i, 2);
+                double grade = (double) table.getValueAt(i, 3);
+
+                // Tạo đối tượng StudentGrade và thêm vào danh sách
+                StudentGrade updatedGrade = new StudentGrade(enrollmentID, courseID, studentID, grade);
+                updatedGrades.add(updatedGrade);
+            }
+        }
+
+        int result = 0;
+        for (StudentGrade updatedGrade : updatedGrades) {
+            try {
+                result = studentGradeBUS.edit(updatedGrade.getEnrollmentID(), updatedGrade.getCourseID(), updatedGrade.getStudentID(), String.valueOf(updatedGrade.getGrade())); // Thực hiện cập nhật StudentGrade vào cơ sở dữ liệu
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "An error occurred when updating data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
+            }
+        }
         
-        
+        if (result > 0) {
+            Resetpanel();
+            JOptionPane.showMessageDialog(this, "Save successfully");
+//            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -540,6 +573,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             table.getColumnModel().getColumn(1).setPreferredWidth(200);
             table.getColumnModel().getColumn(2).setPreferredWidth(50);
             table.getColumnModel().getColumn(3).setPreferredWidth(180);
+            table.setFont(font);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured when Load Data to GUI, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
