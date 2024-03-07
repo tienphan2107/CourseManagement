@@ -47,7 +47,7 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
             }
 
             for (Person i : studentGradeBUS.GetAllStudent()) {
-                String studentName = i.getLastName();
+                String studentName = i.getLastName() + " " + i.getFirstName();
                 cbbStudentName.addItem(studentName);
             }
 
@@ -215,36 +215,16 @@ public class AddManageStudentGrade extends javax.swing.JFrame {
         }
 
         //Thêm
-//        int courseID = Integer.parseInt(cbbCourseID.getSelectedItem().toString());
-//        int teacherID = Integer.parseInt(cbbCourseID.getSelectedItem().toString());
         // Lấy dữ liệu từ các trường nhập liệu
         int enrollmentID = Integer.parseInt(txtEnrollmentID.getText());
         String studentName = cbbStudentName.getSelectedItem().toString();
-        System.out.print(studentName);
         String Title = cbbCourseTitle.getSelectedItem().toString();
-//        System.out.print(Title);
-//        int courseID;
-//        try {
-//            courseID = studentGradeBUS.getCourseIDByTitle(Title);
-//            System.out.print(courseID);
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-//            e.printStackTrace();
-//        }
         int result;
         try {
             int courseID = studentGradeBUS.getCourseIDByTitle(Title);
-            int studentID = studentGradeBUS.getStudentIDByLastName(studentName);
-            System.out.print(studentID);
+            int studentID = studentGradeBUS.getStudentIDByName(studentName);
             result = studentGradeBUS.add(enrollmentID, courseID, studentID, 0);
-        } //        catch (EmptyFieldException e) {
-        //            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
-        //            if (e.getFieldName().equalsIgnoreCase("StudentId")) {
-        //                txtStudentID.requestFocus();
-        //            } else if (e.getFieldName().equalsIgnoreCase("Grade")) {
-        //                txtGrade.requestFocus();
-        //            }
-        //            return;
+        } 
         catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();

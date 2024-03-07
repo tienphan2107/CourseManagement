@@ -368,16 +368,19 @@ public class StudentGradeDAO {
         return courseID;
     }
 
-    public int getStudentIDByLastName(String lastName) throws SQLException {
+    public int getStudentIDByName(String Name) throws SQLException {
         int personID = 0;
+        String FirstName = Name.split(" ")[1];
+        String LastName = Name.split(" ")[0];
         try {
             conn = db.getConnection();
             if (conn == null) {
                 throw new SQLException("Connection error");
             }
-            String query = "SELECT PersonID FROM person WHERE LastName = ?";
+            String query = "SELECT PersonID FROM person WHERE LastName = ? AND FirstName = ?";
             ps = conn.prepareStatement(query);
-            ps.setString(1, lastName);
+            ps.setString(1, LastName);
+            ps.setString(2, FirstName);
             rs = ps.executeQuery();
             if (rs.next()) {
                 personID = rs.getInt("PersonID");
