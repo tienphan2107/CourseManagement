@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class JTableCustom extends AbstractTableModel {
 
     private List<StudentGrade> studentGradeList;
+    private List<Integer> selectedRows;
 
     private final String[] columnNames = new String[]{
         "EnrollmentID", "CourseID", "StudentID", "Grade"
@@ -28,6 +29,7 @@ public class JTableCustom extends AbstractTableModel {
 
     public JTableCustom(List<StudentGrade> studentGradeList) {
         this.studentGradeList = studentGradeList;
+        this.selectedRows = new ArrayList<>();
     }
 
     @Override
@@ -69,6 +71,13 @@ public class JTableCustom extends AbstractTableModel {
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return columnIndex == 3;
     }
+    
+    public StudentGrade getRow(int rowIndex){
+        if (rowIndex >= 0 && rowIndex < studentGradeList.size()) {
+            return studentGradeList.get(rowIndex);
+        }
+        return null;
+    }
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
@@ -99,5 +108,9 @@ public class JTableCustom extends AbstractTableModel {
         }
         
         fireTableDataChanged();
+    }
+     
+    public int getSelectedRowCount() {
+        return selectedRows.size();
     }
 }

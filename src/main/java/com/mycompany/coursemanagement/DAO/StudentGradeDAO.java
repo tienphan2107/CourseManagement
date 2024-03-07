@@ -139,6 +139,41 @@ public class StudentGradeDAO {
         return result;
     }
 
+    public int updateMultipleStudentGrades(List<StudentGrade> studentGrades) throws SQLException {
+        int result = 0;
+        try {
+            conn = db.getConnection();
+            if (conn == null) {
+                throw new SQLException("Connection error");
+            }
+            String query = "UPDATE studentgrade SET Grade = ? WHERE EnrollmentID = ?";
+            ps = conn.prepareStatement(query);
+
+            for (StudentGrade studentGrade : studentGrades) {
+                ps.setDouble(1, studentGrade.getGrade());
+                ps.setInt(2, studentGrade.getEnrollmentID());
+                ps.addBatch(); // Thêm câu lệnh vào batch
+            }
+
+            int[] updateCounts = ps.executeBatch(); // Thực thi các câu lệnh trong batch
+
+            // Đếm số lượng bản ghi đã cập nhật thành công
+            for (int count : updateCounts) {
+                if (count == Statement.SUCCESS_NO_INFO) {
+                    result++; // Nếu kết quả trả về là SUCCESS_NO_INFO, tăng biến result lên
+                } else if (count >= 0) {
+                    result += count; // Nếu kết quả trả về là số dòng bị ảnh hưởng, cộng thêm vào result
+                }
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            ps.close();
+            db.closeConnection(conn);
+        }
+        return result;
+    }
+
     public int deleteStudentGrade(int courseID, int studentID) throws SQLException {
         int result = 0;
         try {
