@@ -7,7 +7,10 @@ package com.mycompany.coursemanagement.GUI.ManageStudentGrade;
 import com.mycompany.coursemanagement.BUS.StudentGradeBUS;
 import com.mycompany.coursemanagement.Models.Person;
 import com.mycompany.coursemanagement.Models.StudentGrade;
+import java.awt.Component;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
@@ -30,6 +33,8 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     private List<StudentGrade> list;
     private final DefaultTableCellRenderer cellRightRenderer = new DefaultTableCellRenderer();
     private DefaultTableModel tableModel;
+    private JTable table;
+    private String query;
 
     EditManageStudentGrade EditFrame;
     DetailManageStudentGrade DetailFrame;
@@ -43,7 +48,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         this.setSize(885, 515);
 //        SetUpTable();
         initTable();
-        Resetpanel();
+//        Resetpanel();
     }
 
     private void initTable() {
@@ -78,12 +83,22 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         JTableCustom model = new JTableCustom(studentGradeList);
 
         // Create the table
-        JTable table = new JTable(model);
+        table = new JTable(model);
         jScrollPane1.setViewportView(table);
         table.getColumnModel().getColumn(0).setPreferredWidth(80);
         table.getColumnModel().getColumn(1).setPreferredWidth(200);
         table.getColumnModel().getColumn(2).setPreferredWidth(50);
         table.getColumnModel().getColumn(3).setPreferredWidth(180);
+
+//        int rows = table.getSelectedRowCount();
+//        System.out.print(rows);
+//        table.addMouseListener(new MouseAdapter() {
+//            public void mouseClicked(MouseEvent e) {
+//                
+//
+//                
+//            }
+//        });
     }
 
     /**
@@ -106,16 +121,13 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         btnReload = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-<<<<<<< HEAD
         jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jScrollPane1MouseClicked(evt);
             }
         });
 
-=======
         tblGrade.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
->>>>>>> e3f0a64ba435a3253938854f4df373d6708b5ba0
         tblGrade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -144,7 +156,6 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         });
         tblGrade.setCellEditor(new DefaultCellEditor(new JTextField()));
         tblGrade.setCellSelectionEnabled(true);
-        tblGrade.setColumnSelectionAllowed(true);
         tblGrade.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblGrade.getTableHeader().setReorderingAllowed(false);
         tblGrade.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -168,14 +179,12 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             }
         });
 
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Search.png"))); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
             }
         });
 
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Delete-file.png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -184,8 +193,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             }
         });
 
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Edit-file.png"))); // NOI18N
-        btnEdit.setText("Input");
+        btnEdit.setText("Save");
         btnEdit.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,7 +201,6 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             }
         });
 
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Add-file.png"))); // NOI18N
         btnAdd.setText("Register");
         btnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -202,7 +209,6 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             }
         });
 
-        btnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/File-details.png"))); // NOI18N
         btnView.setText("View");
         btnView.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnView.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +217,6 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             }
         });
 
-        btnReload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Refresh.png"))); // NOI18N
         btnReload.setText("Reload");
         btnReload.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnReload.addActionListener(new java.awt.event.ActionListener() {
@@ -241,7 +246,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
                 .addComponent(btnEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -307,35 +312,6 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             LoadStudentGrades(resultList);
         }
     }
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        if (txtFindContent.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Please type StudentID in the TextBox first.", "Message", JOptionPane.ERROR_MESSAGE);
-            txtFindContent.setText("");
-            txtFindContent.requestFocus();
-            return;
-        }
-
-        int studentID;
-        try {
-            studentID = Integer.parseInt(txtFindContent.getText().trim());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid StudentID.", "Message", JOptionPane.ERROR_MESSAGE);
-            txtFindContent.setText("");
-            txtFindContent.requestFocus();
-            return;
-        }
-
-        List<StudentGrade> resultList;
-        try {
-            resultList = studentGradeBUS.FindByStudentID(studentID);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "An error occurred when finding data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
-            return;
-        }
-
-        LoadStudentGrades(resultList);
-    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void LoadStudentGrades(List<StudentGrade> resultList) {
         DefaultTableModel tableModel = (DefaultTableModel) tblGrade.getModel();
@@ -353,7 +329,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         }
     }
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        if (tblGrade.getSelectedRowCount() != 1) {
+        if (table.getSelectedRowCount() != 1) {
             JOptionPane.showMessageDialog(this, "Please choose ONE Student Grade", "Message", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -363,8 +339,8 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         choose = JOptionPane.showConfirmDialog(this, "Delete This Student Grade ?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (choose == JOptionPane.YES_OPTION) { // đổi ý không xóa nữa
             //xóa
-            int courseID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 1).toString());
-            int studentID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 2).toString());
+            int courseID = Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 1).toString());
+            int studentID = Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 2).toString());
             try {
                 if (studentGradeBUS.Delete(courseID, studentID) > 0) {
                     JOptionPane.showMessageDialog(this, "Delete Grade Success !");
@@ -381,16 +357,14 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        if (tblGrade.getSelectedRowCount() != 1) {
-            JOptionPane.showMessageDialog(this, "Please choose ONE Student Grade", "Message", JOptionPane.ERROR_MESSAGE);
+        // Xác nhận
+        int choose = JOptionPane.NO_OPTION;
+        choose = JOptionPane.showConfirmDialog(this, "Save All?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (choose == JOptionPane.NO_OPTION) { // đổi ý không xóa nữa
             return;
         }
-        int enrollmentID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 0).toString());
-        int personID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 2).toString());
-        int courseID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 1).toString());
-
-        EditFrame = new EditManageStudentGrade(enrollmentID, personID, courseID);
-        EditFrame.setVisible(true);
+        
+        
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -399,13 +373,13 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        if (tblGrade.getSelectedRowCount() != 1) {
+        if (table.getSelectedRowCount() != 1) {
             JOptionPane.showMessageDialog(this, "Please choose ONE Student Grade", "Message", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        int enrollmentID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 0).toString());
-        int personID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 2).toString());
-        int courseID = Integer.parseInt(tblGrade.getModel().getValueAt(tblGrade.getSelectedRow(), 1).toString());
+        int enrollmentID = Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 0).toString());
+        int personID = Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 2).toString());
+        int courseID = Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 1).toString());
 
         DetailFrame = new DetailManageStudentGrade(enrollmentID, personID, courseID);
         DetailFrame.setVisible(true);
@@ -453,6 +427,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
     }//GEN-LAST:event_jScrollPane1MouseClicked
 
+
     private void tblGradeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGradeMouseClicked
         if (evt.getClickCount() == 2) {
             int row = tblGrade.rowAtPoint(evt.getPoint());
@@ -469,6 +444,36 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             //            }
         }
     }//GEN-LAST:event_tblGradeMouseClicked
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        if (txtFindContent.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Please type StudentID in the TextBox first.", "Message", JOptionPane.ERROR_MESSAGE);
+            txtFindContent.setText("");
+            txtFindContent.requestFocus();
+            return;
+        }
+
+        int studentID;
+        try {
+            studentID = Integer.parseInt(txtFindContent.getText().trim());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid StudentID.", "Message", JOptionPane.ERROR_MESSAGE);
+            txtFindContent.setText("");
+            txtFindContent.requestFocus();
+            return;
+        }
+
+        List<StudentGrade> resultList;
+        try {
+            resultList = studentGradeBUS.FindByStudentID(studentID);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "An error occurred when finding data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+            return;
+        }
+
+        LoadStudentGrades(resultList);
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void Resetpanel() {
         GetAllList();
@@ -491,15 +496,6 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         }
     }
 
-    private void LoadStudentGrades() {
-        GetAllList(); // Get the list of student grades from the database
-        tableModel.setRowCount(0); // Clear the existing rows in the table
-        for (StudentGrade studentGrade : list) {
-            Object[] rowData = {studentGrade.getEnrollmentID(), studentGrade.getCourseID(), studentGrade.getStudentID(), studentGrade.getGrade()};
-            tableModel.addRow(rowData); // Add each student grade as a row in the table
-        }
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -515,26 +511,58 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void LoadStudentGrade(List<StudentGrade> list) {
-        DefaultTableModel tableModel = (DefaultTableModel) tblGrade.getModel();
-        tableModel.setRowCount(0);
-        try {
-            for (StudentGrade ci : list) {
-                int EnrollmentID = ci.getEnrollmentID();
-                int CourseID = ci.getCourseID();
-//                Course course = courseInstructorBUS.GetCourseByID(CourseID);
-//                Person Teacher = courseInstructorBUS.GetTeacherByID(TeacherID);
-                int StudentID = ci.getStudentID();
-                double GradeID = ci.getGrade();
-                Object[] row = {EnrollmentID, CourseID, StudentID, GradeID};
-                tableModel.addRow(row);
-            }
+//        DefaultTableModel tableModel = (DefaultTableModel) tblGrade.getModel();
+//        table.setRowCount(0);
 
+        List<StudentGrade> studentGradeList = new ArrayList<StudentGrade>();
+
+        JTableCustom model = new JTableCustom(studentGradeList);
+        model.setRowCount(0);
+
+        try {
+            for (int i = 0; i < list.size(); i++) {
+                // Tạo một đối tượng StudentGrade mới
+                StudentGrade studentgrade = list.get(i);
+
+                int enrollmentID = studentgrade.getEnrollmentID();
+                int courseID = studentgrade.getCourseID();
+                int studentID = studentgrade.getStudentID();
+                double grade = studentgrade.getGrade();
+                // Gán các thuộc tính của đối tượng StudentGrade
+                StudentGrade studentGrade = new StudentGrade(enrollmentID, courseID, studentID, grade);
+
+                // Thêm đối tượng StudentGrade vào danh sách 
+                studentGradeList.add(studentGrade);
+            }
+            table = new JTable(model);
+            jScrollPane1.setViewportView(table);
+            table.getColumnModel().getColumn(0).setPreferredWidth(80);
+            table.getColumnModel().getColumn(1).setPreferredWidth(200);
+            table.getColumnModel().getColumn(2).setPreferredWidth(50);
+            table.getColumnModel().getColumn(3).setPreferredWidth(180);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occured when Load Data to GUI, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
-            tableModel.setRowCount(0);
+            model.setRowCount(0);
             return;
         }
+
+//        try {
+//            for (StudentGrade ci : list) {
+//                int EnrollmentID = ci.getEnrollmentID();
+//                int CourseID = ci.getCourseID();
+//                int StudentID = ci.getStudentID();
+//                double GradeID = ci.getGrade();
+//                Object[] row = {EnrollmentID, CourseID, StudentID, GradeID};
+//                tableModel.addRow(row);
+//            }
+//
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(this, "An error occured when Load Data to GUI, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+//            ex.printStackTrace();
+//            tableModel.setRowCount(0);
+//            return;
+//        }
     }
 }
 

@@ -56,6 +56,10 @@ public class StudentGradeBUS {
     public int Edit(StudentGrade studentGrade) throws Exception {
         return studentGradeDAO.editStudentGrade(studentGrade);
     }
+    
+    public int updateMultipleStudentGrades(List<StudentGrade> studentGrades) throws Exception {
+        return studentGradeDAO.updateMultipleStudentGrades(studentGrades);
+    }
 
     public int getLastEnrollmentIDFromDatabase() throws Exception {
         return studentGradeDAO.getLastEnrollmentIDFromDatabase();
