@@ -106,16 +106,13 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         btnReload = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-<<<<<<< HEAD
         jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jScrollPane1MouseClicked(evt);
             }
         });
 
-=======
         tblGrade.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
->>>>>>> e3f0a64ba435a3253938854f4df373d6708b5ba0
         tblGrade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
