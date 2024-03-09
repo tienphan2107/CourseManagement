@@ -35,7 +35,6 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     private final DefaultTableCellRenderer cellRightRenderer = new DefaultTableCellRenderer();
     private DefaultTableModel tableModel;
     private JTable table;
-    private String query;
     private Font font = new Font("Arial", Font.PLAIN, 15);
 
     EditManageStudentGrade EditFrame;
@@ -48,16 +47,12 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     public PnManageStudentGrade() {
         initComponents();
         this.setSize(885, 515);
-//        SetUpTable();
         initTable();
-//        Resetpanel();
     }
 
     private void initTable() {
-        List<StudentGrade> resultList;
         try {
-            resultList = studentGradeBUS.Get();
-//            System.out.print(resultList.size());
+            list = studentGradeBUS.Get();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occurred when finding data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
@@ -66,9 +61,9 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
 
         List<StudentGrade> studentGradeList = new ArrayList<StudentGrade>();
 
-        for (int i = 0; i < resultList.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             // Tạo một đối tượng StudentGrade mới
-            StudentGrade studentgrade = resultList.get(i);
+            StudentGrade studentgrade = list.get(i);
 
             int enrollmentID = studentgrade.getEnrollmentID();
             int courseID = studentgrade.getCourseID();
@@ -148,7 +143,6 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             }
         });
         tblGrade.setCellEditor(new DefaultCellEditor(new JTextField()));
-        tblGrade.setCellSelectionEnabled(true);
         tblGrade.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblGrade.getTableHeader().setReorderingAllowed(false);
         tblGrade.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -280,53 +274,6 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (txtFindContent.getText().isBlank()) {
-                txtFindContent.setText("");
-                txtFindContent.requestFocus();
-                return;
-            }
-
-            int studentID;
-            try {
-                studentID = Integer.parseInt(txtFindContent.getText().trim());
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Please enter a valid StudentID.", "Message", JOptionPane.ERROR_MESSAGE);
-                txtFindContent.setText("");
-                txtFindContent.requestFocus();
-                return;
-            }
-
-            List<StudentGrade> resultList;
-            try {
-                resultList = studentGradeBUS.FindByStudentID(studentID);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "An error occurred when finding data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-                ex.printStackTrace();
-                return;
-            }
-
-            LoadStudentGrades(resultList);
-        }
-    }
-
-    private void LoadStudentGrades(List<StudentGrade> resultList) {
-        DefaultTableModel tableModel = (DefaultTableModel) tblGrade.getModel();
-        tableModel.setRowCount(0); // Clear the existing rows in the table
-        try {
-            for (StudentGrade studentGrade : resultList) {
-                Object[] rowData = {studentGrade.getEnrollmentID(), studentGrade.getCourseID(), studentGrade.getStudentID(), studentGrade.getGrade()};
-                tableModel.addRow(rowData); // Add each student grade as a row in the table
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "An error occured when Load Data to GUI, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
-            tableModel.setRowCount(0);
-            return;
-        }
-    }
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         if (table.getSelectedRowCount() != 1) {
             JOptionPane.showMessageDialog(this, "Please choose ONE Student Grade", "Message", JOptionPane.ERROR_MESSAGE);
@@ -393,7 +340,6 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         if (result > 0) {
             Resetpanel();
             JOptionPane.showMessageDialog(this, "Save successfully");
-//            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "An error occured, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -427,34 +373,34 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     }//GEN-LAST:event_txtFindContentActionPerformed
 
     private void txtFindContentKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindContentKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (txtFindContent.getText().isBlank()) {
-                txtFindContent.setText("");
-                txtFindContent.requestFocus();
-                return;
-            }
-
-            int studentID;
-            try {
-                studentID = Integer.parseInt(txtFindContent.getText().trim());
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Please enter a valid StudentID.", "Message", JOptionPane.ERROR_MESSAGE);
-                txtFindContent.setText("");
-                txtFindContent.requestFocus();
-                return;
-            }
-
-            List<StudentGrade> resultList;
-            try {
-                resultList = studentGradeBUS.FindByStudentID(studentID);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "An error occurred when finding data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-                ex.printStackTrace();
-                return;
-            }
-
-            LoadStudentGrades(resultList);
-        }
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            if (txtFindContent.getText().isBlank()) {
+//                txtFindContent.setText("");
+//                txtFindContent.requestFocus();
+//                return;
+//            }
+//
+//            int studentID;
+//            try {
+//                studentID = Integer.parseInt(txtFindContent.getText().trim());
+//            } catch (NumberFormatException ex) {
+//                JOptionPane.showMessageDialog(this, "Please enter a valid StudentID.", "Message", JOptionPane.ERROR_MESSAGE);
+//                txtFindContent.setText("");
+//                txtFindContent.requestFocus();
+//                return;
+//            }
+//
+//            List<StudentGrade> resultList;
+//            try {
+//                resultList = studentGradeBUS.FindByStudentID(studentID);
+//            } catch (Exception ex) {
+//                JOptionPane.showMessageDialog(this, "An error occurred when finding data, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+//                ex.printStackTrace();
+//                return;
+//            }
+//
+//            LoadStudentGrades(resultList);
+//        }
     }//GEN-LAST:event_txtFindContentKeyPressed
 
     private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
@@ -500,12 +446,6 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
         txtFindContent.setText("");
         LoadStudentGrade(list);
     }
-
-//    private void SetUpTable() {
-//        for (int i = 0; i < tblGrade.getColumnCount(); i++) {
-//            tblGrade.getColumnModel().getColumn(i).setCellRenderer(new LeftAlignedCellRenderer());
-//        }
-//    }
     public void GetAllList() {
         try {
             this.list = studentGradeBUS.Get();
@@ -531,9 +471,6 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void LoadStudentGrade(List<StudentGrade> list) {
-//        DefaultTableModel tableModel = (DefaultTableModel) tblGrade.getModel();
-//        table.setRowCount(0);
-
         List<StudentGrade> studentGradeList = new ArrayList<StudentGrade>();
 
         JTableCustom model = new JTableCustom(studentGradeList);
@@ -567,23 +504,6 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             model.setRowCount(0);
             return;
         }
-
-//        try {
-//            for (StudentGrade ci : list) {
-//                int EnrollmentID = ci.getEnrollmentID();
-//                int CourseID = ci.getCourseID();
-//                int StudentID = ci.getStudentID();
-//                double GradeID = ci.getGrade();
-//                Object[] row = {EnrollmentID, CourseID, StudentID, GradeID};
-//                tableModel.addRow(row);
-//            }
-//
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(this, "An error occured when Load Data to GUI, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-//            ex.printStackTrace();
-//            tableModel.setRowCount(0);
-//            return;
-//        }
     }
 }
 
