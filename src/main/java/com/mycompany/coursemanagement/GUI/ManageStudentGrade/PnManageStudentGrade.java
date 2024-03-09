@@ -462,20 +462,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
 
 
     private void tblGradeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGradeMouseClicked
-        if (evt.getClickCount() == 2) {
-            int row = tblGrade.rowAtPoint(evt.getPoint());
-            int column = tblGrade.columnAtPoint(evt.getPoint());
-            System.out.print(row + "  " + column);
-            tblGrade.editCellAt(row, column);
-            //            if (column == 3) { // Chỉnh sửa cột thứ 2
-            //                // Lấy giá trị hiện tại của cột thứ 2
-            //                tblGrade.editCellAt(row, column);
-            ////                TableCellEditor cellEditor = tblGrade.getCellEditor(row, column);
-            ////                if (cellEditor != null) {
-            ////                    cellEditor.stopCellEditing();
-            ////                }
-            //            }
-        }
+        
     }//GEN-LAST:event_tblGradeMouseClicked
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -505,7 +492,7 @@ public class PnManageStudentGrade extends javax.swing.JPanel {
             return;
         }
 
-        LoadStudentGrades(resultList);
+        LoadStudentGrade(resultList);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void Resetpanel() {
