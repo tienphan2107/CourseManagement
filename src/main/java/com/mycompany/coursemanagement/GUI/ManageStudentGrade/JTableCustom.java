@@ -71,8 +71,8 @@ public class JTableCustom extends AbstractTableModel {
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return columnIndex == 3;
     }
-    
-    public StudentGrade getRow(int rowIndex){
+
+    public StudentGrade getRow(int rowIndex) {
         if (rowIndex >= 0 && rowIndex < studentGradeList.size()) {
             return studentGradeList.get(rowIndex);
         }
@@ -92,10 +92,10 @@ public class JTableCustom extends AbstractTableModel {
             row.setGrade((Double) aValue);
         }
     }
-    
-     public void setRowCount(int rowCount) {
+
+    public void setRowCount(int rowCount) {
         int currentRowCount = getRowCount();
-        
+
         if (rowCount < currentRowCount) {
             studentGradeList = studentGradeList.subList(0, rowCount);
         } else if (rowCount > currentRowCount) {
@@ -106,10 +106,10 @@ public class JTableCustom extends AbstractTableModel {
             }
             studentGradeList.addAll(newRows);
         }
-        
+
         fireTableDataChanged();
     }
-     
+
     public int getSelectedRowCount() {
         return selectedRows.size();
     }
